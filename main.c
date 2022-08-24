@@ -2,7 +2,6 @@
 #include <locale.h>
 
 int main() {
-    int opcao = 0;
 
     menu_Principal();
 
