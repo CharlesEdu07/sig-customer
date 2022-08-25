@@ -1,16 +1,6 @@
 #include <stdio.h>
 
-int main() {
-    int op = menu_principal();
-
-    if (op == 4) {
-        menu_sobre();
-    }
-    
-    return 0;
-}
-
-int menu_principal(void) {
+char menu_principal(void) {
     system("cls");
 
     printf("\t\t=====================================\n");
@@ -32,15 +22,17 @@ int menu_principal(void) {
     printf("\t\t|           0 - Encerrar            |\n");
     printf("\t\t-------------------------------------\n");
 
-    int op;
+    char op;
 
-    scanf("%d", &op);
+    printf("\nDigite a opcao desejada: ");
+    scanf("%s", &op);
 
     return op;
 }
 
 void menu_sobre(void) {
     system("cls");
+
     printf("\n\n");
     printf("\t\tSobre o projeto:\n");
     printf("\n");
@@ -58,4 +50,14 @@ void menu_sobre(void) {
     printf("\n");
 
     getch(); // Aperte enter para continuar
+}
+
+int main() {
+    char op = menu_principal();
+
+    if (op == '4') {
+        menu_sobre();
+    }
+    
+    return 0;
 }
