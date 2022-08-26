@@ -6,8 +6,26 @@ int main() {
     char op = menu_principal();
 
     while (op != '0') {
-        if (op == '4') {
-            menu_sobre();
+        switch (op) {
+            case '1':
+                printf("\nModulo de Cliente");
+                break;
+
+            case '2':
+                printf("\nModulo em Desenvolvimento");
+                break;
+
+            case '3':
+                printf("\nModulo em Desenvolvimento");
+                break;
+
+            case '4':
+                menu_sobre();
+                break;
+                
+            default:
+                printf("\nOpcao invalida");
+                break;
         }
 
         printf("\n");
