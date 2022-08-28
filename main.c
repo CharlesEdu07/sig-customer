@@ -3,7 +3,10 @@
 #include "menu_principal.c"
 #include "sobre.c"
 
-int main() {
+char menu_principal(void);
+void sobre(void);
+
+int main(void) {
     char op = menu_principal();
 
     while (op != '0') {
@@ -35,7 +38,6 @@ int main() {
         }
 
         printf("\nTecle ENTER para continuar...");
-
         getchar();
 
         op = menu_principal();
