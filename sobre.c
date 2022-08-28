@@ -1,5 +1,5 @@
 void menu_sobre(void) {
-    system("cls");
+    system("clear");
 
     printf("\n\n");
 

@@ -1,5 +1,5 @@
 char menu_principal(void) {
-    system("cls");
+    system("clear");
 
     printf("\t\t=====================================\n");
     printf("\t\t||           SIG-Customer          ||\n");
@@ -23,7 +23,8 @@ char menu_principal(void) {
     char op;
 
     printf("\nDigite a opcao desejada: ");
-    scanf("%s", &op);
+    scanf("%c", &op);
+    getchar();
 
     return op;
 }
