@@ -3,6 +3,8 @@
 #include "menu_principal.c"
 #include "sobre.c"
 
+// Versao 0.1
+
 char menu_principal(void);
 void sobre(void);
 
