@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include "menu_principal.c"
 #include "sobre.c"
 
@@ -36,7 +35,7 @@ int main() {
         printf("\n");
         printf("Tecle ENTER para continuar");
 
-        getch();
+        system("pause");
 
         op = menu_principal();
     }
