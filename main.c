@@ -3,9 +3,6 @@
 #include "menu_principal.c"
 #include "sobre.c"
 
-char menu_principal(void);
-void menu_sobre(void);
-
 int main() {
     char op = menu_principal();
 
@@ -33,7 +30,6 @@ int main() {
         }
 
         printf("\n");
-        printf("Tecle ENTER para continuar");
 
         system("pause");
 
