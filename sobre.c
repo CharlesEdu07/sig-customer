@@ -1,4 +1,4 @@
-void menu_sobre(void) {
+void sobre(void) {
     system("clear");
 
     printf("\n\n");

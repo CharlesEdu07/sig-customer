@@ -1,23 +1,26 @@
-char menu_principal(void) {
+#include <stdio.h>
+#include <stdlib.h>
+
+char menu_cliente(void) {
     system("clear");
 
     printf("\t\t=====================================\n");
-    printf("\t\t||           SIG-Customer          ||\n");
+    printf("\t\t||         Modulo Clientes         ||\n");
     printf("\t\t=====================================\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       1 - Modulo de Cliente       |\n");
+    printf("\t\t|       1 - Cadastrar Cliente       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|   2 - Modulo em Desenvolvimento   |\n");
+    printf("\t\t|      2 - Visualizar Clientes      |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|   3 - Modulo em Desenvolvimento   |\n");
+    printf("\t\t|       3 - Atualizar Cliente       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|        4 - Sobre e Equipe         |\n");
+    printf("\t\t|        4 - Deletar Cliente        |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|           0 - Encerrar            |\n");
+    printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
     char op;

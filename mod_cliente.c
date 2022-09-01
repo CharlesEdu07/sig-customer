@@ -1,53 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "menus/menu_principal.c"
-#include "sobre.c"
-#include "mod_cliente.c"
+#include "menus/menu_cliente.c"
 
-// Versao 0.1
+char menu_cliente(void);
 
-char menu_principal(void);
-void sobre(void);
-void mod_cliente(void);
-
-int main(void) {
-    char op = menu_principal();
-
+void mod_cliente(void) {
+    char op = menu_cliente();
+    
     while (op != '0') {
         switch (op) {
             case '1':
-                mod_cliente();
-
+                printf("\nCadastrar Cliente\n");
+                
                 break;
-
+                
             case '2':
-                printf("\nModulo em Desenvolvimento\n");
-
+                printf("\nVisualizar Clientes\n");
+                
                 break;
-
+                
             case '3':
-                printf("\nModulo em Desenvolvimento\n");
-
+                printf("\nAtualizar Cliente\n");
+                
                 break;
-
+                
             case '4':
-                sobre();
-
+                printf("\nDeletar Cliente\n");
+                
                 break;
                 
             default:
                 printf("\nOpcao invalida. Por favor, digite uma opcao valida.\n");
-
+                
                 break;
         }
-
+        
         printf("\nTecle ENTER para continuar...");
         getchar();
-
-        op = menu_principal();
+        
+        op = menu_cliente();
     }
-
-    printf("\nPrograma encerrado\n");
-    
-    return 0;
 }
