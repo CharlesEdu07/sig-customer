@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "menus/menu_cliente.c"
-
-char menu_cliente(void);
-
 void mod_cliente(void) {
     char op = menu_cliente();
     
