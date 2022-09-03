@@ -12,7 +12,7 @@ void cadastrar_cliente() {
 }
 
 void visualizar_cliente() {
-    printf("\nVisualizar Clientes\n");
+    printf("\nVisualizar Clientes\n\n");
 }
 
 void pesquisar_cliente() {
