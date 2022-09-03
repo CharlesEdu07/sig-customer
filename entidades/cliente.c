@@ -12,11 +12,11 @@ void cadastrar_cliente() {
 }
 
 void visualizar_cliente() {
-    printf("\nVisualizar Clientes\n\n");
+    printf("\nVisualizar Clientes\n");
 }
 
 void pesquisar_cliente() {
-    printf("\nPesquisar Clientes\n");
+    printf("\nPesquisar Clientes\n\n");
     
     read_nome();
     read_cpf();
