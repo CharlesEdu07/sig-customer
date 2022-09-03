@@ -1,31 +1,19 @@
-#include "../util/read_data.c"
-
 void cadastrar_cliente() {
-    system("clear");
-    printf("\nCadastrar Cliente\n\n");
-
-    read_nome();
-    read_cpf();
-    read_celular();
-    read_endereco();
-    read_email();
+    printf("\nCliente cadastrado com sucesso!\n");
 }
 
 void visualizar_cliente() {
-    printf("\nVisualizar Clientes\n");
+    printf("\nListagem de clientes\n");
 }
 
 void pesquisar_cliente() {
-    printf("\nPesquisar Clientes\n\n");
-    
-    read_nome();
-    read_cpf();
+    printf("\nListando cliente procurado\n");
 }
 
 void atualizar_cliente() {
-    printf("\nAtualizar Cliente\n");
+    printf("\nCliente atualizado com sucesso!\n");
 }
 
 void deletar_cliente() {
-    printf("\nDeletar Cliente\n");
+    printf("\nCliente deletado com sucesso!\n");
 }
