@@ -14,13 +14,18 @@ void mod_cliente(void) {
                 visualizar_cliente();
                 
                 break;
-                
+
             case '3':
-                atualizar_cliente();
+                pesquisar_cliente();
                 
                 break;
                 
             case '4':
+                atualizar_cliente();
+                
+                break;
+                
+            case '5':
                 deletar_cliente();
                 
                 break;
