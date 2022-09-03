@@ -11,10 +11,13 @@ char menu_cliente(void) {
     printf("\t\t|      2 - Visualizar Clientes      |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       3 - Atualizar Cliente       |\n");
+    printf("\t\t|       3 - Pesquisar Cliente       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|        4 - Deletar Cliente        |\n");
+    printf("\t\t|       4 - Atualizar Cliente       |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|        5 - Deletar Cliente        |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Regressar           |\n");
