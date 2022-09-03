@@ -3,15 +3,9 @@
 #include "menus/menu_principal.c"
 #include "menus/menu_cliente.c"
 #include "sobre.c"
-#include "mod_cliente.c"
-#include "cliente.c"
+#include "modulos/mod_cliente.c"
 
 // Versao 0.1
-
-char menu_principal(void);
-char menu_cliente(void);
-void sobre(void);
-void mod_cliente(void);
 
 int main(void) {
     char op = menu_principal();

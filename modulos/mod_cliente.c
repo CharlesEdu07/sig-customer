@@ -1,25 +1,27 @@
+#include "../entidades/cliente.c"
+
 void mod_cliente(void) {
     char op = menu_cliente();
     
     while (op != '0') {
         switch (op) {
             case '1':
-                cadastrar();
+                cadastrar_cliente();
                 
                 break;
                 
             case '2':
-                visualizar();
+                visualizar_cliente();
                 
                 break;
                 
             case '3':
-                atualizar();
+                atualizar_cliente();
                 
                 break;
                 
             case '4':
-                deletar();
+                deletar_cliente();
                 
                 break;
                 
