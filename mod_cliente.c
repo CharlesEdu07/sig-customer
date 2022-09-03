@@ -4,22 +4,22 @@ void mod_cliente(void) {
     while (op != '0') {
         switch (op) {
             case '1':
-                printf("\nCadastrar Cliente\n");
+                cadastrar();
                 
                 break;
                 
             case '2':
-                printf("\nVisualizar Clientes\n");
+                visualizar();
                 
                 break;
                 
             case '3':
-                printf("\nAtualizar Cliente\n");
+                atualizar();
                 
                 break;
                 
             case '4':
-                printf("\nDeletar Cliente\n");
+                deletar();
                 
                 break;
                 

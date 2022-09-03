@@ -4,6 +4,7 @@
 #include "menus/menu_cliente.c"
 #include "sobre.c"
 #include "mod_cliente.c"
+#include "cliente.c"
 
 // Versao 0.1
 
