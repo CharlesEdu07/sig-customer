@@ -159,6 +159,12 @@ void mod_cliente(void) {
 
                 printf("\nPesquisar Clientes\n\n");
 
+                printf("Nome: ");
+                read_nome();
+
+                printf("CPF: ");
+                read_cpf();
+
                 pesquisar_cliente();
                 
                 break;
@@ -168,6 +174,9 @@ void mod_cliente(void) {
 
                 printf("\nAtualizar Cliente\n\n");
 
+                printf("CPF: ");
+                read_cpf();
+
                 atualizar_cliente();
                 
                 break;
@@ -176,6 +185,9 @@ void mod_cliente(void) {
                 system("clear");
 
                 printf("\nDeletar Cliente\n\n");
+
+                printf("CPF: ");
+                read_cpf();
 
                 deletar_cliente();
                 
