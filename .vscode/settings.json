@@ -6,6 +6,8 @@
         "read_data.h": "c",
         "mod_cliente.h": "c",
         "util.h": "c",
-        "cliente.h": "c"
+        "cliente.h": "c",
+        "customer.h": "c",
+        "about.h": "c"
     }
 }
