@@ -2,6 +2,10 @@
     "files.associations": {
         "stdio.h": "c",
         "menu_principal.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "read_data.h": "c",
+        "mod_cliente.h": "c",
+        "util.h": "c",
+        "cliente.h": "c"
     }
 }
