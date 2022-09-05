@@ -65,6 +65,8 @@ void create_customer_screen(void) {
 
     printf("Digite o endereco do cliente: ");
     getchar();
+
+    printf("\nCliente cadastrado com sucesso!\n");
 }
 
 void read_customer_screen(void) {
