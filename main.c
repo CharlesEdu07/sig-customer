@@ -3,7 +3,7 @@
 #include "customer.h"
 #include "about.h"
 
-// Versão 0.2
+// Versão 0.2.0
 
 void mod_main(void);
 char menu_main(void);
