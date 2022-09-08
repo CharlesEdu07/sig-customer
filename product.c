@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "product.h"
 
 char menu_product(void) {
     system("clear");

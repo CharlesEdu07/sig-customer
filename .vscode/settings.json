@@ -8,6 +8,7 @@
         "util.h": "c",
         "cliente.h": "c",
         "customer.h": "c",
-        "about.h": "c"
+        "about.h": "c",
+        "product.h": "c"
     }
 }

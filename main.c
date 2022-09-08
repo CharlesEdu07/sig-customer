@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "customer.h"
+#include "product.h"
 #include "about.h"
 
 // Versão 0.2
 
 void mod_main(void);
 char menu_main(void);
-void about(void);
 
 int main(void) {
     mod_main();
@@ -57,7 +57,7 @@ void mod_main(void) {
                 break;
 
             case '2':
-                printf("\nModulo em Desenvolvimento\n");
+                mod_product();
 
                 break;
 
