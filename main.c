@@ -25,10 +25,10 @@ char menu_main(void) {
     printf("\t\t|       1 - Modulo de Cliente       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|   2 - Modulo em Desenvolvimento   |\n");
+    printf("\t\t|       2 - Modulo de Produto       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|   3 - Modulo em Desenvolvimento   |\n");
+    printf("\t\t|       3 - Modulo de Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|             4 - Sobre             |\n");
