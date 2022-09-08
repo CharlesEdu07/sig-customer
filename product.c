@@ -60,7 +60,7 @@ void create_product_screen(void) {
     printf("Digite o codigo do produto: ");
     getchar();
                 
-    printf("Digite o preço do produto: ");
+    printf("Digite o preco do produto: ");
     getchar();
 
     printf("\nProduto cadastrado com sucesso!\n");
