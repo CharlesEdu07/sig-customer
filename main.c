@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "customer.h"
 #include "product.h"
+#include "request.h"
 #include "about.h"
 
 // Versão 0.2
@@ -62,7 +63,7 @@ void mod_main(void) {
                 break;
 
             case '3':
-                printf("\nModulo em Desenvolvimento\n");
+                mod_request();
 
                 break;
 
