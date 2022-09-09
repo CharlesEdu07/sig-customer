@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "customer.h"
+#include "readers.h"
 
 char menu_customer(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t=====================================\n");
     printf("\t\t||         Modulo Clientes         ||\n");
@@ -27,17 +28,13 @@ char menu_customer(void) {
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op;
-
-    printf("\nDigite a opcao desejada: ");
-    scanf("%c", &op);
-    getchar();
+    char op = read_op();
 
     return op;
 }
 
 void create_customer_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -70,7 +67,7 @@ void create_customer_screen(void) {
 }
 
 void read_customer_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -86,7 +83,7 @@ void read_customer_screen(void) {
 }
 
 void search_customer_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -110,7 +107,7 @@ void search_customer_screen(void) {
 }
 
 void update_customer_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -131,7 +128,7 @@ void update_customer_screen(void) {
 }
 
 void delete_customer_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -187,8 +184,7 @@ void mod_customer(void) {
                 break;
         }
         
-        printf("\nTecle ENTER para continuar...");
-        getchar();
+        press_enter_to_continue();
         
         op = menu_customer();
     }

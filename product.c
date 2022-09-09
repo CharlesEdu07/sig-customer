@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "product.h"
+#include "readers.h"
 
 char menu_product(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t=====================================\n");
     printf("\t\t||         Modulo Produtos         ||\n");
@@ -27,17 +28,13 @@ char menu_product(void) {
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op;
-
-    printf("\nDigite a opcao desejada: ");
-    scanf("%c", &op);
-    getchar();
+    char op = read_op();
 
     return op;
 }
 
 void create_product_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -67,7 +64,7 @@ void create_product_screen(void) {
 }
 
 void read_product_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -83,7 +80,7 @@ void read_product_screen(void) {
 }
 
 void search_product_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -107,7 +104,7 @@ void search_product_screen(void) {
 }
 
 void update_product_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -128,7 +125,7 @@ void update_product_screen(void) {
 }
 
 void delete_product_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -184,8 +181,7 @@ void mod_product(void) {
                 break;
         }
         
-        printf("\nTecle ENTER para continuar...");
-        getchar();
+        press_enter_to_continue();
         
         op = menu_product();
     }

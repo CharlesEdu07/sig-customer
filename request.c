@@ -1,43 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "request.h"
+#include "readers.h"
 
 char menu_request(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t=====================================\n");
     printf("\t\t||          Modulo Pedido          ||\n");
     printf("\t\t=====================================\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       1 - Cadastrar pedidos       |\n");
+    printf("\t\t|       1 - Cadastrar Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       2 - Visualizar pedido       |\n");
+    printf("\t\t|       2 - Visualizar Pedido       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       3 - Pesquisar pedidos       |\n");
+    printf("\t\t|       3 - Pesquisar Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       4 - Atualizar pedidos       |\n");
+    printf("\t\t|       4 - Atualizar Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|        5 - Deletar pedidos        |\n");
+    printf("\t\t|        5 - Deletar Pedidos        |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op;
-
-    printf("\nDigite a opcao desejada: ");
-    scanf("%c", &op);
-    getchar();
+    char op = read_op();
 
     return op;
 }
 
 void create_request_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -67,7 +64,7 @@ void create_request_screen(void) {
 }
 
 void read_request_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -78,12 +75,12 @@ void read_request_screen(void) {
     printf("\t\t========================================\n");
     printf("\n");
     printf("\t\t========================================\n");
-    printf("\t\t||           Listar pedidos          ||\n");
+    printf("\t\t||           Listar Pedidos           ||\n");
     printf("\t\t========================================\n");
 }
 
 void search_request_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -94,7 +91,7 @@ void search_request_screen(void) {
     printf("\t\t========================================\n");
     printf("\n");
     printf("\t\t========================================\n");
-    printf("\t\t||         Pesquisar pedidos         ||\n");
+    printf("\t\t||          Pesquisar Pedido          ||\n");
     printf("\t\t========================================\n");
 
     printf("\nDigite o identificador do pedido: ");
@@ -104,7 +101,7 @@ void search_request_screen(void) {
 }
 
 void update_request_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -115,7 +112,7 @@ void update_request_screen(void) {
     printf("\t\t========================================\n");
     printf("\n");
     printf("\t\t========================================\n");
-    printf("\t\t||         Atualizar pedidos         ||\n");
+    printf("\t\t||          Atualizar Pedido          ||\n");
     printf("\t\t========================================\n");
 
     printf("\nDigite o identificador do pedido: ");
@@ -125,7 +122,7 @@ void update_request_screen(void) {
 }
 
 void delete_request_screen(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -136,7 +133,7 @@ void delete_request_screen(void) {
     printf("\t\t========================================\n");
     printf("\n");
     printf("\t\t========================================\n");
-    printf("\t\t||          Deletar pedidos          ||\n");
+    printf("\t\t||           Deletar Pedido           ||\n");
     printf("\t\t========================================\n");
 
     printf("\nDigite o identificador do pedido: ");
@@ -180,9 +177,8 @@ void mod_request(void) {
                 
                 break;
         }
-        
-        printf("\nTecle ENTER para continuar...");
-        getchar();
+
+        press_enter_to_continue();
         
         op = menu_request();
     }

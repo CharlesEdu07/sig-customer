@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void clear_terminal(void) {
+void terminal_clear(void) {
     system("clear||cls");
 }
 

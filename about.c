@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "about.h"
+#include "readers.h"
 
 void about(void) {
-    system("clear||cls");
+    terminal_clear();
 
     printf("\n\n");
 

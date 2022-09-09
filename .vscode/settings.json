@@ -9,6 +9,7 @@
         "cliente.h": "c",
         "customer.h": "c",
         "about.h": "c",
-        "product.h": "c"
+        "product.h": "c",
+        "readers.h": "c"
     }
 }
