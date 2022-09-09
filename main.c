@@ -4,6 +4,7 @@
 #include "product.h"
 #include "request.h"
 #include "about.h"
+#include "readers.h"
 
 // Versão 0.2
 
@@ -17,7 +18,7 @@ int main(void) {
 }
 
 char menu_main(void) {
-    system("clear||cls");
+    clear_terminal();
 
     printf("\t\t=====================================\n");
     printf("\t\t||           SIG-Customer          ||\n");
@@ -38,11 +39,7 @@ char menu_main(void) {
     printf("\t\t|           0 - Finalizar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op;
-
-    printf("\nDigite a opcao desejada: ");
-    scanf("%c", &op);
-    getchar();
+    char op = read_op();
 
     return op;
 }
@@ -78,8 +75,7 @@ void mod_main(void) {
                 break;
         }
 
-        printf("\nTecle ENTER para continuar...");
-        getchar();
+        press_enter_to_continue();
 
         op = menu_main();
     }
