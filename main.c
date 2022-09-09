@@ -17,7 +17,7 @@ int main(void) {
 }
 
 char menu_main(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t=====================================\n");
     printf("\t\t||           SIG-Customer          ||\n");

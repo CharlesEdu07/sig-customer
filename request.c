@@ -3,7 +3,7 @@
 #include "request.h"
 
 char menu_request(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t=====================================\n");
     printf("\t\t||          Modulo Pedido          ||\n");
@@ -37,7 +37,7 @@ char menu_request(void) {
 }
 
 void create_request_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -67,7 +67,7 @@ void create_request_screen(void) {
 }
 
 void read_request_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -83,7 +83,7 @@ void read_request_screen(void) {
 }
 
 void search_request_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -104,7 +104,7 @@ void search_request_screen(void) {
 }
 
 void update_request_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -125,7 +125,7 @@ void update_request_screen(void) {
 }
 
 void delete_request_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");

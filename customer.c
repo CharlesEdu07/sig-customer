@@ -3,7 +3,7 @@
 #include "customer.h"
 
 char menu_customer(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t=====================================\n");
     printf("\t\t||         Modulo Clientes         ||\n");
@@ -37,7 +37,7 @@ char menu_customer(void) {
 }
 
 void create_customer_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -70,7 +70,7 @@ void create_customer_screen(void) {
 }
 
 void read_customer_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -86,7 +86,7 @@ void read_customer_screen(void) {
 }
 
 void search_customer_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -110,7 +110,7 @@ void search_customer_screen(void) {
 }
 
 void update_customer_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -131,7 +131,7 @@ void update_customer_screen(void) {
 }
 
 void delete_customer_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");

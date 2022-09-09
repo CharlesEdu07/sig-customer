@@ -3,7 +3,7 @@
 #include "about.h"
 
 void about(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\n\n");
 

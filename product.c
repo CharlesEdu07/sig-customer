@@ -3,7 +3,7 @@
 #include "product.h"
 
 char menu_product(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t=====================================\n");
     printf("\t\t||         Modulo Produtos         ||\n");
@@ -37,7 +37,7 @@ char menu_product(void) {
 }
 
 void create_product_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -67,7 +67,7 @@ void create_product_screen(void) {
 }
 
 void read_product_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -83,7 +83,7 @@ void read_product_screen(void) {
 }
 
 void search_product_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -107,7 +107,7 @@ void search_product_screen(void) {
 }
 
 void update_product_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -128,7 +128,7 @@ void update_product_screen(void) {
 }
 
 void delete_product_screen(void) {
-    system("clear");
+    system("clear||cls");
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
