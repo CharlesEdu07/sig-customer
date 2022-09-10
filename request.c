@@ -38,6 +38,11 @@ char menu_request(void) {
 void create_request_screen(void) {
     terminal_clear();
 
+    char cpf[15];
+    char product_name[50];
+    char quantity[10];
+    char identifier[10];
+
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
     printf("\t\t||            ------------            ||\n");
@@ -51,16 +56,21 @@ void create_request_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nQual o cliente fez o pedido? Digite o CPF: ");
-    getchar();
+    read_cpf(cpf);
 
     printf("Qual o produto? Digite o codigo: ");
-    getchar();
+    read_product_name(product_name);
 
     printf("Qual a quantidade? Digite: ");
-    getchar();
+    read_request_quantity(quantity);
 
     printf("Digite um identificador para o pedido: ");
-    getchar();
+    read_request_identifier(identifier);
+
+    printf("\n%s", cpf);
+    printf("%s", product_name);
+    printf("%s", quantity);
+    printf("%s", identifier);
 
     printf("\nPedido feito com sucesso!\n");
 }
@@ -84,6 +94,8 @@ void read_request_screen(void) {
 void search_request_screen(void) {
     terminal_clear();
 
+    char identifier[10];
+
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
     printf("\t\t||            ------------            ||\n");
@@ -97,13 +109,15 @@ void search_request_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o identificador do pedido: ");
-    getchar();
+    read_request_identifier(identifier);
 
     printf("\nPesquisa realizada com sucesso!\n");
 }
 
 void update_request_screen(void) {
     terminal_clear();
+
+    char identifier[10];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -118,13 +132,15 @@ void update_request_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o identificador do pedido: ");
-    getchar();
+    read_request_identifier(identifier);
 
     printf("\nPedido atualizado com sucesso!\n");
 }
 
 void delete_request_screen(void) {
     terminal_clear();
+
+    char identifier[10];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -139,7 +155,7 @@ void delete_request_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o identificador do pedido: ");
-    getchar();
+    read_request_identifier(identifier);
 
     printf("\nPedido deletado com sucesso!\n");
 }

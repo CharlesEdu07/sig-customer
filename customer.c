@@ -71,7 +71,7 @@ void create_customer_screen(void) {
     printf("Digite o endereco do cliente: ");
     read_address(address);
 
-    printf("%s", name);
+    printf("\n%s", name);
     printf("%s", cpf);
     printf("%s", phone);
     printf("%s", email);
@@ -99,6 +99,9 @@ void read_customer_screen(void) {
 void search_customer_screen(void) {
     terminal_clear();
 
+    char name[50];
+    char cpf[20];
+
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
     printf("\t\t||            ------------            ||\n");
@@ -112,16 +115,18 @@ void search_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do cliente: ");
-    getchar();
+    read_name(name);
 
     printf("Digite o CPF do cliente: ");
-    getchar();
+    read_cpf(cpf);
 
     printf("\nPesquisa realizada com sucesso!\n");
 }
 
 void update_customer_screen(void) {
     terminal_clear();
+
+    char cpf[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -136,13 +141,15 @@ void update_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o CPF do cliente: ");
-    getchar();
+    read_cpf(cpf);
 
     printf("\nCliente atualizado com sucesso!\n");
 }
 
 void delete_customer_screen(void) {
     terminal_clear();
+
+    char cpf[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -157,7 +164,7 @@ void delete_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o CPF do cliente: ");
-    getchar();
+    read_cpf(cpf);
 
     printf("\nCliente deletado com sucesso!\n");
 }
