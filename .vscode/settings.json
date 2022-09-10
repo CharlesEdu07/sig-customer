@@ -10,6 +10,8 @@
         "customer.h": "c",
         "about.h": "c",
         "product.h": "c",
-        "readers.h": "c"
+        "readers.h": "c",
+        "ctype.h": "c",
+        "string.h": "c"
     }
 }

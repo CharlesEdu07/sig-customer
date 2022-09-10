@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 #include "customer.h"
 #include "readers.h"
 
@@ -36,6 +38,12 @@ char menu_customer(void) {
 void create_customer_screen(void) {
     terminal_clear();
 
+    char name[50];
+    char cpf[20];
+    char phone[20];
+    char email[50];
+    char address[100];
+
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
     printf("\t\t||            ------------            ||\n");
@@ -49,19 +57,25 @@ void create_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do cliente: ");
-    getchar();
+    read_name(name);
 
     printf("Digite o CPF do cliente: ");
-    getchar();
+    read_cpf(cpf);
                 
     printf("Digite o celular do cliente: ");
-    getchar();
+    read_phone(phone);
 
     printf("Digite o email do cliente: ");
-    getchar();
+    read_email(email);
 
     printf("Digite o endereco do cliente: ");
-    getchar();
+    read_address(address);
+
+    printf("%s", name);
+    printf("%s", cpf);
+    printf("%s", phone);
+    printf("%s", email);
+    printf("%s", address);
 
     printf("\nCliente cadastrado com sucesso!\n");
 }
