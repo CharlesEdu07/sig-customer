@@ -17,6 +17,11 @@ char read_op() {
     return op;
 }
 
+void press_enter_to_continue(void) {
+    printf("\nPressione ENTER para continuar...");
+    getchar();
+}
+
 int is_digit(char digit) {
     if (digit >= '0' && digit <= '9') {
         return 1;
@@ -25,11 +30,6 @@ int is_digit(char digit) {
     else {
         return 0;
     }
-}
-
-void press_enter_to_continue(void) {
-    printf("\nPressione ENTER para continuar...");
-    getchar();
 }
 
 void read_name(char* str) {

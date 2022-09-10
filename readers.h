@@ -2,6 +2,8 @@ void terminal_clear(void);
 char read_op();
 void press_enter_to_continue(void);
 
+int is_digit(char digit);
+
 void read_name(char* str);
 void read_cpf(char* str);
 void read_phone(char* str);
