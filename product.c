@@ -42,7 +42,6 @@ void create_product_screen(void) {
     char product_type[20];
     char product_price[20];
     char product_code[50];
-    float product_price_float;
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -67,8 +66,6 @@ void create_product_screen(void) {
                 
     printf("Digite o preco do produto: ");
     read_product_price(product_price);
-
-    product_price_float = atof(product_price);
 
     printf("\n%s", product_name);
     printf("%s", product_type);
