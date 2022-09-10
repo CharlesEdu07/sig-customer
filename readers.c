@@ -22,27 +22,10 @@ void press_enter_to_continue(void) {
     getchar();
 }
 
-int is_digit(char digit) {
-    if (digit >= '0' && digit <= '9') {
-        return 1;
-    }
-
-    else {
-        return 0;
-    }
-}
-
 void read_name(char* str) {
     char name[50];
 
     fgets(name, 50, stdin);
-
-    for (int i = 0; i < strlen(name); i++) {
-        if (is_digit(name[i])) {
-            printf("\nNome invalido! Digite novamente: ");
-            fgets(name, 50, stdin);
-        }
-    }
 
     strcpy(str, name);
 }
@@ -52,13 +35,6 @@ void read_cpf(char* str) {
 
     fgets(cpf, 20, stdin);
 
-    for (int i = 0; i < strlen(cpf); i++) {
-        if (!is_digit(cpf[i])) {
-            printf("\nCPF invalido! Digite novamente: ");
-            fgets(cpf, 20, stdin);
-        }
-    }
-
     strcpy(str, cpf);
 }
 
@@ -66,13 +42,6 @@ void read_phone(char* str) {
     char phone[20];
 
     fgets(phone, 20, stdin);
-
-    for (int i = 0; i < strlen(phone); i++) {
-        if (is_digit(phone[i])) {
-            printf("\nTelefone invalido! Digite novamente: ");
-            fgets(phone, 20, stdin);
-        }
-    }
 
     strcpy(str, phone);
 }
