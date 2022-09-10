@@ -71,9 +71,9 @@ void create_product_screen(void) {
     product_price_float = atof(product_price);
 
     printf("\n%s", product_name);
-    printf("\n%s", product_type);
-    printf("\n%s", product_code);
-    printf("\n%.2f", product_price_float);
+    printf("%s", product_type);
+    printf("%s", product_code);
+    printf("%s", product_price);
 
     printf("\nProduto cadastrado com sucesso!\n");
 }
