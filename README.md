@@ -22,8 +22,8 @@ trole de clientes de uma empresa, facilitando a gestao.
 Como executar este projeto? Seguem os comandos:
 
 
-gcc -c -Wall main.c customer.c about.c
+gcc -c -Wall main.c customer.c product.c request.c about.c readers.c
 
-gcc -o teste main.o customer.o about.o
+gcc -o teste main.o customer.o product.o request.o about.o readers.o
 
 ./teste
