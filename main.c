@@ -8,7 +8,7 @@
 #include "about.h"
 #include "readers.h"
 
-// Versão 0.3
+// Versão 0.4
 
 void mod_main(void);
 char menu_main(void);
