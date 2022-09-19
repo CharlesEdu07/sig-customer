@@ -1,5 +1,5 @@
 void terminal_clear(void);
-char read_op();
+char read_op(void);
 void press_enter_to_continue(void);
 
 void read_name(char *str);

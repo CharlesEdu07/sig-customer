@@ -7,7 +7,7 @@ void terminal_clear(void) {
     system("clear||cls");
 }
 
-char read_op() {
+char read_op(void) {
     char op;
 
     printf("\nDigite a opcao desejada: ");
