@@ -22,7 +22,7 @@ void press_enter_to_continue(void) {
     getchar();
 }
 
-void read_name(char* str) {
+void read_name(char *str) {
     char name[50];
 
     fgets(name, 50, stdin);
@@ -30,7 +30,7 @@ void read_name(char* str) {
     strcpy(str, name);
 }
 
-void read_cpf(char* str) {
+void read_cpf(char *str) {
     char cpf[20];
 
     fgets(cpf, 20, stdin);
@@ -38,7 +38,7 @@ void read_cpf(char* str) {
     strcpy(str, cpf);
 }
 
-void read_phone(char* str) {
+void read_phone(char *str) {
     char phone[20];
 
     fgets(phone, 20, stdin);
@@ -46,7 +46,7 @@ void read_phone(char* str) {
     strcpy(str, phone);
 }
 
-void read_email(char* str) {
+void read_email(char *str) {
     char email[50];
 
     fgets(email, 50, stdin);
@@ -54,7 +54,7 @@ void read_email(char* str) {
     strcpy(str, email);
 }
 
-void read_address(char* str) {
+void read_address(char *str) {
     char address[50];
 
     fgets(address, 50, stdin);
@@ -62,7 +62,7 @@ void read_address(char* str) {
     strcpy(str, address);
 }
 
-void read_product_name(char* str) {
+void read_product_name(char *str) {
     char name[50];
 
     fgets(name, 50, stdin);
@@ -70,7 +70,7 @@ void read_product_name(char* str) {
     strcpy(str, name);
 }
 
-void read_product_type(char* str) {
+void read_product_type(char *str) {
     char type[50];
 
     fgets(type, 50, stdin);
@@ -78,7 +78,7 @@ void read_product_type(char* str) {
     strcpy(str, type);
 }
 
-void read_product_price(char* str) {
+void read_product_price(char *str) {
     char price[10];
 
     fgets(price, 10, stdin);
@@ -86,7 +86,7 @@ void read_product_price(char* str) {
     strcpy(str, price);
 }
 
-void read_product_code(char* str) {
+void read_product_code(char *str) {
     char code[50];
 
     fgets(code, 50, stdin);
@@ -94,7 +94,7 @@ void read_product_code(char* str) {
     strcpy(str, code);
 }
 
-void read_request_quantity(char* str) {
+void read_request_quantity(char *str) {
     char quantity[10];
 
     fgets(quantity, 10, stdin);
@@ -102,7 +102,7 @@ void read_request_quantity(char* str) {
     strcpy(str, quantity);
 }
 
-void read_request_identifier(char* str) {
+void read_request_identifier(char *str) {
     char identifier[50];
 
     fgets(identifier, 50, stdin);
