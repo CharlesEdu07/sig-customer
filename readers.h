@@ -3,16 +3,16 @@ char read_op(void);
 void press_enter_to_continue(void);
 
 char* read_name(void);
-void read_cpf(char *str);
-void read_phone(char *str);
-void read_email(char *str);
-void read_address(char* str);
+char* read_cpf(void);
+char* read_phone(void);
+char* read_email(void);
+char* read_address(void);
 
-void read_product_name(char *str);
-void read_product_type(char *str);
-void read_product_price(char *str);
-void read_product_code(char *str);
+char* read_product_name(void);
+char* read_product_type(void);
+char* read_product_price(void);
+char* read_product_code(void);
 
-void read_request_quantity(char *str);
-void read_request_identifier(char *str);
+char* read_request_quantity(void);
+char* read_request_identifier(void);
 
