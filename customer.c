@@ -38,11 +38,17 @@ char menu_customer(void) {
 void create_customer_screen(void) {
     terminal_clear();
 
-    char name[50];
+    // char name[50];
     char cpf[20];
     char phone[20];
     char email[50];
     char address[100];
+
+    char* name;
+    // char* cpf;
+    // char* phone;
+    // char* email;
+    // char* address;
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -57,7 +63,7 @@ void create_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do cliente: ");
-    read_name(name);
+    name = read_name();
 
     printf("Digite o CPF do cliente: ");
     read_cpf(cpf);
@@ -99,7 +105,7 @@ void read_customer_screen(void) {
 void search_customer_screen(void) {
     terminal_clear();
 
-    char name[50];
+    char* name;
     char cpf[20];
 
     printf("\t\t========================================\n");
@@ -115,11 +121,12 @@ void search_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do cliente: ");
-    read_name(name);
+    name = read_name();
 
     printf("Digite o CPF do cliente: ");
     read_cpf(cpf);
 
+    printf("\n%s", name);
     printf("\nPesquisa realizada com sucesso!\n");
 }
 

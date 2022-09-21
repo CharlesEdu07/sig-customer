@@ -22,12 +22,17 @@ void press_enter_to_continue(void) {
     getchar();
 }
 
-void read_name(char *str) {
+char* read_name(void) {
     char name[50];
+    char* str;
 
     fgets(name, 50, stdin);
 
+    int len = strlen(name) + 1;
+    str = (char*) malloc(len * sizeof(char));
+
     strcpy(str, name);
+    return str;
 }
 
 void read_cpf(char *str) {
