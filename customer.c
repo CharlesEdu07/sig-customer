@@ -94,6 +94,13 @@ void read_customer_screen(void) {
     printf("\t\t========================================\n");
     printf("\t\t||           Listar Clientes          ||\n");
     printf("\t\t========================================\n");
+
+    printf("\nNome do cliente: ");
+    printf("\nCPF do cliente: ");
+    printf("\nCelular do cliente: ");
+    printf("\nEmail do cliente: ");
+    printf("\nEndereco do cliente: ");
+    printf("\n");
 }
 
 void search_customer_screen(void) {

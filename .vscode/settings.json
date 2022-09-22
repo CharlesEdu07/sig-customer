@@ -12,6 +12,7 @@
         "product.h": "c",
         "readers.h": "c",
         "ctype.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "request.h": "c"
     }
 }
