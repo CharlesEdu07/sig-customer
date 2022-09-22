@@ -71,11 +71,11 @@ void create_customer_screen(void) {
     printf("Digite o endereco do cliente: ");
     address = read_address();
 
-    printf("\n%s", name);
-    printf("%s", cpf);
-    printf("%s", phone);
-    printf("%s", email);
-    printf("%s", address);
+    printf("\nNome do cliente: %s", name);
+    printf("CPF do cliente: %s", cpf);
+    printf("Telefone do cliente: %s", phone);
+    printf("Email do cliente: %s", email);
+    printf("Endereco do cliente: %s", address);
 
     printf("\nCliente cadastrado com sucesso!\n");
 }
@@ -128,6 +128,7 @@ void search_customer_screen(void) {
     cpf = read_cpf();
 
     printf("\n%s", name);
+    printf("\n%s", cpf);
     printf("\nPesquisa realizada com sucesso!\n");
 }
 
