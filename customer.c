@@ -127,8 +127,8 @@ void search_customer_screen(void) {
     printf("Digite o CPF do cliente: ");
     cpf = read_cpf();
 
-    printf("\n%s", name);
-    printf("\n%s", cpf);
+    printf("\nNome do cliente: %s", name);
+    printf("\nCPF do cliente: %s", cpf);
     printf("\nPesquisa realizada com sucesso!\n");
 }
 
@@ -152,7 +152,7 @@ void update_customer_screen(void) {
     printf("\nDigite o CPF do cliente: ");
     cpf = read_cpf();
 
-    printf("\nCliente atualizado com sucesso!\n");
+    printf("\nCliente do CPF %s atualizado com sucesso!\n", cpf);
 }
 
 void delete_customer_screen(void) {
@@ -175,7 +175,7 @@ void delete_customer_screen(void) {
     printf("\nDigite o CPF do cliente: ");
     cpf = read_cpf();
 
-    printf("\nCliente deletado com sucesso!\n");
+    printf("\nCliente do CPF %s deletado com sucesso!\n", cpf);
 }
 
 void mod_customer(void) {
