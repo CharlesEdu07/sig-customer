@@ -129,6 +129,7 @@ void search_customer_screen(void) {
 
     printf("\nNome do cliente: %s", name);
     printf("\nCPF do cliente: %s", cpf);
+    
     printf("\nPesquisa realizada com sucesso!\n");
 }
 

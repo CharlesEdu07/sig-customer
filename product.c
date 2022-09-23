@@ -89,6 +89,12 @@ void read_product_screen(void) {
     printf("\t\t========================================\n");
     printf("\t\t||           Listar Produtos          ||\n");
     printf("\t\t========================================\n");
+
+    printf("\nNome do produto: ");
+    printf("\nTipo do produto: ");
+    printf("\nCodigo do produto: ");
+    printf("\nPreco do produto: ");
+    printf("\n");
 }
 
 void search_product_screen(void) {
@@ -115,6 +121,9 @@ void search_product_screen(void) {
     printf("Digite o codigo do produto: ");
     product_code = read_product_code();
 
+    printf("\nNome do produto: %s", product_name);
+    printf("\nCodigo do produto: %s", product_code);
+
     printf("\nPesquisa realizada com sucesso!\n");
 }
 
@@ -138,7 +147,7 @@ void update_product_screen(void) {
     printf("\nDigite o codigo do produto: ");
     product_code = read_product_code();
 
-    printf("\nProduto atualizado com sucesso!\n");
+    printf("\nProduto de codigo %s atualizado com sucesso!\n", product_code);
 }
 
 void delete_product_screen(void) {
@@ -161,7 +170,7 @@ void delete_product_screen(void) {
     printf("\nDigite o codigo do produto: ");
     product_code = read_product_code();
 
-    printf("\nProduto deletado com sucesso!\n");
+    printf("\nProduto de codigo %s deletado com sucesso!\n", product_code);
 }
 
 void mod_product(void) {
