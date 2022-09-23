@@ -122,7 +122,7 @@ void search_product_screen(void) {
     product_code = read_product_code();
 
     printf("\nNome do produto: %s", product_name);
-    printf("\nCodigo do produto: %s", product_code);
+    printf("Codigo do produto: %s", product_code);
 
     printf("\nPesquisa realizada com sucesso!\n");
 }
@@ -147,7 +147,7 @@ void update_product_screen(void) {
     printf("\nDigite o codigo do produto: ");
     product_code = read_product_code();
 
-    printf("\nProduto de codigo %s atualizado com sucesso!\n", product_code);
+    printf("\nProduto de codigo %satualizado com sucesso!\n", product_code);
 }
 
 void delete_product_screen(void) {
@@ -170,7 +170,7 @@ void delete_product_screen(void) {
     printf("\nDigite o codigo do produto: ");
     product_code = read_product_code();
 
-    printf("\nProduto de codigo %s deletado com sucesso!\n", product_code);
+    printf("\nProduto de codigo %sdeletado com sucesso!\n", product_code);
 }
 
 void mod_product(void) {
