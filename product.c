@@ -67,10 +67,10 @@ void create_product_screen(void) {
     printf("Digite o preco do produto: ");
     product_price = read_product_price();
 
-    printf("\n%s", product_name);
-    printf("%s", product_type);
-    printf("%s", product_code);
-    printf("%s", product_price);
+    printf("\nNome do produto: %s", product_name);
+    printf("Tipo do produto: %s", product_type);
+    printf("Codigo do produto: %s", product_code);
+    printf("Preco do produto: %s", product_price);
 
     printf("\nProduto cadastrado com sucesso!\n");
 }
