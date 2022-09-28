@@ -35,8 +35,15 @@ char menu_customer(void) {
     return op;
 }
 
-void create_customer_screen(void) {
+void create_customer(void) {
+    Customer *customer = create_customer_screen();
+}
+
+Customer* create_customer_screen(void) {
     terminal_clear();
+
+    Customer* customer;
+    customer = (Customer*) malloc(sizeof(Customer));
 
     char* name;
     char* cpf;
@@ -71,13 +78,21 @@ void create_customer_screen(void) {
     printf("Digite o endereco do cliente: ");
     address = read_address();
 
-    printf("\nNome do cliente: %s", name);
-    printf("CPF do cliente: %s", cpf);
-    printf("Telefone do cliente: %s", phone);
-    printf("Email do cliente: %s", email);
-    printf("Endereco do cliente: %s", address);
+    customer->name = name;
+    customer->cpf = cpf;
+    customer->phone = phone;
+    customer->email = email;
+    customer->address = address;
+
+    printf("\nNome do cliente: %s", customer->name);
+    printf("CPF do cliente: %s", customer->cpf);
+    printf("Telefone do cliente: %s", customer->phone);
+    printf("Email do cliente: %s", customer->email);
+    printf("Endereco do cliente: %s", customer->address);
 
     printf("\nCliente cadastrado com sucesso!\n");
+
+    return customer;
 }
 
 void read_customer_screen(void) {
