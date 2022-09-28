@@ -15,16 +15,13 @@ char menu_request(void) {
     printf("\t\t|       1 - Cadastrar Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       2 - Visualizar Pedido       |\n");
+    printf("\t\t|       2 - Pesquisar Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       3 - Pesquisar Pedidos       |\n");
+    printf("\t\t|       3 - Atualizar Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       4 - Atualizar Pedidos       |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|        5 - Deletar Pedidos        |\n");
+    printf("\t\t|        4 - Deletar Pedidos        |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Regressar           |\n");
@@ -73,28 +70,6 @@ void create_request_screen(void) {
     printf("Identificador do pedido: %s", identifier);
 
     printf("\nPedido feito com sucesso!\n");
-}
-
-void read_request_screen(void) {
-    terminal_clear();
-
-    printf("\t\t========================================\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||            SIG-Customer            ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t========================================\n");
-    printf("\n");
-    printf("\t\t========================================\n");
-    printf("\t\t||           Listar Pedidos           ||\n");
-    printf("\t\t========================================\n");
-
-    printf("\nCPF do cliente: ");
-    printf("\nNome do produto: ");
-    printf("\nQuantidade do pedido: ");
-    printf("\nIdentificador do pedido: ");
-    printf("\n");
 }
 
 void search_request_screen(void) {
@@ -177,29 +152,24 @@ void mod_request(void) {
                 create_request_screen();
                 
                 break;
-                
-            case '2':
-                read_request_screen();
-                
-                break;
 
-            case '3':
+            case '2':
                 search_request_screen();
                 
                 break;
                 
-            case '4':
+            case '3':
                 update_request_screen();
                 
                 break;
                 
-            case '5':
+            case '4':
                 delete_request_screen();
                 
                 break;
                 
             default:
-                printf("\nOpcao invalida. Por favor, digite uma opcao valida.\n");
+                printf("\nOpcao invalida. Por favor, digite uma opcao valida\n");
                 
                 break;
         }

@@ -5,6 +5,7 @@
 #include "customer.h"
 #include "product.h"
 #include "request.h"
+#include "report.h"
 #include "about.h"
 #include "readers.h"
 
@@ -35,7 +36,10 @@ char menu_main(void) {
     printf("\t\t|       3 - Modulo de Pedidos       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|             4 - Sobre             |\n");
+    printf("\t\t|      4 - Modulo de Relatorio      |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|             5 - Sobre             |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Finalizar           |\n");
@@ -67,6 +71,11 @@ void mod_main(void) {
                 break;
 
             case '4':
+                mod_report();
+
+                break;
+
+            case '5':
                 about();
 
                 break;

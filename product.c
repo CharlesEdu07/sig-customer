@@ -15,16 +15,13 @@ char menu_product(void) {
     printf("\t\t|       1 - Cadastrar Produto       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|      2 - Visualizar Produtos      |\n");
+    printf("\t\t|       2 - Pesquisar Produto       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       3 - Pesquisar Produto       |\n");
+    printf("\t\t|       3 - Atualizar Produto       |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|       4 - Atualizar Produto       |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|        5 - Deletar Produto        |\n");
+    printf("\t\t|        4 - Deletar Produto        |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Regressar           |\n");
@@ -73,28 +70,6 @@ void create_product_screen(void) {
     printf("Preco do produto: %s", product_price);
 
     printf("\nProduto cadastrado com sucesso!\n");
-}
-
-void read_product_screen(void) {
-    terminal_clear();
-
-    printf("\t\t========================================\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||            SIG-Customer            ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t========================================\n");
-    printf("\n");
-    printf("\t\t========================================\n");
-    printf("\t\t||           Listar Produtos          ||\n");
-    printf("\t\t========================================\n");
-
-    printf("\nNome do produto: ");
-    printf("\nTipo do produto: ");
-    printf("\nCodigo do produto: ");
-    printf("\nPreco do produto: ");
-    printf("\n");
 }
 
 void search_product_screen(void) {
@@ -182,29 +157,24 @@ void mod_product(void) {
                 create_product_screen();
                 
                 break;
-                
-            case '2':
-                read_product_screen();
-                
-                break;
 
-            case '3':
+            case '2':
                 search_product_screen();
                 
                 break;
                 
-            case '4':
+            case '3':
                 update_product_screen();
                 
                 break;
                 
-            case '5':
+            case '4':
                 delete_product_screen();
                 
                 break;
                 
             default:
-                printf("\nOpcao invalida. Por favor, digite uma opcao valida.\n");
+                printf("\nOpcao invalida. Por favor, digite uma opcao valida\n");
                 
                 break;
         }
