@@ -9,11 +9,11 @@ void about(void) {
 
     printf("\n\n");
 
-    printf("|============================================================================|\n");
-    printf("|                             Sobre o projeto                                |\n");
-    printf("|============================================================================|\n");
+    printf("==============================================================================\n");
+    printf("||                       Sobre o projeto SIG-Customer                       ||\n");
+    printf("==============================================================================\n");
     printf("|                                                                            |\n");
-    printf("|              SIG-Custumer: Um sistema de controle de cliente               |\n");
+    printf("|              SIG-Customer: Um sistema de controle de cliente               |\n");
     printf("|   As empresas da atualidade utilizam complexos sistemas gerenciais para,   |\n");
     printf("|   entre varias outras coisas, controlar seus clientes, alem de ajudar a    |\n");
     printf("|   a conseguir novos clientes. O presente projeto tem como objetivo propor  |\n");
