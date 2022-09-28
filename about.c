@@ -18,7 +18,7 @@ void about(void) {
     printf("|   entre varias outras coisas, controlar seus clientes, alem de ajudar a    |\n");
     printf("|   a conseguir novos clientes. O presente projeto tem como objetivo propor  |\n");
     printf("|   um software que implementa funcionalidades basicas relacionadas ao con-  |\n");
-    printf("|   trole de clientes de uma empresa, facilitando a gestao                   |\n");
+    printf("|   trole de clientes de uma empresa, facilitando a gestao.                  |\n");
     printf("|____________________________________________________________________________|\n");
     printf("|                                                                            |\n");
     printf("|   Discente/Autor do Projeto:                                               |\n");
