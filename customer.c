@@ -37,6 +37,8 @@ char menu_customer(void) {
 
 void create_customer(void) {
     Customer *customer = create_customer_screen();
+
+    free(customer);
 }
 
 Customer* create_customer_screen(void) {
