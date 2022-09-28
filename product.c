@@ -4,6 +4,7 @@
 #include <string.h>
 #include "product.h"
 #include "readers.h"
+#include "util.h"
 
 char menu_product(void) {
     terminal_clear();

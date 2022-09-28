@@ -4,6 +4,7 @@
 #include <string.h>
 #include "request.h"
 #include "readers.h"
+#include "util.h"
 
 char menu_request(void) {
     terminal_clear();

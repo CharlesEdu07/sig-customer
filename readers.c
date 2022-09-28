@@ -3,10 +3,6 @@
 #include <ctype.h>
 #include <string.h>
 
-void terminal_clear(void) {
-    system("clear||cls");
-}
-
 char read_op(void) {
     char op;
 
@@ -15,11 +11,6 @@ char read_op(void) {
     getchar();
 
     return op;
-}
-
-void press_enter_to_continue(void) {
-    printf("\nPressione ENTER para continuar...");
-    getchar();
 }
 
 char* read_name(void) {

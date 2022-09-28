@@ -13,6 +13,7 @@
         "readers.h": "c",
         "ctype.h": "c",
         "string.h": "c",
-        "request.h": "c"
+        "request.h": "c",
+        "report.h": "c"
     }
 }

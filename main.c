@@ -8,6 +8,7 @@
 #include "report.h"
 #include "about.h"
 #include "readers.h"
+#include "util.h"
 
 // Versão 0.5
 

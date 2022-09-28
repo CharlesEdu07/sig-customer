@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "about.h"
 #include "readers.h"
+#include "util.h"
 
 void about(void) {
     terminal_clear();

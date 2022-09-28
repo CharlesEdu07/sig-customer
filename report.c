@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "report.h"
 #include "readers.h"
+#include "util.h"
 
 char menu_report(void) {
     terminal_clear();
