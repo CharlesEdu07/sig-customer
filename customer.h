@@ -1,3 +1,13 @@
+typedef struct customer Customer;
+
+struct st_customer {
+    char *name;
+    char *cpf;
+    char *phone;
+    char *email;
+    char *address;
+};
+
 char menu_customer(void);
 void mod_customer(void);
 void create_customer_screen(void);
