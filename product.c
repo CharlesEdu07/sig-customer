@@ -53,10 +53,10 @@ void create_product_screen(void) {
     printf("\t\t||          Cadastrar Produto         ||\n");
     printf("\t\t========================================\n");
 
-    printf("Digite o codigo do produto: ");
+    printf("\nDigite o codigo do produto: ");
     product_code = read_product_code();
     
-    printf("\nDigite o nome do produto: ");
+    printf("Digite o nome do produto: ");
     product_name = read_product_name();
 
     printf("Digite o tipo do produto: ");
