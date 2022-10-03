@@ -10,7 +10,7 @@
 #include "readers.h"
 #include "util.h"
 
-// Versão 0.5
+// Versão 0.6
 
 void mod_main(void);
 char menu_main(void);
