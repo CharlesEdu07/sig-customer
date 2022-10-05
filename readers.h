@@ -15,4 +15,3 @@ char* read_request_quantity(void);
 char* read_request_identifier(void);
 
 int name_validation(char* name);
-int cpf_validation(char* cpf);
