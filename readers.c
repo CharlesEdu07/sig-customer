@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include "readers.h"
 
 char read_op(void) {
     char op;
@@ -19,6 +20,11 @@ char* read_name(void) {
 
     fgets(name, 50, stdin);
 
+    while (!name_validation(name)) {
+        printf("\nNome invalido. Digite novamente: ");
+        fgets(name, 50, stdin);
+    }
+
     int len = strlen(name) + 1;
     str = (char*) malloc(len * sizeof(char));
 
@@ -28,10 +34,10 @@ char* read_name(void) {
 }
 
 char* read_cpf(void) {
-    char cpf[20];
+    char cpf[12];
     char* str;
 
-    fgets(cpf, 20, stdin);
+    fgets(cpf, 12, stdin);
 
     int len = strlen(cpf) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -165,4 +171,22 @@ char* read_request_identifier(void) {
     strcpy(str, identifier);
 
     return str;
+}
+
+int is_digit(char c) {
+    return c >= '0' && c <= '9';
+}
+
+int name_validation(char* name) {
+    char invalid_characters[] = {"0123456789,-:;[]{}*#"};
+
+    for (int i = 0; i < strlen(name); i++) {
+        for (int j = 0; j < strlen(invalid_characters); j++) {
+            if (name[i] == invalid_characters[j]) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
 }
