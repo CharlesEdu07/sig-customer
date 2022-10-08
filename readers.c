@@ -34,10 +34,15 @@ char* read_name(void) {
 }
 
 char* read_cpf(void) {
-    char cpf[12];
+    char cpf[20];
     char* str;
 
-    fgets(cpf, 12, stdin);
+    fgets(cpf, 20, stdin);
+
+    while (!cpf_validation(cpf)) {
+        printf("\nCPF invalido. Digite novamente: ");
+        fgets(cpf, 20, stdin);
+    }
 
     int len = strlen(cpf) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -173,10 +178,6 @@ char* read_request_identifier(void) {
     return str;
 }
 
-int is_digit(char c) {
-    return c >= '0' && c <= '9';
-}
-
 int name_validation(char* name) {
     char invalid_characters[] = {"0123456789,-:;[]{}*#"};
 
@@ -186,6 +187,54 @@ int name_validation(char* name) {
                 return 0;
             }
         }
+    }
+
+    return 1;
+}
+
+int cpf_validation(char* cpf) {
+    int accumulator = 0;
+    int d1 = 0;
+    int d2 = 0;
+
+    if (strlen(cpf) != 12) {
+        return 0;
+    }
+
+    for (int i = 0; i < strlen(cpf) - 1; i++) {
+        if (!isdigit(cpf[i])) {
+            return 0;
+        }
+    }
+
+    for (int i = 0; i < 9; i++) {
+        accumulator += (cpf[i] - '0') * (10 - i);
+    }
+
+    d1 = 11 - (accumulator % 11);
+
+    if (d1 == 10 || d1 == 11) {
+        d1 = 0;
+    }
+
+    if (d1 != (cpf[9] - '0')) {
+        return 0;
+    }
+
+    accumulator = 0;
+
+    for (int i = 0; i < 10; i++) {
+        accumulator += (cpf[i] - '0') * (11 - i);
+    }
+
+    d2 = 11 - (accumulator % 11);
+
+    if (d2 == 10 || d2 == 11) {
+        d2 = 0;
+    }
+
+    if (d2 != (cpf[10] - '0')) {
+        return 0;
     }
 
     return 1;
