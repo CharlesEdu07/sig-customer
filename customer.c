@@ -34,12 +34,28 @@ char menu_customer(void) {
 }
 
 void create_customer(void) {
-    Customer *customer = create_customer_screen();
+    Customer* customer = create_customer_screen();
 
     save_customer(customer);
 
     free(customer);
 }
+
+// void create_customer(void) {
+//     Customer *customer = create_customer_screen();
+
+//     if (search_customer(customer->cpf) == NULL) {
+//         save_customer(customer);
+
+//         printf("\nCliente cadastrado com sucesso.\n");
+//     }
+
+//     else {
+//         printf("\nCliente ja cadastrado.\n");
+//     }
+
+//     free(customer);
+// }
 
 void save_customer(Customer *customer) {
     FILE *file = fopen("customers.dat", "ab");
@@ -110,6 +126,32 @@ Customer* create_customer_screen(void) {
 
     return customer;
 }
+
+// Customer* search_customer(char* cpf) {
+//     FILE* file;
+//     Customer* customer;
+
+//     customer = (Customer*) malloc(sizeof(Customer));
+
+//     file = fopen("customers.dat", "rb");
+
+//     if (file == NULL) {
+//         printf("\nErro ao abrir o arquivo.\n");
+//         exit(1);
+//     }
+
+//     while(fread(customer, sizeof(Customer), 1, file)) {
+//         if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
+//             fclose(file);
+
+//             return customer;
+//         }
+//     }
+
+//     fclose(file);
+
+//     return NULL;
+// }
 
 void search_customer_screen(void) {
     terminal_clear();

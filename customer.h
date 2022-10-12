@@ -14,6 +14,7 @@ void mod_customer(void);
 void save_customer(Customer *customer);
 void create_customer(void);
 Customer* create_customer_screen(void);
+Customer* search_customer(char *cpf);
 void search_customer_screen(void);
 void update_customer_screen(void);
 void delete_customer_screen(void);
