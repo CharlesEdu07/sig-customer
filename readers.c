@@ -15,14 +15,14 @@ char read_op(void) {
 }
 
 char* read_name(void) {
-    char name[50];
+    char name[255];
     char* str;
 
-    fgets(name, 50, stdin);
+    fgets(name, 255, stdin);
 
     while (!name_validation(name)) {
         printf("\nNome invalido. Digite novamente: ");
-        fgets(name, 50, stdin);
+        fgets(name, 255, stdin);
     }
 
     int len = strlen(name) + 1;
@@ -34,14 +34,14 @@ char* read_name(void) {
 }
 
 char* read_cpf(void) {
-    char cpf[20];
+    char cpf[255];
     char* str;
 
-    fgets(cpf, 20, stdin);
+    fgets(cpf, 255, stdin);
 
     while (!cpf_validation(cpf)) {
         printf("\nCPF invalido. Digite novamente: ");
-        fgets(cpf, 20, stdin);
+        fgets(cpf, 255, stdin);
     }
 
     int len = strlen(cpf) + 1;
@@ -53,10 +53,15 @@ char* read_cpf(void) {
 }
 
 char* read_phone(void) {
-    char phone[20];
+    char phone[255];
     char* str;
 
-    fgets(phone, 20, stdin);
+    fgets(phone, 255, stdin);
+
+    while (!phone_validation(phone)) {
+        printf("\nTelefone invalido. Digite novamente: ");
+        fgets(phone, 255, stdin);
+    }
 
     int len = strlen(phone) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -67,10 +72,15 @@ char* read_phone(void) {
 }
 
 char* read_email(void) {
-    char email[50];
+    char email[255];
     char* str;
 
-    fgets(email, 50, stdin);
+    fgets(email, 255, stdin);
+
+    while (!email_validation(email)) {
+        printf("\nEmail invalido. Digite novamente: ");
+        fgets(email, 255, stdin);
+    }
 
     int len = strlen(email) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -81,10 +91,10 @@ char* read_email(void) {
 }
 
 char* read_address(void) {
-    char address[50];
+    char address[255];
     char* str;
 
-    fgets(address, 50, stdin);
+    fgets(address, 255, stdin);
 
     int len = strlen(address) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -94,39 +104,11 @@ char* read_address(void) {
     return str;
 }
 
-char* read_product_name(void) {
-    char name[50];
+char* read_float(void) {
+    char price[255];
     char* str;
 
-    fgets(name, 50, stdin);
-
-    int len = strlen(name) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, name);
-
-    return str;
-}
-
-char* read_product_type(void) {
-    char type[50];
-    char* str;
-
-    fgets(type, 50, stdin);
-
-    int len = strlen(type) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, type);
-
-    return str;
-}
-
-char* read_product_price(void) {
-    char price[10];
-    char* str;
-
-    fgets(price, 10, stdin);
+    fgets(price, 255, stdin);
 
     int len = strlen(price) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -137,10 +119,10 @@ char* read_product_price(void) {
 }
 
 char* read_product_code(void) {
-    char code[50];
+    char code[255];
     char* str;
 
-    fgets(code, 50, stdin);
+    fgets(code, 255, stdin);
 
     int len = strlen(code) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -150,11 +132,11 @@ char* read_product_code(void) {
     return str;
 }
 
-char* read_request_quantity(void) {
-    char quantity[10];
+char* read_int(void) {
+    char quantity[255];
     char* str;
 
-    fgets(quantity, 10, stdin);
+    fgets(quantity, 255, stdin);
 
     int len = strlen(quantity) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -165,10 +147,10 @@ char* read_request_quantity(void) {
 }
 
 char* read_request_identifier(void) {
-    char identifier[50];
+    char identifier[255];
     char* str;
 
-    fgets(identifier, 50, stdin);
+    fgets(identifier, 255, stdin);
 
     int len = strlen(identifier) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -234,6 +216,41 @@ int cpf_validation(char* cpf) {
     }
 
     if (d2 != (cpf[10] - '0')) {
+        return 0;
+    }
+
+    return 1;
+}
+
+int phone_validation(char* phone) {
+    if (strlen(phone) != 12) {
+        return 0;
+    }
+
+    for (int i = 0; i < strlen(phone) - 1; i++) {
+        if (!isdigit(phone[i])) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int email_validation(char* email) {
+    int at = 0;
+    int dot = 0;
+
+    for (int i = 0; i < strlen(email); i++) {
+        if (email[i] == '@') {
+            at++;
+        }
+
+        if (email[i] == '.') {
+            dot++;
+        }
+    }
+
+    if (at != 1 || dot != 1) {
         return 0;
     }
 

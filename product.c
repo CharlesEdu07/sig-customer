@@ -53,17 +53,17 @@ void create_product_screen(void) {
     printf("\t\t||          Cadastrar Produto         ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nDigite o codigo do produto: ");
+    printf("\nDigite o codigo de barras do produto: ");
     product_code = read_product_code();
     
     printf("Digite o nome do produto: ");
-    product_name = read_product_name();
+    product_name = read_name();
 
     printf("Digite o tipo do produto: ");
-    product_type = read_product_type();
+    product_type = read_name();
                 
     printf("Digite o preco do produto: ");
-    product_price = read_product_price();
+    product_price = read_float();
 
     printf("\nNome do produto: %s", product_name);
     printf("Tipo do produto: %s", product_type);
@@ -92,7 +92,7 @@ void search_product_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do produto: ");
-    product_name = read_product_name();
+    product_name = read_name();
 
     printf("Digite o codigo do produto: ");
     product_code = read_product_code();

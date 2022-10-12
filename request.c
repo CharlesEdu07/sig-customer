@@ -57,10 +57,10 @@ void create_request_screen(void) {
     cpf = read_cpf();
 
     printf("Qual o produto? Digite o codigo: ");
-    product_name = read_product_name();
+    product_name = read_name();
 
     printf("Qual a quantidade? Digite: ");
-    quantity = read_request_quantity();
+    quantity = read_int();
 
     printf("Digite um identificador para o pedido: ");
     identifier = read_request_identifier();
