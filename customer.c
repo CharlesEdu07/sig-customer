@@ -36,7 +36,22 @@ char menu_customer(void) {
 void create_customer(void) {
     Customer *customer = create_customer_screen();
 
+    save_customer(customer);
+
     free(customer);
+}
+
+void save_customer(Customer *customer) {
+    FILE *file = fopen("customers.dat", "ab");
+
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
+        exit(1);
+    }
+
+    fwrite(customer, sizeof(Customer), 1, file);
+
+    fclose(file);
 }
 
 Customer* create_customer_screen(void) {
@@ -83,6 +98,7 @@ Customer* create_customer_screen(void) {
     customer->phone = phone;
     customer->email = email;
     customer->address = address;
+    customer->deleted = 0;
 
     printf("\nNome do cliente: %s", customer->name);
     printf("CPF do cliente: %s", customer->cpf);
@@ -177,7 +193,7 @@ void mod_customer(void) {
     while (op != '0') {
         switch (op) {
             case '1':
-                create_customer_screen();
+                create_customer();
                 
                 break;
 

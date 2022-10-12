@@ -6,10 +6,12 @@ struct st_customer {
     char *phone;
     char *email;
     char *address;
+    char deleted;
 };
 
 char menu_customer(void);
 void mod_customer(void);
+void save_customer(Customer *customer);
 void create_customer(void);
 Customer* create_customer_screen(void);
 void search_customer_screen(void);
