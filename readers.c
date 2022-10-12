@@ -110,6 +110,11 @@ char* read_float(void) {
 
     fgets(price, 255, stdin);
 
+    while (!float_validation(price)) {
+        printf("\nPreco invalido. Digite novamente: ");
+        fgets(price, 255, stdin);
+    }
+
     int len = strlen(price) + 1;
     str = (char*) malloc(len * sizeof(char));
 
@@ -123,6 +128,11 @@ char* read_product_code(void) {
     char* str;
 
     fgets(code, 255, stdin);
+
+    while (!product_code_validation(code)) {
+        printf("\nCodigo invalido. Digite novamente: ");
+        fgets(code, 255, stdin);
+    }
 
     int len = strlen(code) + 1;
     str = (char*) malloc(len * sizeof(char));
@@ -138,6 +148,11 @@ char* read_int(void) {
 
     fgets(quantity, 255, stdin);
 
+    while (!int_validation(quantity)) {
+        printf("\nQuantidade invalida. Digite novamente: ");
+        fgets(quantity, 255, stdin);
+    }
+
     int len = strlen(quantity) + 1;
     str = (char*) malloc(len * sizeof(char));
 
@@ -146,18 +161,27 @@ char* read_int(void) {
     return str;
 }
 
-char* read_request_identifier(void) {
-    char identifier[255];
+char* read_request_id(void) {
+    char id[255];
     char* str;
 
-    fgets(identifier, 255, stdin);
+    fgets(id, 255, stdin);
 
-    int len = strlen(identifier) + 1;
+    int len = strlen(id) + 1;
     str = (char*) malloc(len * sizeof(char));
 
-    strcpy(str, identifier);
+    strcpy(str, id);
 
     return str;
+}
+
+char* generate_request_id(char* cpf, char* product_code) {
+    char* request_id = (char*) malloc(255 * sizeof(char));
+
+    strcpy(request_id, cpf);
+    strcat(request_id, product_code);
+
+    return request_id;
 }
 
 int name_validation(char* name) {
@@ -252,6 +276,46 @@ int email_validation(char* email) {
 
     if (at != 1 || dot != 1) {
         return 0;
+    }
+
+    return 1;
+}
+
+int float_validation(char* num) {
+    int dot = 0;
+
+    for (int i = 0; i < strlen(num); i++) {
+        if (num[i] == '.') {
+            dot++;
+        }
+    }
+
+    if (dot != 1) {
+        return 0;
+    }
+
+    return 1;
+}
+
+int product_code_validation(char* code) {
+    if (strlen(code) != 14) {
+        return 0;
+    }
+
+    for (int i = 0; i < strlen(code) - 1; i++) {
+        if (!isdigit(code[i])) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int int_validation(char* num) {
+    for (int i = 0; i < strlen(num) - 1; i++) {
+        if (!isdigit(num[i])) {
+            return 0;
+        }
     }
 
     return 1;
