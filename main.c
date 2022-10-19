@@ -61,25 +61,25 @@ void mod_main(void) {
 
                 break;
 
-            case '2':
-                mod_product();
+            // case '2':
+            //     mod_product();
 
-                break;
+            //     break;
 
-            case '3':
-                mod_request();
+            // case '3':
+            //     mod_request();
 
-                break;
+            //     break;
 
-            case '4':
-                mod_report();
+            // case '4':
+            //     mod_report();
 
-                break;
+            //     break;
 
-            case '5':
-                about();
+            // case '5':
+            //     about();
 
-                break;
+            //     break;
                 
             default:
                 printf("\nOpcao invalida. Por favor, digite uma opcao valida.\n");

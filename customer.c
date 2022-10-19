@@ -33,29 +33,29 @@ char menu_customer(void) {
     return op;
 }
 
-void create_customer(void) {
-    Customer* customer = create_customer_screen();
-
-    save_customer(customer);
-
-    free(customer);
-}
-
 // void create_customer(void) {
-//     Customer *customer = create_customer_screen();
+//     Customer* customer = create_customer_screen();
 
-//     if (search_customer(customer->cpf) == NULL) {
-//         save_customer(customer);
-
-//         printf("\nCliente cadastrado com sucesso.\n");
-//     }
-
-//     else {
-//         printf("\nCliente ja cadastrado.\n");
-//     }
+//     save_customer(customer);
 
 //     free(customer);
 // }
+
+void create_customer(void) {
+    Customer *customer = create_customer_screen();
+
+    if (search_customer(customer->cpf) == NULL) {
+        save_customer(customer);
+
+        printf("\nCliente cadastrado com sucesso.\n");
+    }
+
+    else {
+        printf("\nCliente ja cadastrado.\n");
+    }
+
+    free(customer);
+}
 
 void save_customer(Customer *customer) {
     FILE *file = fopen("customers.dat", "ab");
@@ -76,11 +76,11 @@ Customer* create_customer_screen(void) {
     Customer* customer;
     customer = (Customer*) malloc(sizeof(Customer));
 
-    char* name;
-    char* cpf;
-    char* phone;
-    char* email;
-    char* address;
+    char name[255];
+    char cpf[20];
+    char phone[20];
+    char email[255];
+    char address[255];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -95,69 +95,69 @@ Customer* create_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do cliente: ");
-    name = read_name();
+    read_name(name);
 
     printf("Digite o CPF do cliente: ");
-    cpf = read_cpf();
+    read_cpf(cpf);
                 
     printf("Digite o celular do cliente: ");
-    phone = read_phone();
+    read_phone(phone);
 
     printf("Digite o email do cliente: ");
-    email = read_email();
+    read_email(email);
 
     printf("Digite o endereco do cliente: ");
-    address = read_address();
+    read_address(address);
 
-    customer->name = name;
-    customer->cpf = cpf;
-    customer->phone = phone;
-    customer->email = email;
-    customer->address = address;
+    strcpy(customer->name, name);
+    strcpy(customer->cpf, cpf);
+    strcpy(customer->phone, phone);
+    strcpy(customer->email, email);
+    strcpy(customer->address, address);
     customer->deleted = 0;
 
-    printf("\nNome do cliente: %s", customer->name);
-    printf("CPF do cliente: %s", customer->cpf);
-    printf("Telefone do cliente: %s", customer->phone);
-    printf("Email do cliente: %s", customer->email);
-    printf("Endereco do cliente: %s", customer->address);
+    printf("\nNome do cliente: %s\n", customer->name);
+    printf("CPF do cliente: %s\n", customer->cpf);
+    printf("Telefone do cliente: %s\n", customer->phone);
+    printf("Email do cliente: %s\n", customer->email);
+    printf("Endereco do cliente: %s\n", customer->address);
 
     printf("\nCliente cadastrado com sucesso!\n");
 
     return customer;
 }
 
-// Customer* search_customer(char* cpf) {
-//     FILE* file;
-//     Customer* customer;
+Customer* search_customer(char* cpf) {
+    FILE* file;
+    Customer* customer;
 
-//     customer = (Customer*) malloc(sizeof(Customer));
+    customer = (Customer*) malloc(sizeof(Customer));
 
-//     file = fopen("customers.dat", "rb");
+    file = fopen("customers.dat", "rb");
 
-//     if (file == NULL) {
-//         printf("\nErro ao abrir o arquivo.\n");
-//         exit(1);
-//     }
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
+        exit(1);
+    }
 
-//     while(fread(customer, sizeof(Customer), 1, file)) {
-//         if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
-//             fclose(file);
+    while(fread(customer, sizeof(Customer), 1, file)) {
+        if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
+            fclose(file);
 
-//             return customer;
-//         }
-//     }
+            return customer;
+        }
+    }
 
-//     fclose(file);
+    fclose(file);
 
-//     return NULL;
-// }
+    return NULL;
+}
 
 void search_customer_screen(void) {
     terminal_clear();
 
-    char* name;
-    char* cpf;
+    char name[255];
+    char cpf[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -172,10 +172,10 @@ void search_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do cliente: ");
-    name = read_name();
+    read_name(name);
 
     printf("Digite o CPF do cliente: ");
-    cpf = read_cpf();
+    read_cpf(cpf);
 
     printf("\nNome do cliente: %s", name);
     printf("CPF do cliente: %s", cpf);
@@ -186,7 +186,7 @@ void search_customer_screen(void) {
 void update_customer_screen(void) {
     terminal_clear();
 
-    char* cpf;
+    char cpf[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -201,7 +201,7 @@ void update_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o CPF do cliente: ");
-    cpf = read_cpf();
+    read_cpf(cpf);
 
     printf("\nCliente do CPF %satualizado com sucesso!\n", cpf);
 }
@@ -209,7 +209,7 @@ void update_customer_screen(void) {
 void delete_customer_screen(void) {
     terminal_clear();
 
-    char* cpf;
+    char cpf[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -224,7 +224,7 @@ void delete_customer_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o CPF do cliente: ");
-    cpf = read_cpf();
+    read_cpf(cpf);
 
     printf("\nCliente do CPF %sdeletado com sucesso!\n", cpf);
 }
