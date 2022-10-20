@@ -14,6 +14,8 @@
         "ctype.h": "c",
         "string.h": "c",
         "request.h": "c",
-        "report.h": "c"
+        "report.h": "c",
+        "inputs.h": "c",
+        "unistd.h": "c"
     }
 }

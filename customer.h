@@ -1,12 +1,12 @@
 typedef struct st_customer Customer;
 
 struct st_customer {
-    char *name;
-    char *cpf;
-    char *phone;
-    char *email;
-    char *address;
-    char deleted;
+    char name[255];
+    char cpf[20];
+    char phone[20];
+    char email[255];
+    char address[255];
+    int deleted;
 };
 
 char menu_customer(void);

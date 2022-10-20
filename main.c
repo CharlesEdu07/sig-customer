@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+
 #include "customer.h"
 #include "product.h"
 #include "request.h"
 #include "report.h"
 #include "about.h"
-#include "readers.h"
+#include "inputs.h"
 #include "util.h"
 
 // Versão 0.6

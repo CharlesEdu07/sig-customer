@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include "readers.h"
+
+#include "inputs.h"
 
 char read_op(void) {
     char op;
@@ -14,10 +15,7 @@ char read_op(void) {
     return op;
 }
 
-char* read_name(void) {
-    char name[255];
-    char* str;
-
+void read_name(char* name) {
     fgets(name, 255, stdin);
 
     while (!name_validation(name)) {
@@ -25,56 +23,32 @@ char* read_name(void) {
         fgets(name, 255, stdin);
     }
 
-    int len = strlen(name) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, name);
-
-    return str;
+    name[strlen(name) - 1] = '\0';
 }
 
-char* read_cpf(void) {
-    char cpf[255];
-    char* str;
-
-    fgets(cpf, 255, stdin);
+void read_cpf(char* cpf) {
+    fgets(cpf, 20, stdin);
 
     while (!cpf_validation(cpf)) {
         printf("\nCPF invalido. Digite novamente: ");
-        fgets(cpf, 255, stdin);
+        fgets(cpf, 20, stdin);
     }
 
-    int len = strlen(cpf) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, cpf);
-
-    return str;
+    cpf[strlen(cpf) - 1] = '\0';
 }
 
-char* read_phone(void) {
-    char phone[255];
-    char* str;
-
-    fgets(phone, 255, stdin);
+void read_phone(char* phone) {
+    fgets(phone, 20, stdin);
 
     while (!phone_validation(phone)) {
         printf("\nTelefone invalido. Digite novamente: ");
-        fgets(phone, 255, stdin);
+        fgets(phone, 20, stdin);
     }
 
-    int len = strlen(phone) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, phone);
-
-    return str;
+    phone[strlen(phone) - 1] = '\0';
 }
 
-char* read_email(void) {
-    char email[255];
-    char* str;
-
+void read_email(char* email) {
     fgets(email, 255, stdin);
 
     while (!email_validation(email)) {
@@ -82,106 +56,45 @@ char* read_email(void) {
         fgets(email, 255, stdin);
     }
 
-    int len = strlen(email) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, email);
-
-    return str;
+    email[strlen(email) - 1] = '\0';
 }
 
-char* read_address(void) {
-    char address[255];
-    char* str;
+void read_string(char* string) {
+    fgets(string, 255, stdin);
 
-    fgets(address, 255, stdin);
-
-    int len = strlen(address) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, address);
-
-    return str;
+    string[strlen(string) - 1] = '\0';
 }
 
-char* read_float(void) {
-    char price[255];
-    char* str;
+void read_float(char *number) {
+    fgets(number, 20, stdin);
 
-    fgets(price, 255, stdin);
-
-    while (!float_validation(price)) {
+    while (!float_validation(number)) {
         printf("\nPreco invalido. Digite novamente: ");
-        fgets(price, 255, stdin);
+        fgets(number, 20, stdin);
     }
-
-    int len = strlen(price) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, price);
-
-    return str;
 }
 
-char* read_product_code(void) {
-    char code[255];
-    char* str;
-
+void read_product_code(char *code) {
     fgets(code, 255, stdin);
 
     while (!product_code_validation(code)) {
         printf("\nCodigo invalido. Digite novamente: ");
         fgets(code, 255, stdin);
     }
-
-    int len = strlen(code) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, code);
-
-    return str;
 }
 
-char* read_int(void) {
-    char quantity[255];
-    char* str;
+void read_int(char *number) {
+    fgets(number, 255, stdin);
 
-    fgets(quantity, 255, stdin);
-
-    while (!int_validation(quantity)) {
+    while (!int_validation(number)) {
         printf("\nQuantidade invalida. Digite novamente: ");
-        fgets(quantity, 255, stdin);
+        fgets(number, 255, stdin);
     }
-
-    int len = strlen(quantity) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, quantity);
-
-    return str;
 }
 
-char* read_request_id(void) {
-    char id[255];
-    char* str;
-
-    fgets(id, 255, stdin);
-
-    int len = strlen(id) + 1;
-    str = (char*) malloc(len * sizeof(char));
-
-    strcpy(str, id);
-
-    return str;
-}
-
-char* generate_request_id(char* cpf, char* product_code) {
-    char* request_id = (char*) malloc(255 * sizeof(char));
-
+void generate_request_id(char* cpf, char* product_code, char* request_id) {
     strcpy(request_id, cpf);
     strcat(request_id, product_code);
-
-    return request_id;
 }
 
 int name_validation(char* name) {
