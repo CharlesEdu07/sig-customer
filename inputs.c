@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include "readers.h"
+
+#include "inputs.h"
 
 char read_op(void) {
     char op;
@@ -58,91 +59,43 @@ void read_email(char* email) {
     email[strlen(email) - 1] = '\0';
 }
 
-void read_address(char* address) {
-    fgets(address, 255, stdin);
+void read_string(char* string) {
+    fgets(string, 255, stdin);
 
-    address[strlen(address) - 1] = '\0';
+    string[strlen(string) - 1] = '\0';
 }
 
-// char* read_float(void) {
-//     char price[255];
-//     char* str;
+void read_float(char *number) {
+    fgets(number, 20, stdin);
 
-//     fgets(price, 255, stdin);
+    while (!float_validation(number)) {
+        printf("\nPreco invalido. Digite novamente: ");
+        fgets(number, 20, stdin);
+    }
+}
 
-//     while (!float_validation(price)) {
-//         printf("\nPreco invalido. Digite novamente: ");
-//         fgets(price, 255, stdin);
-//     }
+void read_product_code(char *code) {
+    fgets(code, 255, stdin);
 
-//     int len = strlen(price) + 1;
-//     str = (char*) malloc(len * sizeof(char));
+    while (!product_code_validation(code)) {
+        printf("\nCodigo invalido. Digite novamente: ");
+        fgets(code, 255, stdin);
+    }
+}
 
-//     strcpy(str, price);
+void read_int(char *number) {
+    fgets(number, 255, stdin);
 
-//     return str;
-// }
+    while (!int_validation(number)) {
+        printf("\nQuantidade invalida. Digite novamente: ");
+        fgets(number, 255, stdin);
+    }
+}
 
-// char* read_product_code(void) {
-//     char code[255];
-//     char* str;
-
-//     fgets(code, 255, stdin);
-
-//     while (!product_code_validation(code)) {
-//         printf("\nCodigo invalido. Digite novamente: ");
-//         fgets(code, 255, stdin);
-//     }
-
-//     int len = strlen(code) + 1;
-//     str = (char*) malloc(len * sizeof(char));
-
-//     strcpy(str, code);
-
-//     return str;
-// }
-
-// char* read_int(void) {
-//     char quantity[255];
-//     char* str;
-
-//     fgets(quantity, 255, stdin);
-
-//     while (!int_validation(quantity)) {
-//         printf("\nQuantidade invalida. Digite novamente: ");
-//         fgets(quantity, 255, stdin);
-//     }
-
-//     int len = strlen(quantity) + 1;
-//     str = (char*) malloc(len * sizeof(char));
-
-//     strcpy(str, quantity);
-
-//     return str;
-// }
-
-// char* read_request_id(void) {
-//     char id[255];
-//     char* str;
-
-//     fgets(id, 255, stdin);
-
-//     int len = strlen(id) + 1;
-//     str = (char*) malloc(len * sizeof(char));
-
-//     strcpy(str, id);
-
-//     return str;
-// }
-
-// char* generate_request_id(char* cpf, char* product_code) {
-//     char* request_id = (char*) malloc(255 * sizeof(char));
-
-//     strcpy(request_id, cpf);
-//     strcat(request_id, product_code);
-
-//     return request_id;
-// }
+void generate_request_id(char* cpf, char* product_code, char* request_id) {
+    strcpy(request_id, cpf);
+    strcat(request_id, product_code);
+}
 
 int name_validation(char* name) {
     char invalid_characters[] = {"0123456789,-:;[]{}*#"};

@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "report.h"
-#include "readers.h"
+#include "inputs.h"
 #include "util.h"
 
 char menu_report(void) {

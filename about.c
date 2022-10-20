@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "about.h"
-#include "readers.h"
+#include "inputs.h"
 #include "util.h"
 
 void about(void) {

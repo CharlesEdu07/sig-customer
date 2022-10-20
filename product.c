@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+
 #include "product.h"
-#include "readers.h"
+#include "inputs.h"
 #include "util.h"
 
 char menu_product(void) {
@@ -36,10 +37,11 @@ char menu_product(void) {
 void create_product_screen(void) {
     terminal_clear();
 
-    char* product_name;
-    char* product_type;
-    char* product_price;
-    char* product_code;
+    char product_code[255];
+    char product_name[255];
+    char product_type[255];
+    char product_description[255];
+    char product_price[255];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -54,16 +56,19 @@ void create_product_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o codigo de barras do produto: ");
-    product_code = read_product_code();
+    read_product_code(product_code);
     
     printf("Digite o nome do produto: ");
-    product_name = read_name();
+    read_name(product_name);
 
     printf("Digite o tipo do produto: ");
-    product_type = read_name();
+    read_name(product_type);
+
+    printf("Digite a descricao do produto: ");
+    read_string(product_description);
                 
     printf("Digite o preco do produto: ");
-    product_price = read_float();
+    read_float(product_price);
 
     printf("\nNome do produto: %s", product_name);
     printf("Tipo do produto: %s", product_type);
@@ -76,8 +81,8 @@ void create_product_screen(void) {
 void search_product_screen(void) {
     terminal_clear();
 
-    char* product_name;
-    char* product_code;
+    char product_name[255];
+    char product_code[255];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -92,10 +97,10 @@ void search_product_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o nome do produto: ");
-    product_name = read_name();
+    read_name(product_name);
 
     printf("Digite o codigo do produto: ");
-    product_code = read_product_code();
+    read_product_code(product_code);
 
     printf("\nNome do produto: %s", product_name);
     printf("Codigo do produto: %s", product_code);
@@ -106,7 +111,7 @@ void search_product_screen(void) {
 void update_product_screen(void) {
     terminal_clear();
 
-    char* product_code;
+    char product_code[255];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -121,7 +126,7 @@ void update_product_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o codigo do produto: ");
-    product_code = read_product_code();
+    read_product_code(product_code);
 
     printf("\nProduto de codigo %satualizado com sucesso!\n", product_code);
 }
@@ -129,7 +134,7 @@ void update_product_screen(void) {
 void delete_product_screen(void) {
     terminal_clear();
 
-    char* product_code;
+    char product_code[255];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -144,7 +149,7 @@ void delete_product_screen(void) {
     printf("\t\t========================================\n");
 
     printf("\nDigite o codigo do produto: ");
-    product_code = read_product_code();
+    read_product_code(product_code);
 
     printf("\nProduto de codigo %sdeletado com sucesso!\n", product_code);
 }

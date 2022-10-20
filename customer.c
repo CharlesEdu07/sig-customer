@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
+
 #include "customer.h"
-#include "readers.h"
+#include "inputs.h"
 #include "util.h"
 
 char menu_customer(void) {
@@ -33,14 +35,6 @@ char menu_customer(void) {
     return op;
 }
 
-// void create_customer(void) {
-//     Customer* customer = create_customer_screen();
-
-//     save_customer(customer);
-
-//     free(customer);
-// }
-
 void create_customer(void) {
     Customer *customer = create_customer_screen();
 
@@ -58,7 +52,7 @@ void create_customer(void) {
 }
 
 void save_customer(Customer *customer) {
-    FILE *file = fopen("customers.dat", "ab");
+    FILE *file = fopen("customer.dat", "ab");
 
     if (file == NULL) {
         printf("\nErro ao abrir o arquivo.\n");
@@ -107,7 +101,7 @@ Customer* create_customer_screen(void) {
     read_email(email);
 
     printf("Digite o endereco do cliente: ");
-    read_address(address);
+    read_string(address);
 
     strcpy(customer->name, name);
     strcpy(customer->cpf, cpf);
@@ -122,8 +116,6 @@ Customer* create_customer_screen(void) {
     printf("Email do cliente: %s\n", customer->email);
     printf("Endereco do cliente: %s\n", customer->address);
 
-    printf("\nCliente cadastrado com sucesso!\n");
-
     return customer;
 }
 
@@ -133,22 +125,25 @@ Customer* search_customer(char* cpf) {
 
     customer = (Customer*) malloc(sizeof(Customer));
 
-    file = fopen("customers.dat", "rb");
+    if (access("customer.dat", F_OK) != -1) {
+        file = fopen("customer.dat", "rb");
 
-    if (file == NULL) {
-        printf("\nErro ao abrir o arquivo.\n");
-        exit(1);
-    }
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
 
-    while(fread(customer, sizeof(Customer), 1, file)) {
-        if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
-            fclose(file);
-
-            return customer;
+            exit(1);
         }
-    }
 
-    fclose(file);
+        while (fread(customer, sizeof(Customer), 1, file)) {
+            if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
+                fclose(file);
+
+                return customer;
+            }
+        }
+
+        fclose(file);
+    }
 
     return NULL;
 }
