@@ -11,10 +11,10 @@ struct st_customer {
 
 char menu_customer(void);
 void mod_customer(void);
-void save_customer(Customer *customer);
 void create_customer(void);
-Customer* create_customer_screen(void);
+void save_customer(Customer* customer);
 Customer* search_customer(char *cpf);
+Customer* create_customer_screen(void);
 void search_customer_screen(void);
 void update_customer_screen(void);
 void delete_customer_screen(void);

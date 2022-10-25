@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "product.h"
 #include "inputs.h"
@@ -34,8 +35,68 @@ char menu_product(void) {
     return op;
 }
 
-void create_product_screen(void) {
+void create_product(void) {
+    Product* product = create_product_screen();
+
+    if (search_product(product->product_code) == NULL) {
+        save_product(product);
+
+        printf("\nProduto cadastrado com sucesso.\n");
+    }
+
+    else {
+        printf("\nProduto ja cadastrado.\n");
+    }
+
+    free(product);
+}
+
+Product* search_product(char* product_code) {
+    FILE* file;
+    Product* product;
+
+    product = (Product*) malloc(sizeof(Product));
+
+    if (access("product.dat", F_OK) != -1) {
+        file = fopen("product.dat", "rb");
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+            
+            exit(1);
+        }
+
+        while (fread(product, sizeof(Product), 1, file)) {
+            if (strcmp(product->product_code, product_code) == 0 && product->deleted == 0) {
+                fclose(file);
+
+                return product;
+            }
+        }
+
+        fclose(file);
+    }
+
+    return NULL;
+}
+
+void save_product(Product *product) {
+    FILE* file = fopen("product.dat", "ab");
+
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
+        exit(1);
+    }
+
+    fwrite(product, sizeof(Product), 1, file);
+
+    fclose(file);
+}
+
+Product* create_product_screen(void) {
     terminal_clear();
+
+    Product* product = (Product*) malloc(sizeof(Product));
 
     char product_code[255];
     char product_name[255];
@@ -70,12 +131,19 @@ void create_product_screen(void) {
     printf("Digite o preco do produto: ");
     read_float(product_price);
 
-    printf("\nNome do produto: %s", product_name);
-    printf("Tipo do produto: %s", product_type);
-    printf("Codigo do produto: %s", product_code);
-    printf("Preco do produto: %s", product_price);
+    strcpy(product->product_code, product_code);
+    strcpy(product->product_name, product_name);
+    strcpy(product->product_type, product_type);
+    strcpy(product->product_description, product_description);
+    strcpy(product->product_price, product_price);
 
-    printf("\nProduto cadastrado com sucesso!\n");
+    printf("\nCodigo do produto: %s\n", product->product_code);
+    printf("Nome do produto: %s\n", product->product_name);
+    printf("Tipo do produto: %s\n", product->product_type);
+    printf("Descricao do produto: %s\n", product->product_description);
+    printf("Preco do produto: %s\n", product->product_price);
+
+    return product;
 }
 
 void search_product_screen(void) {
@@ -160,7 +228,7 @@ void mod_product(void) {
     while (op != '0') {
         switch (op) {
             case '1':
-                create_product_screen();
+                create_product();
                 
                 break;
 

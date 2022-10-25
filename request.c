@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "request.h"
 #include "inputs.h"
@@ -34,8 +35,64 @@ char menu_request(void) {
     return op;
 }
 
-void create_request_screen(void) {
+void create_request(void) {
+    Request* request = create_request_screen();
+
+    if (search_request(request->id) == NULL) {
+        save_request(request);
+
+        printf("\nPedido cadastrado com sucesso.\n");
+    }
+
+    else {
+        printf("\nPedido ja cadastrado.\n");
+    }
+
+    free(request);
+}
+
+Request* search_request(char* id) {
+    FILE* file;
+    Request* request;
+
+    request = (Request*) malloc(sizeof(Request));
+
+    if (access("request.dat", F_OK) != -1) {
+        file = fopen("request.dat", "rb");
+
+        while (fread(request, sizeof(Request), 1, file)) {
+            if (strcmp(request->id, id) == 0) {
+                fclose(file);
+
+                return request;
+            }
+        }
+
+        fclose(file);
+    }
+
+    free(request);
+
+    return NULL;
+}
+
+void save_request(Request* request) {
+    FILE* file = fopen("request.dat", "ab");
+
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
+        exit(1);
+    }
+
+    fwrite(request, sizeof(Request), 1, file);
+
+    fclose(file);
+}
+
+Request* create_request_screen(void) {
     terminal_clear();
+
+    Request* request = (Request*) malloc(sizeof(Request));
 
     char cpf[255];
     char product_code[255];
@@ -70,7 +127,13 @@ void create_request_screen(void) {
     printf("Quantidade do pedido: %s", quantity);
     printf("ID do pedido: %s", request_id);
 
-    printf("\nPedido feito com sucesso!\n");
+    strcpy(request->id, request_id);
+    strcpy(request->customer_cpf, cpf);
+    strcpy(request->product_code, product_code);
+    strcpy(request->quantity, quantity);
+    request->deleted = 0;
+
+    return request;
 }
 
 void search_request_screen(void) {
@@ -150,7 +213,7 @@ void mod_request(void) {
     while (op != '0') {
         switch (op) {
             case '1':
-                create_request_screen();
+                create_request();
                 
                 break;
 

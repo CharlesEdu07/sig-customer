@@ -36,7 +36,7 @@ char menu_customer(void) {
 }
 
 void create_customer(void) {
-    Customer *customer = create_customer_screen();
+    Customer* customer = create_customer_screen();
 
     if (search_customer(customer->cpf) == NULL) {
         save_customer(customer);
@@ -51,8 +51,37 @@ void create_customer(void) {
     free(customer);
 }
 
-void save_customer(Customer *customer) {
-    FILE *file = fopen("customer.dat", "ab");
+Customer* search_customer(char* cpf) {
+    FILE* file;
+    Customer* customer;
+
+    customer = (Customer*) malloc(sizeof(Customer));
+
+    if (access("customer.dat", F_OK) != -1) {
+        file = fopen("customer.dat", "rb");
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        while (fread(customer, sizeof(Customer), 1, file)) {
+            if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
+                fclose(file);
+
+                return customer;
+            }
+        }
+
+        fclose(file);
+    }
+
+    return NULL;
+}
+
+void save_customer(Customer* customer) {
+    FILE* file = fopen("customer.dat", "ab");
 
     if (file == NULL) {
         printf("\nErro ao abrir o arquivo.\n");
@@ -117,35 +146,6 @@ Customer* create_customer_screen(void) {
     printf("Endereco do cliente: %s\n", customer->address);
 
     return customer;
-}
-
-Customer* search_customer(char* cpf) {
-    FILE* file;
-    Customer* customer;
-
-    customer = (Customer*) malloc(sizeof(Customer));
-
-    if (access("customer.dat", F_OK) != -1) {
-        file = fopen("customer.dat", "rb");
-
-        if (file == NULL) {
-            printf("\nErro ao abrir o arquivo.\n");
-
-            exit(1);
-        }
-
-        while (fread(customer, sizeof(Customer), 1, file)) {
-            if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
-                fclose(file);
-
-                return customer;
-            }
-        }
-
-        fclose(file);
-    }
-
-    return NULL;
 }
 
 void search_customer_screen(void) {
