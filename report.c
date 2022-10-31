@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "report.h"
+#include "customer.h"
 #include "inputs.h"
 #include "util.h"
 
@@ -30,6 +31,10 @@ char menu_report(void) {
 }
 
 void list_customer(void) {
+    FILE *fp = fopen("customer.dat", "rb");
+
+    Customer* customer = (Customer*) malloc(sizeof(Customer));
+
     terminal_clear();
 
     printf("\t\t========================================\n");
@@ -44,12 +49,22 @@ void list_customer(void) {
     printf("\t\t||           Listar Clientes          ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nNome do cliente: ");
-    printf("\nCPF do cliente: ");
-    printf("\nCelular do cliente: ");
-    printf("\nEmail do cliente: ");
-    printf("\nEndereco do cliente: ");
-    printf("\n");
+    int count = 1;
+
+    while (fread(customer, sizeof(Customer), 1, fp)) {
+        printf("\nCliente %d:\n", count);
+        printf("\nNome do cliente: %s\n", customer->name);
+        printf("CPF do cliente: %s\n", customer->cpf);
+        printf("Celular do cliente: %s\n", customer->phone);
+        printf("Email do cliente: %s\n", customer->email);
+        printf("Endereco do cliente: %s\n", customer->address);
+
+        count++;
+    }
+
+    fclose(fp);
+    
+    free(customer);
 }
 
 void list_product(void) {

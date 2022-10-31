@@ -25,5 +25,4 @@ void about(void) {
     printf("|   Discente/Autor do Projeto:                                               |\n");
     printf("|       -> Charles Eduardo Araujo De Faria. Matricula: 20220042687           |\n");
     printf("|____________________________________________________________________________|\n");
-    printf("\n");
 }
