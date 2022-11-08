@@ -141,7 +141,7 @@ Product* create_product_screen(void) {
     printf("Nome do produto: %s\n", product->product_name);
     printf("Tipo do produto: %s\n", product->product_type);
     printf("Descricao do produto: %s\n", product->product_description);
-    printf("Preco do produto: %s\n", product->product_price);
+    printf("Preco do produto: %s", product->product_price);
 
     return product;
 }

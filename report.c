@@ -3,6 +3,8 @@
 
 #include "report.h"
 #include "customer.h"
+#include "product.h"
+#include "request.h"
 #include "inputs.h"
 #include "util.h"
 
@@ -31,11 +33,11 @@ char menu_report(void) {
 }
 
 void list_customer(void) {
+    terminal_clear();
+
     FILE *fp = fopen("customer.dat", "rb");
 
     Customer* customer = (Customer*) malloc(sizeof(Customer));
-
-    terminal_clear();
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -70,6 +72,10 @@ void list_customer(void) {
 void list_product(void) {
     terminal_clear();
 
+    FILE *fp = fopen("product.dat", "rb");
+
+    Product* product = (Product*) malloc(sizeof(Product));
+
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
     printf("\t\t||            ------------            ||\n");
@@ -82,15 +88,30 @@ void list_product(void) {
     printf("\t\t||           Listar Produtos          ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nNome do produto: ");
-    printf("\nTipo do produto: ");
-    printf("\nCodigo do produto: ");
-    printf("\nPreco do produto: ");
-    printf("\n");
+    int count = 1;
+
+    while (fread(product, sizeof(Product), 1, fp)) {
+        printf("\nProduto %d\n ", count);
+        printf("\nCodigo do produto: %s", product->product_code);
+        printf("Nome do produto: %s\n", product->product_name);
+        printf("Tipo do produto: %s\n", product->product_type);
+        printf("Descricao do produto: %s\n", product->product_description);
+        printf("Preco do produto: %s", product->product_price);
+
+        count++;
+    }
+
+    fclose(fp);
+
+    free(product);
 }
 
 void list_request(void) {
     terminal_clear();
+
+    FILE *fp = fopen("request.dat", "rb");
+
+    Request* request = (Request*) malloc(sizeof(Request));
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -104,11 +125,21 @@ void list_request(void) {
     printf("\t\t||           Listar Pedidos           ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nCPF do cliente: ");
-    printf("\nNome do produto: ");
-    printf("\nQuantidade do pedido: ");
-    printf("\nIdentificador do pedido: ");
-    printf("\n");
+    int count = 1;
+
+    while (fread(request, sizeof(Request), 1, fp)) {
+        printf("\nPedido %d:\n", count);
+        printf("\nCodigo do pedido: %s", request->id);
+        printf("Codigo do cliente: %s\n", request->customer_cpf);
+        printf("Codigo do produto: %s", request->product_code);
+        printf("Quantidade do produto: %s", request->quantity);
+
+        count++;
+    }
+
+    fclose(fp);
+
+    free(request);
 }
 
 void mod_report(void) {
