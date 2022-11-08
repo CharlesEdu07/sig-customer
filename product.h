@@ -12,6 +12,7 @@ struct st_product {
 char menu_product(void);
 void mod_product(void);
 void save_product(Product* product);
+char* show_product_types(void);
 void create_product(void);
 Product* search_product(char* product_code);
 Product* create_product_screen(void);

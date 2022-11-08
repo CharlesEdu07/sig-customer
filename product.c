@@ -93,6 +93,65 @@ void save_product(Product *product) {
     fclose(file);
 }
 
+char* show_product_types(void) {
+    char* types = (char*) malloc(255 * sizeof(char));
+
+    printf("\n");
+
+    printf("\t\t=====================================\n");
+    printf("\t\t||        Tipos de produtos        ||\n");
+    printf("\t\t=====================================\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|            1 - Perfume            |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|          2 - Hidratantes          |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|            3 - Barbear            |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|           4 - Sabonetes           |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t|            5 - Shampoo            |\n");
+    printf("\t\t-------------------------------------\n");
+
+    char op = read_op();
+
+    switch(op) {
+        case '1':
+            strcpy(types, "Perfume");
+
+            break;
+
+        case '2':
+            strcpy(types, "Hidratante");
+
+            break;
+
+        case '3':
+            strcpy(types, "Barbear");
+
+            break;
+
+        case '4':
+            strcpy(types, "Sabonete");
+
+            break;
+
+        case '5':
+            strcpy(types, "Shampoo");
+
+            break;
+
+        default:
+            printf("\nOpcao invalida.\n");
+    }
+
+    return types;
+}
+
 Product* create_product_screen(void) {
     terminal_clear();
 
@@ -100,7 +159,7 @@ Product* create_product_screen(void) {
 
     char product_code[20];
     char product_name[255];
-    char product_type[255];
+    char* product_type;
     char product_description[255];
     char product_price[255];
 
@@ -122,8 +181,8 @@ Product* create_product_screen(void) {
     printf("Digite o nome do produto: ");
     read_name(product_name);
 
-    printf("Digite o tipo do produto: ");
-    read_name(product_type);
+    printf("Digite o tipo do produto:\n");
+    product_type = show_product_types();
 
     printf("Digite a descricao do produto: ");
     read_string(product_description);
