@@ -98,7 +98,7 @@ Product* create_product_screen(void) {
 
     Product* product = (Product*) malloc(sizeof(Product));
 
-    char product_code[255];
+    char product_code[20];
     char product_name[255];
     char product_type[255];
     char product_description[255];
@@ -136,21 +136,52 @@ Product* create_product_screen(void) {
     strcpy(product->product_type, product_type);
     strcpy(product->product_description, product_description);
     strcpy(product->product_price, product_price);
-
-    printf("\nCodigo do produto: %s\n", product->product_code);
-    printf("Nome do produto: %s\n", product->product_name);
-    printf("Tipo do produto: %s\n", product->product_type);
-    printf("Descricao do produto: %s\n", product->product_description);
-    printf("Preco do produto: %s", product->product_price);
+    product->deleted = 0;
 
     return product;
 }
 
-void search_product_screen(void) {
+void find_product(void) {
     terminal_clear();
 
-    char product_name[255];
-    char product_code[255];
+    Product* product;
+    char* product_code = search_product_screen();
+
+    if (search_product(product_code) != NULL) {
+        product = search_product(product_code);
+
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||        Visualizando Produto        ||\n");
+        printf("\t\t========================================\n");
+
+        printf("\nCodigo de barras: %s", product->product_code);
+        printf("Nome: %s", product->product_name);
+        printf("\nTipo: %s", product->product_type);
+        printf("\nDescricao: %s", product->product_description);
+        printf("\nPreco: %s", product->product_price);
+
+        free(product);
+    }
+
+    else {
+        printf("\nProduto nao encontrado ou inexistente.\n");
+    }
+
+    free(product_code);
+}
+
+char* search_product_screen(void) {
+    terminal_clear();
+
+    char* product_code = (char*) malloc(sizeof(char) * 20);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -164,22 +195,16 @@ void search_product_screen(void) {
     printf("\t\t||         Pesquisar Produtos         ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nDigite o nome do produto: ");
-    read_name(product_name);
-
-    printf("Digite o codigo do produto: ");
+    printf("\nDigite o codigo do produto: ");
     read_product_code(product_code);
 
-    printf("\nNome do produto: %s", product_name);
-    printf("Codigo do produto: %s", product_code);
-
-    printf("\nPesquisa realizada com sucesso!\n");
+    return product_code;
 }
 
 void update_product_screen(void) {
     terminal_clear();
 
-    char product_code[255];
+    char product_code[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -233,7 +258,7 @@ void mod_product(void) {
                 break;
 
             case '2':
-                search_product_screen();
+                find_product();
                 
                 break;
                 

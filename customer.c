@@ -175,6 +175,8 @@ void find_customer(void) {
     else {
         printf("\nCliente nao encontrado ou inexistente.\n");
     }
+
+    free(cpf);
 }
 
 char* search_customer_screen(void) {
