@@ -139,20 +139,48 @@ Customer* create_customer_screen(void) {
     strcpy(customer->address, address);
     customer->deleted = 0;
 
-    printf("\nNome do cliente: %s\n", customer->name);
-    printf("CPF do cliente: %s\n", customer->cpf);
-    printf("Telefone do cliente: %s\n", customer->phone);
-    printf("Email do cliente: %s\n", customer->email);
-    printf("Endereco do cliente: %s\n", customer->address);
-
     return customer;
 }
 
-void search_customer_screen(void) {
+void find_customer(void) {
     terminal_clear();
 
-    char name[255];
-    char cpf[20];
+    Customer* customer;
+    char* cpf = search_customer_screen();
+    
+    if (search_customer(cpf) != NULL) {
+        customer = search_customer(cpf);
+
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||        Visualizando Cliente        ||\n");
+        printf("\t\t========================================\n");
+
+        printf("\nNome do cliente: %s\n", customer->name);
+        printf("CPF do cliente: %s\n", customer->cpf);
+        printf("Celular do cliente: %s\n", customer->phone);
+        printf("Email do cliente: %s\n", customer->email);
+        printf("Endereco do cliente: %s\n", customer->address);
+
+        free(customer);
+    }
+
+    else {
+        printf("\nCliente nao encontrado ou inexistente.\n");
+    }
+}
+
+char* search_customer_screen(void) {
+    terminal_clear();
+
+    char *cpf = (char*) malloc(sizeof(char) * 20);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -166,16 +194,10 @@ void search_customer_screen(void) {
     printf("\t\t||         Pesquisar Clientes         ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nDigite o nome do cliente: ");
-    read_name(name);
-
-    printf("Digite o CPF do cliente: ");
+    printf("\nDigite o CPF do cliente: ");
     read_cpf(cpf);
 
-    printf("\nNome do cliente: %s", name);
-    printf("CPF do cliente: %s", cpf);
-    
-    printf("\nPesquisa realizada com sucesso!\n");
+    return cpf;
 }
 
 void update_customer_screen(void) {
@@ -235,7 +257,7 @@ void mod_customer(void) {
                 break;
 
             case '2':
-                search_customer_screen();
+                find_customer();
                 
                 break;
                 

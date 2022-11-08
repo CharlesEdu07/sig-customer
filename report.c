@@ -36,7 +36,7 @@ char menu_report(void) {
 void list_customer(void) {
     terminal_clear();
 
-    FILE *fp;
+    FILE* fp;
 
     if (access("customer.dat", F_OK) == -1) {
         printf("\t\t========================================\n");
@@ -51,7 +51,7 @@ void list_customer(void) {
         printf("\t\t||           Listar Clientes          ||\n");
         printf("\t\t========================================\n");
 
-        printf("Nao ha clientes cadastrados.\n");
+        printf("\nNao ha clientes cadastrados.\n");
     }
 
     else {
@@ -92,7 +92,7 @@ void list_customer(void) {
 void list_product(void) {
     terminal_clear();
 
-    FILE *fp;
+    FILE* fp;
 
     if (access("product.dat", F_OK) == -1) {
         printf("\t\t========================================\n");
@@ -148,7 +148,7 @@ void list_product(void) {
 void list_request(void) {
     terminal_clear();
 
-    FILE *fp;
+    FILE* fp;
 
     if (access("request.dat", F_OK) == -1) {
         printf("\t\t========================================\n");
