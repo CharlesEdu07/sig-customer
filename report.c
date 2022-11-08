@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "report.h"
 #include "customer.h"
@@ -35,111 +36,156 @@ char menu_report(void) {
 void list_customer(void) {
     terminal_clear();
 
-    FILE *fp = fopen("customer.dat", "rb");
+    FILE *fp;
 
-    Customer* customer = (Customer*) malloc(sizeof(Customer));
-
-    printf("\t\t========================================\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||            SIG-Customer            ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t========================================\n");
-    printf("\n");
-    printf("\t\t========================================\n");
-    printf("\t\t||           Listar Clientes          ||\n");
-    printf("\t\t========================================\n");
-
-    int count = 1;
-
-    while (fread(customer, sizeof(Customer), 1, fp)) {
-        printf("\nCliente %d:\n", count);
-        printf("\nNome do cliente: %s\n", customer->name);
-        printf("CPF do cliente: %s\n", customer->cpf);
-        printf("Celular do cliente: %s\n", customer->phone);
-        printf("Email do cliente: %s\n", customer->email);
-        printf("Endereco do cliente: %s\n", customer->address);
-
-        count++;
+    if (access("customer.dat", F_OK) == -1) {
+        printf("\nNao existem clientes registados.\n");
     }
 
-    fclose(fp);
+    else {
+        fp = fopen("customer.dat", "rb");
+        Customer* customer = (Customer*) malloc(sizeof(Customer));
+
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||           Listar Clientes          ||\n");
+        printf("\t\t========================================\n");
+
+        int count = 1;
+
+        while (fread(customer, sizeof(Customer), 1, fp)) {
+            printf("\nCliente %d:\n", count);
+            printf("\nNome do cliente: %s\n", customer->name);
+            printf("CPF do cliente: %s\n", customer->cpf);
+            printf("Celular do cliente: %s\n", customer->phone);
+            printf("Email do cliente: %s\n", customer->email);
+            printf("Endereco do cliente: %s\n", customer->address);
+
+            count++;
+        }
+
+        fclose(fp);
     
-    free(customer);
+        free(customer);
+    }
 }
 
 void list_product(void) {
     terminal_clear();
 
-    FILE *fp = fopen("product.dat", "rb");
+    FILE *fp;
 
-    Product* product = (Product*) malloc(sizeof(Product));
+    if (access("product.dat", F_OK) == -1) {
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||           Listar Produtos          ||\n");
+        printf("\t\t========================================\n");
 
-    printf("\t\t========================================\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||            SIG-Customer            ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t========================================\n");
-    printf("\n");
-    printf("\t\t========================================\n");
-    printf("\t\t||           Listar Produtos          ||\n");
-    printf("\t\t========================================\n");
-
-    int count = 1;
-
-    while (fread(product, sizeof(Product), 1, fp)) {
-        printf("\nProduto %d\n ", count);
-        printf("\nCodigo do produto: %s", product->product_code);
-        printf("Nome do produto: %s\n", product->product_name);
-        printf("Tipo do produto: %s\n", product->product_type);
-        printf("Descricao do produto: %s\n", product->product_description);
-        printf("Preco do produto: %s", product->product_price);
-
-        count++;
+        printf("\nNao existem produtos registados.\n");
     }
 
-    fclose(fp);
+    else {
+        fp = fopen("product.dat", "rb");
+        Product* product = (Product*) malloc(sizeof(Product));
 
-    free(product);
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||           Listar Produtos          ||\n");
+        printf("\t\t========================================\n");
+
+        int count = 1;
+
+        while (fread(product, sizeof(Product), 1, fp)) {
+            printf("\nProduto %d:\n", count);
+            printf("\nNome do produto: %s\n", product->product_name);
+            printf("Codigo do produto: %s", product->product_code);
+            printf("Descricao do produto: %s\n", product->product_description);
+            printf("Tipo do produto: %s\n", product->product_type);
+            printf("Preco do produto: %s", product->product_price);
+
+            count++;
+        }
+
+        fclose(fp);
+    
+        free(product);
+    }
 }
 
 void list_request(void) {
     terminal_clear();
 
-    FILE *fp = fopen("request.dat", "rb");
+    FILE *fp;
 
-    Request* request = (Request*) malloc(sizeof(Request));
+    if (access("request.dat", F_OK) == -1) {
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||            Listar Pedido           ||\n");
+        printf("\t\t========================================\n");
 
-    printf("\t\t========================================\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||            SIG-Customer            ||\n");
-    printf("\t\t||            ------------            ||\n");
-    printf("\t\t||                                    ||\n");
-    printf("\t\t========================================\n");
-    printf("\n");
-    printf("\t\t========================================\n");
-    printf("\t\t||           Listar Pedidos           ||\n");
-    printf("\t\t========================================\n");
-
-    int count = 1;
-
-    while (fread(request, sizeof(Request), 1, fp)) {
-        printf("\nPedido %d:\n", count);
-        printf("\nCodigo do pedido: %s", request->id);
-        printf("Codigo do cliente: %s\n", request->customer_cpf);
-        printf("Codigo do produto: %s", request->product_code);
-        printf("Quantidade do produto: %s", request->quantity);
-
-        count++;
+        printf("\nNao existem pedidos registados.\n");
     }
 
-    fclose(fp);
+    else {
+        fp = fopen("request.dat", "rb");
+        Request* request = (Request*) malloc(sizeof(Request));
 
-    free(request);
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||            Listar Pedido           ||\n");
+        printf("\t\t========================================\n");
+
+        int count = 1;
+
+        while (fread(request, sizeof(Request), 1, fp)) {
+            printf("\nPedido %d:\n", count);
+            printf("\nID do pedido: %s", request->id);
+            printf("CPF do cliente: %s\n", request->customer_cpf);
+            printf("Codigo do produto: %s", request->product_code);
+            printf("Quantidade do produto: %s", request->quantity);
+
+            count++;
+        }
+
+        fclose(fp);
+    
+        free(request);
+    }
 }
 
 void mod_report(void) {
