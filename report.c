@@ -39,7 +39,19 @@ void list_customer(void) {
     FILE *fp;
 
     if (access("customer.dat", F_OK) == -1) {
-        printf("\nNao existem clientes registados.\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||           Listar Clientes          ||\n");
+        printf("\t\t========================================\n");
+
+        printf("Nao ha clientes cadastrados.\n");
     }
 
     else {
