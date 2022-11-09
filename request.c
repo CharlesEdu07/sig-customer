@@ -60,6 +60,12 @@ Request* search_request(char* id) {
     if (access("request.dat", F_OK) != -1) {
         file = fopen("request.dat", "rb");
 
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
         while (fread(request, sizeof(Request), 1, file)) {
             if (strcmp(request->id, id) == 0) {
                 fclose(file);
@@ -70,8 +76,6 @@ Request* search_request(char* id) {
 
         fclose(file);
     }
-
-    free(request);
 
     return NULL;
 }
@@ -94,10 +98,10 @@ Request* create_request_screen(void) {
 
     Request* request = (Request*) malloc(sizeof(Request));
 
-    char cpf[255];
-    char product_code[255];
-    char quantity[255];
-    char request_id[255];
+    char cpf[20];
+    char product_code[50];
+    char quantity[10];
+    char request_id[50];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -122,11 +126,6 @@ Request* create_request_screen(void) {
 
     generate_request_id(cpf, product_code, request_id);
 
-    printf("\nCPF do cliente: %s", cpf);
-    printf("Codigo do produto: %s", product_code);
-    printf("Quantidade do pedido: %s", quantity);
-    printf("ID do pedido: %s", request_id);
-
     strcpy(request->id, request_id);
     strcpy(request->customer_cpf, cpf);
     strcpy(request->product_code, product_code);
@@ -136,10 +135,46 @@ Request* create_request_screen(void) {
     return request;
 }
 
-void search_request_screen(void) {
+void find_request(void) {
     terminal_clear();
 
-    char id[255];
+    Request* request;
+    char* id = search_request_screen();
+
+    if (search_request(id) != NULL) {
+        request = search_request(id);
+
+        printf("\t\t========================================\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||            SIG-Customer            ||\n");
+        printf("\t\t||            ------------            ||\n");
+        printf("\t\t||                                    ||\n");
+        printf("\t\t========================================\n");
+        printf("\n");
+        printf("\t\t========================================\n");
+        printf("\t\t||          Pesquisar Pedidos         ||\n");
+        printf("\t\t========================================\n");
+
+        printf("\nID: %s", request->id);
+        printf("\nCPF: %s", request->customer_cpf);
+        printf("\nCodigo do produto: %s", request->product_code);
+        printf("\nQuantidade: %s", request->quantity);
+
+        free(request);
+    }
+
+    else {
+        printf("\nPedido nao encontrado.\n");
+    }
+
+    free(id);
+}
+
+char* search_request_screen(void) {
+    terminal_clear();
+
+    char* id = (char*) malloc(sizeof(char) * 50);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -156,15 +191,13 @@ void search_request_screen(void) {
     printf("\nDigite o identificador do pedido: ");
     read_string(id);
 
-    printf("\nIdentificador do pedido: %s", id);
-
-    printf("\nPesquisa realizada com sucesso!\n");
+    return id;
 }
 
 void update_request_screen(void) {
     terminal_clear();
 
-    char id[255];
+    char id[50];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -187,7 +220,7 @@ void update_request_screen(void) {
 void delete_request_screen(void) {
     terminal_clear();
 
-    char id[255];
+    char id[50];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -218,7 +251,7 @@ void mod_request(void) {
                 break;
 
             case '2':
-                search_request_screen();
+                find_request();
                 
                 break;
                 

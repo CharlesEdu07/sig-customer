@@ -14,6 +14,7 @@ void create_request(void);
 void save_request(Request* request);
 Request* search_request(char *id);
 Request* create_request_screen(void);
-void search_request_screen(void);
+void find_request(void);
+char* search_request_screen(void);
 void update_request_screen(void);
 void delete_request_screen(void);

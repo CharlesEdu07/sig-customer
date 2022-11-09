@@ -72,24 +72,30 @@ void read_float(char *number) {
         printf("\nPreco invalido. Digite novamente: ");
         fgets(number, 20, stdin);
     }
+
+    number[strlen(number) - 1] = '\0';
 }
 
 void read_product_code(char *code) {
-    fgets(code, 255, stdin);
+    fgets(code, 50, stdin);
 
     while (!product_code_validation(code)) {
         printf("\nCodigo invalido. Digite novamente: ");
-        fgets(code, 255, stdin);
+        fgets(code, 50, stdin);
     }
+
+    code[strlen(code) - 1] = '\0';
 }
 
 void read_int(char *number) {
-    fgets(number, 255, stdin);
+    fgets(number, 10, stdin);
 
     while (!int_validation(number)) {
         printf("\nQuantidade invalida. Digite novamente: ");
-        fgets(number, 255, stdin);
+        fgets(number, 10, stdin);
     }
+
+    number[strlen(number) - 1] = '\0';
 }
 
 void generate_request_id(char* cpf, char* product_code, char* request_id) {

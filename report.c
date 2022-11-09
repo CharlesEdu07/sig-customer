@@ -131,10 +131,10 @@ void list_product(void) {
         while (fread(product, sizeof(Product), 1, fp)) {
             printf("\nProduto %d:\n", count);
             printf("\nNome do produto: %s\n", product->product_name);
-            printf("Codigo do produto: %s", product->product_code);
+            printf("Codigo do produto: %s\n", product->product_code);
             printf("Descricao do produto: %s\n", product->product_description);
             printf("Tipo do produto: %s\n", product->product_type);
-            printf("Preco do produto: %s", product->product_price);
+            printf("Preco do produto: %s\n", product->product_price);
 
             count++;
         }
@@ -186,10 +186,10 @@ void list_request(void) {
 
         while (fread(request, sizeof(Request), 1, fp)) {
             printf("\nPedido %d:\n", count);
-            printf("\nID do pedido: %s", request->id);
+            printf("\nID do pedido: %s\n", request->id);
             printf("CPF do cliente: %s\n", request->customer_cpf);
-            printf("Codigo do produto: %s", request->product_code);
-            printf("Quantidade do produto: %s", request->quantity);
+            printf("Codigo do produto: %s\n", request->product_code);
+            printf("Quantidade do produto: %s\n", request->quantity);
 
             count++;
         }

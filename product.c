@@ -221,11 +221,11 @@ void find_product(void) {
         printf("\t\t||        Visualizando Produto        ||\n");
         printf("\t\t========================================\n");
 
-        printf("\nCodigo de barras: %s", product->product_code);
-        printf("Nome: %s", product->product_name);
-        printf("\nTipo: %s", product->product_type);
-        printf("\nDescricao: %s", product->product_description);
-        printf("\nPreco: %s", product->product_price);
+        printf("\nCodigo de barras: %s\n", product->product_code);
+        printf("Nome: %s\n", product->product_name);
+        printf("Tipo: %s\n", product->product_type);
+        printf("Descricao: %s\n", product->product_description);
+        printf("Preco: %s\n", product->product_price);
 
         free(product);
     }
