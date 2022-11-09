@@ -202,10 +202,21 @@ char* search_customer_screen(void) {
     return cpf;
 }
 
-void update_customer_screen(void) {
+void update_customer(void) {
+    Customer* customer;
+
+    char* cpf = update_customer_screen();
+
+    if (search_customer(cpf) != NULL) {
+        customer = search_customer(cpf);
+        customer = update_customer_data(customer);
+    }
+}
+
+char* update_customer_screen(void) {
     terminal_clear();
 
-    char cpf[20];
+    char* cpf = malloc(sizeof(char) * 20);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -222,7 +233,36 @@ void update_customer_screen(void) {
     printf("\nDigite o CPF do cliente: ");
     read_cpf(cpf);
 
-    printf("\nCliente do CPF %satualizado com sucesso!\n", cpf);
+    return cpf;
+}
+
+Customer* update_customer_data(Customer* customer) {
+    terminal_clear();
+
+    char op = read_op();
+
+    while (op != '0') {
+        printf("\t\t=====================================\n");
+        printf("\t\t||  Qual(is) dado(s) quer editar?  ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|        1 - Nome do Cliente        |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|      2 - Telefone ou Celular      |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|             3 - Email             |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|           4 - Domicílio           |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|     0 - Encerrar Atualizacoes     |\n");
+        printf("\t\t-------------------------------------\n");
+    }
+
+    return customer;
 }
 
 void delete_customer_screen(void) {

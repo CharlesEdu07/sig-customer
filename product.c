@@ -119,6 +119,14 @@ char* show_product_types(void) {
 
     char op = read_op();
 
+    while (op != '1' && op != '2' && op != '3' && op != '4' && op != '5') {
+        printf("\nOpcao invalida, digite novamente\n");
+
+        op = read_op();
+
+        printf("\n");
+    }
+
     switch(op) {
         case '1':
             strcpy(types, "Perfume");
@@ -144,9 +152,6 @@ char* show_product_types(void) {
             strcpy(types, "Shampoo");
 
             break;
-
-        default:
-            printf("\nOpcao invalida.\n");
     }
 
     return types;
