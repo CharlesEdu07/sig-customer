@@ -227,9 +227,9 @@ void update_customer_file(Customer* customer) {
         }
 
         fclose(file);
-
-        free(aux_customer);
     }
+
+    free(aux_customer);
 }
 
 void update_customer(void) {
@@ -313,11 +313,19 @@ Customer* update_customer_data(Customer* customer) {
                     printf("\nDigite o novo nome do cliente: ");
                     read_name(customer->name);
 
+                    printf("\nNome do cliente atualizado com sucesso.\n");
+
+                    press_enter_to_continue();
+
                     break;
 
                 case '2':
                     printf("\nDigite o novo telefone ou celular do cliente: ");
                     read_phone(customer->phone);
+
+                    printf("\nTelefone ou celular do cliente atualizado com sucesso.\n");
+
+                    press_enter_to_continue();
 
                     break;
 
@@ -325,11 +333,19 @@ Customer* update_customer_data(Customer* customer) {
                     printf("\nDigite o novo email do cliente: ");
                     read_email(customer->email);
 
+                    printf("\nEmail do cliente atualizado com sucesso.\n");
+
+                    press_enter_to_continue();
+
                     break;
 
                 case '4':
-                    printf("\nDigite o novo domicílio do cliente: ");
+                    printf("\nDigite o novo domicilio do cliente: ");
                     read_string(customer->address);
+
+                    printf("\nDomicilio do cliente atualizado com sucesso.\n");
+
+                    press_enter_to_continue();
 
                     break;
 
