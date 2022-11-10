@@ -17,6 +17,7 @@ Customer* search_customer(char *cpf);
 Customer* create_customer_screen(void);
 void find_customer(void);
 char* search_customer_screen(void);
+void update_customer_file(Customer* customer);
 void update_customer(void);
 char* update_customer_screen(void);
 Customer* update_customer_data(Customer* customer);

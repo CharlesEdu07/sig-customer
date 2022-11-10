@@ -202,6 +202,36 @@ char* search_customer_screen(void) {
     return cpf;
 }
 
+void update_customer_file(Customer* customer) {
+    FILE* file;
+
+    Customer* aux_customer = (Customer*) malloc(sizeof(Customer));
+
+    if (access("customer.dat", F_OK) != -1) {
+        file = fopen("customer.dat", "r+b");
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        while (fread(aux_customer, sizeof(Customer), 1, file)) {
+            if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
+                fseek(file, -sizeof(Customer), SEEK_CUR);
+
+                fwrite(customer, sizeof(Customer), 1, file);
+                
+                fclose(file);
+            }
+        }
+
+        fclose(file);
+
+        free(aux_customer);
+    }
+}
+
 void update_customer(void) {
     Customer* customer;
 
@@ -210,7 +240,19 @@ void update_customer(void) {
     if (search_customer(cpf) != NULL) {
         customer = search_customer(cpf);
         customer = update_customer_data(customer);
+
+        strcpy(customer->cpf, cpf);
+
+        update_customer_file(customer);
+
+        free(customer);
     }
+
+    else {
+        printf("\nCliente nao encontrado ou inexistente.\n");
+    }
+
+    free(cpf);
 }
 
 char* update_customer_screen(void) {
@@ -239,9 +281,11 @@ char* update_customer_screen(void) {
 Customer* update_customer_data(Customer* customer) {
     terminal_clear();
 
-    char op = read_op();
+    char op;
 
-    while (op != '0') {
+    do {
+        op = '0';
+
         printf("\t\t=====================================\n");
         printf("\t\t||  Qual(is) dado(s) quer editar?  ||\n");
         printf("\t\t=====================================\n");
@@ -255,12 +299,49 @@ Customer* update_customer_data(Customer* customer) {
         printf("\t\t|             3 - Email             |\n");
         printf("\t\t-------------------------------------\n");
         printf("\t\t-------------------------------------\n");
-        printf("\t\t|           4 - Domicílio           |\n");
+        printf("\t\t|           4 - Domicilio           |\n");
         printf("\t\t-------------------------------------\n");
         printf("\t\t-------------------------------------\n");
         printf("\t\t|     0 - Encerrar Atualizacoes     |\n");
         printf("\t\t-------------------------------------\n");
-    }
+
+        op = read_op();
+
+        if (op != 0) {
+            switch (op) {
+                case '1':
+                    printf("\nDigite o novo nome do cliente: ");
+                    read_name(customer->name);
+
+                    break;
+
+                case '2':
+                    printf("\nDigite o novo telefone ou celular do cliente: ");
+                    read_phone(customer->phone);
+
+                    break;
+
+                case '3':
+                    printf("\nDigite o novo email do cliente: ");
+                    read_email(customer->email);
+
+                    break;
+
+                case '4':
+                    printf("\nDigite o novo domicílio do cliente: ");
+                    read_string(customer->address);
+
+                    break;
+
+                default:
+                    printf("\nOpcao invalida.\n");
+
+                    break;
+            }
+        }
+    } while (op != '0');
+
+    terminal_clear();
 
     return customer;
 }
@@ -304,7 +385,7 @@ void mod_customer(void) {
                 break;
                 
             case '3':
-                update_customer_screen();
+                update_customer();
                 
                 break;
                 
