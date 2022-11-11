@@ -1,10 +1,11 @@
 typedef struct st_request Request;
 
 struct st_request {
-    char id[255];
+    char id[50];
+    char date[100];
     char customer_cpf[20];
-    char product_code[255];
-    char quantity[255];
+    char product_code[20];
+    char quantity[10];
     int deleted;
 };
 

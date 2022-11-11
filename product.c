@@ -94,67 +94,68 @@ void save_product(Product *product) {
 }
 
 char* show_product_types(void) {
-    char* types = (char*) malloc(255 * sizeof(char));
+    char* type = (char*) malloc(255 * sizeof(char));
 
-    printf("\n");
+    char op = '0';
 
-    printf("\t\t=====================================\n");
-    printf("\t\t||    Informe o tipo do produto    ||\n");
-    printf("\t\t=====================================\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|            1 - Perfume            |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|          2 - Hidratantes          |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|            3 - Barbear            |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|           4 - Sabonetes           |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|            5 - Shampoo            |\n");
-    printf("\t\t-------------------------------------\n");
+    do {
+        printf("\n");
 
-    char op = read_op();
-
-    while (op != '1' && op != '2' && op != '3' && op != '4' && op != '5') {
-        printf("\nOpcao invalida, digite novamente\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t||    Informe o tipo do produto    ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|            1 - Perfume            |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|          2 - Hidratantes          |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|            3 - Barbear            |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|           4 - Sabonetes           |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|            5 - Shampoo            |\n");
+        printf("\t\t-------------------------------------\n");
 
         op = read_op();
 
-        printf("\n");
-    }
+        switch(op) {
+            case '1':
+                strcpy(type, "Perfume");
 
-    switch(op) {
-        case '1':
-            strcpy(types, "Perfume");
+                break;
 
-            break;
+            case '2':
+                strcpy(type, "Hidratante");
 
-        case '2':
-            strcpy(types, "Hidratante");
+                break;
 
-            break;
+            case '3':
+                strcpy(type, "Barbear");
 
-        case '3':
-            strcpy(types, "Barbear");
+                break;
 
-            break;
+            case '4':
+                strcpy(type, "Sabonete");
 
-        case '4':
-            strcpy(types, "Sabonete");
+                break;
 
-            break;
+            case '5':
+                strcpy(type, "Shampoo");
 
-        case '5':
-            strcpy(types, "Shampoo");
+                break;
 
-            break;
-    }
+            default:
+                printf("\nOpcao invalida.\n");
 
-    return types;
+                break;
+        }   
+    } while (op != '1' && op != '2' && op != '3' && op != '4' && op != '5');
+
+    return type;
 }
 
 Product* create_product_screen(void) {
@@ -162,10 +163,10 @@ Product* create_product_screen(void) {
 
     Product* product = (Product*) malloc(sizeof(Product));
 
-    char product_code[20];
+    char product_code[50];
     char product_name[255];
     char product_description[255];
-    char product_price[255];
+    char product_price[20];
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -283,7 +284,7 @@ void update_product_file(Product* product) {
             if (strcmp(aux_product->product_code, product->product_code) == 0 && aux_product->deleted == 0) {
                 found = 1;
 
-                fseek(file, -sizeof(Product), SEEK_CUR);
+                fseek(file, (-1) * sizeof(Product), SEEK_CUR);
 
                 fwrite(product, sizeof(Product), 1, file);
             }

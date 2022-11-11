@@ -205,33 +205,29 @@ char* search_customer_screen(void) {
 }
 
 void update_customer_file(Customer* customer) {
-    FILE* file;
+    FILE* file = fopen("customer.dat", "r+b");
 
     Customer* aux_customer = (Customer*) malloc(sizeof(Customer));
 
     int found = 0;
 
-    if (access("customer.dat", F_OK) != -1) {
-        file = fopen("customer.dat", "r+b");
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
 
-        if (file == NULL) {
-            printf("\nErro ao abrir o arquivo.\n");
-
-            exit(1);
-        }
-
-        while ((fread(aux_customer, sizeof(Customer), 1, file) && found == 0)) {
-            if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
-                found = 1;
-
-                fseek(file, -sizeof(Customer), SEEK_CUR);
-
-                fwrite(customer, sizeof(Customer), 1, file);
-            }
-        }
-
-        fclose(file);
+        exit(1);
     }
+
+    while ((fread(aux_customer, sizeof(Customer), 1, file) && found == 0)) {
+        if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
+            found = 1;
+
+            fseek(file, (-1) * sizeof(Customer), SEEK_CUR);
+
+            fwrite(customer, sizeof(Customer), 1, file);
+        }
+    }
+
+    fclose(file);
 
     free(aux_customer);
 }
@@ -283,11 +279,9 @@ char* update_customer_screen(void) {
 }
 
 Customer* update_customer_data(Customer* customer) {
-    char op;
+    char op = '0';
 
     do {
-        op = '0';
-
         terminal_clear();
 
         printf("\t\t=====================================\n");
@@ -311,7 +305,7 @@ Customer* update_customer_data(Customer* customer) {
 
         op = read_op();
 
-        if (op != 0) {
+        if (op != '0') {
             switch (op) {
                 case '1':
                     printf("\nDigite o novo nome do cliente: ");

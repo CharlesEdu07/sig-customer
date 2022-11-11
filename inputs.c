@@ -106,6 +106,10 @@ void generate_request_id(char* cpf, char* product_code, char* request_id) {
 int name_validation(char* name) {
     char invalid_characters[] = {"0123456789,-:;[]{}*#"};
 
+    if (strlen(name) < 3) {
+        return 0;
+    }
+
     for (int i = 0; i < strlen(name); i++) {
         for (int j = 0; j < strlen(invalid_characters); j++) {
             if (name[i] == invalid_characters[j]) {
@@ -203,6 +207,10 @@ int email_validation(char* email) {
 int float_validation(char* num) {
     int dot = 0;
 
+    if (strlen(num) < 3) {
+        return 0;
+    }
+
     for (int i = 0; i < strlen(num); i++) {
         if (num[i] == '.') {
             dot++;
@@ -217,14 +225,51 @@ int float_validation(char* num) {
 }
 
 int product_code_validation(char* code) {
+    char check_digit;
+    int accumulator = 0;
+
     if (strlen(code) != 14) {
         return 0;
     }
 
-    for (int i = 0; i < strlen(code) - 1; i++) {
+    for (int i = 0; i < strlen(code) - 2; i++) {
         if (!isdigit(code[i])) {
             return 0;
         }
+    }
+
+    int multiplier = 1;
+
+    for (int i = 0; i < strlen(code) - 2; i++) {
+        accumulator += (code[i] - '0') * multiplier;
+        
+        if (multiplier == 1) {
+            multiplier = 3;
+        }
+
+        else {
+            multiplier = 1;
+        }
+    }
+
+    int starting_sum = accumulator; 
+
+    accumulator = (accumulator / 10) + 1;
+    accumulator *= 10;
+    accumulator -= starting_sum;
+
+    if (accumulator % 10 == 0) {
+        check_digit = '0';
+    }
+
+    else {
+        check_digit = accumulator + '0';
+    }
+
+    printf("%c", check_digit);
+
+    if (check_digit != code[12]) {
+        return 0;
     }
 
     return 1;
