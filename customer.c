@@ -320,6 +320,7 @@ Customer* update_customer_data(Customer* customer) {
                     printf("\nNome do cliente atualizado com sucesso.\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
@@ -330,6 +331,7 @@ Customer* update_customer_data(Customer* customer) {
                     printf("\nTelefone ou celular do cliente atualizado com sucesso.\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
@@ -340,6 +342,7 @@ Customer* update_customer_data(Customer* customer) {
                     printf("\nEmail do cliente atualizado com sucesso.\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
@@ -350,6 +353,7 @@ Customer* update_customer_data(Customer* customer) {
                     printf("\nDomicilio do cliente atualizado com sucesso.\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 

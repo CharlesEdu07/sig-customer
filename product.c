@@ -379,6 +379,7 @@ Product* update_product_data(Product* product) {
                     printf("\nNome do produto atualizado com sucesso!\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
@@ -390,6 +391,7 @@ Product* update_product_data(Product* product) {
                     printf("\nTipo do produto atualizado com sucesso!\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
@@ -400,6 +402,7 @@ Product* update_product_data(Product* product) {
                     printf("\nDescricao do produto atualizada com sucesso!\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
@@ -410,6 +413,7 @@ Product* update_product_data(Product* product) {
                     printf("\nPreco do produto atualizado com sucesso!\n");
 
                     press_enter_to_continue();
+                    terminal_clear();
 
                     break;
 
