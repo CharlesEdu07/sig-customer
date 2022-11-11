@@ -281,12 +281,12 @@ char* update_customer_screen(void) {
 }
 
 Customer* update_customer_data(Customer* customer) {
-    terminal_clear();
-
     char op;
 
     do {
         op = '0';
+
+        terminal_clear();
 
         printf("\t\t=====================================\n");
         printf("\t\t||  Qual(is) dado(s) quer editar?  ||\n");
