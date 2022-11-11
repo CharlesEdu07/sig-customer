@@ -207,6 +207,8 @@ void update_customer_file(Customer* customer) {
 
     Customer* aux_customer = (Customer*) malloc(sizeof(Customer));
 
+    int found = 0;
+
     if (access("customer.dat", F_OK) != -1) {
         file = fopen("customer.dat", "r+b");
 
@@ -216,13 +218,13 @@ void update_customer_file(Customer* customer) {
             exit(1);
         }
 
-        while (fread(aux_customer, sizeof(Customer), 1, file)) {
+        while ((fread(aux_customer, sizeof(Customer), 1, file) && found == 0)) {
             if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
+                found = 1;
+
                 fseek(file, -sizeof(Customer), SEEK_CUR);
 
                 fwrite(customer, sizeof(Customer), 1, file);
-                
-                fclose(file);
             }
         }
 

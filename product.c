@@ -268,6 +268,8 @@ void update_product_file(Product* product) {
 
     Product* aux_product = (Product*) malloc(sizeof(Product));
 
+    int found = 0;
+
     if (access("product.dat", F_OK) != -1) {
         file = fopen("product.dat", "r+b");
 
@@ -277,13 +279,13 @@ void update_product_file(Product* product) {
             exit(1);
         }
 
-        while (fread(aux_product, sizeof(Product), 1, file)) {
+        while ((fread(aux_product, sizeof(Product), 1, file)) && found == 0) {
             if (strcmp(aux_product->product_code, product->product_code) == 0 && aux_product->deleted == 0) {
+                found = 1;
+
                 fseek(file, -sizeof(Product), SEEK_CUR);
 
                 fwrite(product, sizeof(Product), 1, file);
-
-                fclose(file);
             }
         }
 
