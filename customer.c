@@ -151,6 +151,8 @@ void find_customer(void) {
     if (search_customer(cpf) != NULL) {
         customer = search_customer(cpf);
 
+        terminal_clear();
+
         printf("\t\t========================================\n");
         printf("\t\t||                                    ||\n");
         printf("\t\t||            ------------            ||\n");
