@@ -279,9 +279,11 @@ char* update_customer_screen(void) {
 }
 
 Customer* update_customer_data(Customer* customer) {
-    char op = '0';
+    char op;
 
     do {
+        op = '0';
+
         terminal_clear();
 
         printf("\t\t=====================================\n");
