@@ -210,6 +210,7 @@ void update_customer_file(Customer* customer) {
     Customer* aux_customer = (Customer*) malloc(sizeof(Customer));
 
     int found = 0;
+    long int minus_one = -1;
 
     if (file == NULL) {
         printf("\nErro ao abrir o arquivo.\n");
@@ -220,15 +221,16 @@ void update_customer_file(Customer* customer) {
     while ((fread(aux_customer, sizeof(Customer), 1, file) && found == 0)) {
         if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
             found = 1;
-
-            fseek(file, (-1) * sizeof(Customer), SEEK_CUR);
-
-            fwrite(customer, sizeof(Customer), 1, file);
         }
     }
 
-    fclose(file);
+    if (found == 1) {
+        fseek(file, (minus_one) * sizeof(Customer), SEEK_CUR);
+        fwrite(customer, sizeof(Customer), 1, file);
+    }
 
+    fclose(file);
+    
     free(aux_customer);
 }
 

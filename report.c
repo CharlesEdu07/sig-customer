@@ -73,14 +73,16 @@ void list_customer(void) {
         int count = 1;
 
         while (fread(customer, sizeof(Customer), 1, fp)) {
-            printf("\nCliente %d:\n", count);
-            printf("\nNome do cliente: %s\n", customer->name);
-            printf("CPF do cliente: %s\n", customer->cpf);
-            printf("Celular do cliente: %s\n", customer->phone);
-            printf("Email do cliente: %s\n", customer->email);
-            printf("Endereco do cliente: %s\n", customer->address);
+            if (customer->deleted == 0) {
+                printf("\nCliente %d:\n", count);
+                printf("\nNome do cliente: %s\n", customer->name);
+                printf("CPF do cliente: %s\n", customer->cpf);
+                printf("Celular do cliente: %s\n", customer->phone);
+                printf("Email do cliente: %s\n", customer->email);
+                printf("Endereco do cliente: %s\n", customer->address);
 
-            count++;
+                count++;
+            }
         }
 
         fclose(fp);

@@ -270,6 +270,7 @@ void update_product_file(Product* product) {
     Product* aux_product = (Product*) malloc(sizeof(Product));
 
     int found = 0;
+    long int minus_one = -1;
 
     if (file == NULL) {
         printf("\nErro ao abrir o arquivo.\n");
@@ -280,11 +281,12 @@ void update_product_file(Product* product) {
     while ((fread(aux_product, sizeof(Product), 1, file)) && found == 0) {
         if (strcmp(aux_product->product_code, product->product_code) == 0 && aux_product->deleted == 0) {
             found = 1;
-
-            fseek(file, (-1) * sizeof(Product), SEEK_CUR);
-
-            fwrite(product, sizeof(Product), 1, file);
         }
+    }
+
+    if (found == 1) {
+        fseek(file, (minus_one) * sizeof(Product), SEEK_CUR);
+        fwrite(product, sizeof(Product), 1, file);
     }
 
     fclose(file);
