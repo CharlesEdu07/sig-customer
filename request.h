@@ -2,9 +2,10 @@ typedef struct st_request Request;
 
 struct st_request {
     char id[50];
-    char date[100];
+    char date[50];
     char customer_cpf[20];
     char product_code[20];
+    char price[20];
     char quantity[10];
     int deleted;
 };

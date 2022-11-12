@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <time.h>
 
+#include "customer.h"
+#include "product.h"
 #include "request.h"
 #include "inputs.h"
 #include "util.h"
@@ -100,10 +102,9 @@ Request* create_request_screen(void) {
     Request* request = (Request*) malloc(sizeof(Request));
 
     char id[50];
-    char date[100];
+    //char date[50];
     char customer_cpf[20];
     char product_code[50];
-    char price[20];
     char quantity[10];
 
     printf("\t\t========================================\n");
@@ -127,11 +128,11 @@ Request* create_request_screen(void) {
     printf("Qual a quantidade? Digite: ");
     read_int(quantity);
 
-    generate_request_id(customer_cpf, product_code, id);
-
-    strcpy(request->id, id);
+    strcpy(request->id, generate_request_id());
+    strcpy(request->date, get_current_date());
     strcpy(request->customer_cpf, customer_cpf);
     strcpy(request->product_code, product_code);
+    strcpy(request->price, "0");
     strcpy(request->quantity, quantity);
     request->deleted = 0;
 

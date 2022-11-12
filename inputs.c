@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <unistd.h>
+#include <time.h>
 
 #include "inputs.h"
 
@@ -98,9 +100,16 @@ void read_int(char *number) {
     number[strlen(number) - 1] = '\0';
 }
 
-void generate_request_id(char* cpf, char* product_code, char* request_id) {
-    strcpy(request_id, cpf);
-    strcat(request_id, product_code);
+char* generate_request_id(void) {
+    char* date = (char*) malloc(50 * sizeof(char));
+
+    time_t now = time(NULL);
+
+    struct tm* t = localtime(&now);
+
+    strftime(date, 50, "%d%m%Y%H%M%S", t);
+
+    return date;
 }
 
 int name_validation(char* name) {

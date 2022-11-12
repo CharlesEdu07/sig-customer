@@ -8,8 +8,7 @@ void read_string(char* string);
 void read_product_code(char* code);
 void read_float(char* number);
 void read_int(char* number);
-void read_request_id(char* id);
-void generate_request_id(char* cpf, char* product_code, char* request_id);
+char* generate_request_id(void);
 
 int name_validation(char* name);
 int cpf_validation(char* cpf);

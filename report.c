@@ -131,14 +131,16 @@ void list_product(void) {
         int count = 1;
 
         while (fread(product, sizeof(Product), 1, fp)) {
-            printf("\nProduto %d:\n", count);
-            printf("\nNome do produto: %s\n", product->product_name);
-            printf("Codigo do produto: %s\n", product->product_code);
-            printf("Descricao do produto: %s\n", product->product_description);
-            printf("Tipo do produto: %s\n", product->product_type);
-            printf("Preco do produto: %s\n", product->product_price);
+            if (product->deleted == 0) {
+                printf("\nProduto %d:\n", count);
+                printf("\nNome do produto: %s\n", product->product_name);
+                printf("Codigo do produto: %s\n", product->product_code);
+                printf("Descricao do produto: %s\n", product->product_description);
+                printf("Tipo do produto: %s\n", product->product_type);
+                printf("Preco do produto: %s\n", product->product_price);
 
-            count++;
+                count++;
+            }
         }
 
         fclose(fp);
