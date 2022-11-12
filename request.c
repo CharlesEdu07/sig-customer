@@ -101,8 +101,6 @@ Request* create_request_screen(void) {
 
     Request* request = (Request*) malloc(sizeof(Request));
 
-    char id[50];
-    //char date[50];
     char customer_cpf[20];
     char product_code[50];
     char quantity[10];
@@ -164,6 +162,8 @@ void find_request(void) {
         printf("\nCPF: %s", request->customer_cpf);
         printf("\nCodigo do produto: %s", request->product_code);
         printf("\nQuantidade: %s", request->quantity);
+
+        printf("\n");
 
         free(request);
     }

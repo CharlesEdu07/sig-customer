@@ -5,7 +5,7 @@ struct st_product {
     char product_name[255];
     char product_type[255];
     char product_description[255];
-    char product_price[20];
+    float product_price;
     int deleted;
 };
 

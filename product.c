@@ -195,10 +195,13 @@ Product* create_product_screen(void) {
     printf("Digite o preco do produto (Formato: 00.00): ");
     read_float(product_price);
 
+    float price = atof(product_price);
+
     strcpy(product->product_code, product_code);
     strcpy(product->product_name, product_name);
     strcpy(product->product_description, product_description);
-    strcpy(product->product_price, product_price);
+    
+    product->product_price = price;
     product->deleted = 0;
 
     return product;
@@ -229,7 +232,7 @@ void find_product(void) {
         printf("Nome: %s\n", product->product_name);
         printf("Tipo: %s\n", product->product_type);
         printf("Descricao: %s\n", product->product_description);
-        printf("Preco: %s\n", product->product_price);
+        printf("Preco: %f\n", product->product_price);
 
         free(product);
     }
@@ -343,6 +346,8 @@ char* update_product_screen(void) {
 Product* update_product_data(Product* product) {
     terminal_clear();
 
+    char product_price[20];
+
     char op;
 
     do {
@@ -407,7 +412,11 @@ Product* update_product_data(Product* product) {
 
                 case '4':
                     printf("\nDigite o novo preco do produto: ");
-                    read_float(product->product_price);
+                    read_float(product_price);
+
+                    float price = atof(product_price);
+
+                    product->product_price = price;
 
                     printf("\nPreco do produto atualizado com sucesso!\n");
 

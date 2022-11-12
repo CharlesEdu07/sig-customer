@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <locale.h>
 
 #include "customer.h"
 #include "product.h"
@@ -17,6 +18,8 @@ void mod_main(void);
 char menu_main(void);
 
 int main(void) {
+    setlocale(LC_ALL|~LC_NUMERIC, "");
+
     mod_main();
     
     return 0;

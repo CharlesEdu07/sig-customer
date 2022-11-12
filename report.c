@@ -137,7 +137,7 @@ void list_product(void) {
                 printf("Codigo do produto: %s\n", product->product_code);
                 printf("Descricao do produto: %s\n", product->product_description);
                 printf("Tipo do produto: %s\n", product->product_type);
-                printf("Preco do produto: %s\n", product->product_price);
+                printf("Preco do produto: %.2f\n", product->product_price);
 
                 count++;
             }
