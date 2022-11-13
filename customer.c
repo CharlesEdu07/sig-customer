@@ -376,40 +376,43 @@ Customer* update_customer_data(Customer* customer) {
 }
 
 void delete_customer_file(Customer* customer) {
-    FILE* file = fopen("customer.dat", "r+b");
-
-    Customer* aux_customer = (Customer*) malloc(sizeof(Customer));
+    FILE* file;
+    Customer* aux_customer;
 
     int found = 0;
     long int minus_one = -1;
 
-    if (file == NULL) {
-        printf("\nErro ao abrir o arquivo.\n");
-
-        exit(1);
-    }
-
     if (confirm_customer_delete(customer)) {
-        printf("Hally");
-    }
+        file = fopen("customer.dat", "r+b");
 
-    while (!feof(file) && !found) {
-        fread(aux_customer, sizeof(Customer), 1, file);
-        
-        if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
-            found = 1;
+        aux_customer = (Customer*) malloc(sizeof(Customer));
 
-            fseek(file, (minus_one) * sizeof(Customer), SEEK_CUR);
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
 
-            customer->deleted = 1;
-
-            fwrite(customer, sizeof(Customer), 1, file);
+            exit(1);
         }
-    }
 
-    fclose(file);
-    
-    free(aux_customer);
+        while(!feof(file) && !found) {
+            fread(aux_customer, sizeof(Customer), 1, file);
+
+            if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
+                found = 1;
+
+                fseek(file, (minus_one) * sizeof(Customer), SEEK_CUR);
+
+                aux_customer->deleted = 1;
+
+                fwrite(aux_customer, sizeof(Customer), 1, file);
+
+                printf("\nCliente deletado com sucesso.\n");
+            }
+        }
+
+        fclose(file);
+
+        free(aux_customer);
+    }
 }
 
 int confirm_customer_delete(Customer* customer) {
@@ -422,13 +425,11 @@ int confirm_customer_delete(Customer* customer) {
     printf("\nTem certeza que deseja excluir este cliente? (s/n): ");
     op = read_alpha_op();
 
-    if (op == 's') {
+    if (tolower(op) == 's') {
         return 1;
     }
 
-    else {
-        return 0;
-    }
+    return 0;
 }
 
 void delete_customer(void) {
@@ -497,7 +498,7 @@ void mod_customer(void) {
                 break;
                 
             case 4:
-                delete_customer_screen();
+                delete_customer();
                 
                 break;
                 
