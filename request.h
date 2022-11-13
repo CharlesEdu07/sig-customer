@@ -5,8 +5,8 @@ struct st_request {
     char date[50];
     char customer_cpf[20];
     char product_code[20];
-    char price[20];
-    char quantity[10];
+    int quantity;
+    float amount_to_pay;
     int deleted;
 };
 

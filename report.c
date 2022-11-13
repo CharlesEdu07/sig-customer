@@ -189,13 +189,15 @@ void list_request(void) {
         int count = 1;
 
         while (fread(request, sizeof(Request), 1, fp)) {
-            printf("\nPedido %d:\n", count);
-            printf("\nID do pedido: %s\n", request->id);
-            printf("CPF do cliente: %s\n", request->customer_cpf);
-            printf("Codigo do produto: %s\n", request->product_code);
-            printf("Quantidade do produto: %s\n", request->quantity);
+            if (request->deleted == 0) {
+                printf("\nPedido %d:\n", count);
+                printf("\nID do pedido: %s\n", request->id);
+                printf("CPF do cliente: %s\n", request->customer_cpf);
+                printf("Codigo do produto: %s\n", request->product_code);
+                printf("Quantidade do produto: %d\n", request->quantity);
 
-            count++;
+                count++;
+            }
         }
 
         fclose(fp);

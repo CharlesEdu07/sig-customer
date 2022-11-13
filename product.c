@@ -80,6 +80,12 @@ Product* search_product(char* product_code) {
     return NULL;
 }
 
+float get_product_price(char* product_code) {
+    Product* product = search_product(product_code);
+
+    return product->product_price;
+}
+
 void save_product(Product *product) {
     FILE* file = fopen("product.dat", "ab");
 
@@ -281,15 +287,16 @@ void update_product_file(Product* product) {
         exit(1);
     }
 
-    while ((fread(aux_product, sizeof(Product), 1, file)) && found == 0) {
+    while (!feof(file) && !found) {
+        fread(aux_product, sizeof(Product), 1, file);
+
         if (strcmp(aux_product->product_code, product->product_code) == 0 && aux_product->deleted == 0) {
             found = 1;
-        }
-    }
 
-    if (found == 1) {
-        fseek(file, (minus_one) * sizeof(Product), SEEK_CUR);
-        fwrite(product, sizeof(Product), 1, file);
+            fseek(file, (minus_one) * sizeof(Product), SEEK_CUR);
+
+            fwrite(product, sizeof(Product), 1, file);
+        }
     }
 
     fclose(file);

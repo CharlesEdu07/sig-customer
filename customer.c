@@ -218,15 +218,16 @@ void update_customer_file(Customer* customer) {
         exit(1);
     }
 
-    while ((fread(aux_customer, sizeof(Customer), 1, file) && found == 0)) {
+    while (!feof(file) && !found) {
+        fread(aux_customer, sizeof(Customer), 1, file);
+        
         if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
             found = 1;
-        }
-    }
 
-    if (found == 1) {
-        fseek(file, (minus_one) * sizeof(Customer), SEEK_CUR);
-        fwrite(customer, sizeof(Customer), 1, file);
+            fseek(file, (minus_one) * sizeof(Customer), SEEK_CUR);
+
+            fwrite(customer, sizeof(Customer), 1, file);
+        }
     }
 
     fclose(file);

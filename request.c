@@ -126,12 +126,15 @@ Request* create_request_screen(void) {
     printf("Qual a quantidade? Digite: ");
     read_int(quantity);
 
+    int integer_quantity = atoi(quantity);
+
     strcpy(request->id, generate_request_id());
     strcpy(request->date, get_current_date());
     strcpy(request->customer_cpf, customer_cpf);
     strcpy(request->product_code, product_code);
-    strcpy(request->price, "0");
-    strcpy(request->quantity, quantity);
+    
+    request->quantity = integer_quantity;
+    request->amount_to_pay = get_product_price(product_code) * integer_quantity;
     request->deleted = 0;
 
     return request;
@@ -161,7 +164,7 @@ void find_request(void) {
         printf("\nID: %s", request->id);
         printf("\nCPF: %s", request->customer_cpf);
         printf("\nCodigo do produto: %s", request->product_code);
-        printf("\nQuantidade: %s", request->quantity);
+        printf("\nQuantidade: %d", request->quantity);
 
         printf("\n");
 
