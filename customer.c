@@ -67,7 +67,9 @@ Customer* search_customer(char* cpf) {
             exit(1);
         }
 
-        while (fread(customer, sizeof(Customer), 1, file)) {
+        while (!feof(file)) {
+            fread(customer, sizeof(Customer), 1, file);
+            
             if (strcmp(customer->cpf, cpf) == 0 && customer->deleted == 0) {
                 fclose(file);
 

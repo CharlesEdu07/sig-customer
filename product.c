@@ -67,7 +67,9 @@ Product* search_product(char* product_code) {
             exit(1);
         }
 
-        while (fread(product, sizeof(Product), 1, file)) {
+        while (!feof(file)) {
+            fread(product, sizeof(Product), 1, file);
+
             if (strcmp(product->product_code, product_code) == 0 && product->deleted == 0) {
                 fclose(file);
 
@@ -215,6 +217,26 @@ Product* create_product_screen(void) {
     return product;
 }
 
+void show_product(Product* product) {
+    printf("\t\t========================================\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||            SIG-Customer            ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t========================================\n");
+    printf("\n");
+    printf("\t\t========================================\n");
+    printf("\t\t||        Visualizando Produto        ||\n");
+    printf("\t\t========================================\n");
+
+    printf("\nCodigo de barras: %s\n", product->product_code);
+    printf("Nome: %s\n", product->product_name);
+    printf("Tipo: %s\n", product->product_type);
+    printf("Descricao: %s\n", product->product_description);
+    printf("Preco: %.2f\n", product->product_price);
+}
+
 void find_product(void) {
     terminal_clear();
 
@@ -226,23 +248,7 @@ void find_product(void) {
 
         terminal_clear();
 
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||        Visualizando Produto        ||\n");
-        printf("\t\t========================================\n");
-
-        printf("\nCodigo de barras: %s\n", product->product_code);
-        printf("Nome: %s\n", product->product_name);
-        printf("Tipo: %s\n", product->product_type);
-        printf("Descricao: %s\n", product->product_description);
-        printf("Preco: %.2f\n", product->product_price);
+        show_product(product);
 
         free(product);
     }
@@ -450,10 +456,87 @@ Product* update_product_data(Product* product) {
     return product;
 }
 
-void delete_product_screen(void) {
+void delete_product_file(Product* product) {
+    FILE* file;
+    Product* aux_product;
+
+    int found = 0;
+    long int minus_one = -1;
+
+    if (confirm_product_delete(product)) {
+        file = fopen("product.dat", "r+b");
+
+        aux_product = (Product*) malloc(sizeof(Product));
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        while (!feof(file) && !found) {
+            fread(aux_product, sizeof(Product), 1, file);
+
+            if (strcmp(aux_product->product_code, product->product_code) == 0 && aux_product->deleted == 0) {
+                found = 1;
+
+                fseek(file, (minus_one) * sizeof(Product), SEEK_CUR);
+
+                aux_product->deleted = 1;
+
+                fwrite(aux_product, sizeof(Product), 1, file);
+
+                printf("\nProduto deletado com sucesso.\n");
+            }
+        }
+
+        fclose(file);
+
+        free(aux_product);
+    }
+}
+
+int confirm_product_delete(Product* product) {
+    char op;
+
     terminal_clear();
 
-    char product_code[255];
+    show_product(product);
+
+    printf("\nTem certeza que deseja excluir este produto? (s/n): ");
+    op = read_alpha_op();
+
+    if (tolower(op) == 's') {
+        return 1;
+    }
+
+    return 0;
+}
+
+void delete_product(void) {
+    Product* product;
+
+    char* product_code = delete_product_screen();
+
+    if (search_product(product_code) != NULL) {
+        product = search_product(product_code);
+
+        delete_product_file(product);
+
+        free(product);
+    }
+
+    else {
+        printf("\nProduto nao encontrado ou inexistente.\n");
+    }
+
+    free(product_code);
+}
+
+char* delete_product_screen(void) {
+    terminal_clear();
+
+    char* product_code = (char*) malloc(20 * sizeof(char));
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -470,7 +553,7 @@ void delete_product_screen(void) {
     printf("\nDigite o codigo do produto: ");
     read_product_code(product_code);
 
-    printf("\nProduto de codigo %s deletado com sucesso!\n", product_code);
+    return product_code;
 }
 
 void mod_product(void) {
@@ -494,7 +577,7 @@ void mod_product(void) {
                 break;
                 
             case 4:
-                delete_product_screen();
+                delete_product();
                 
                 break;
                 
