@@ -15,7 +15,7 @@
 // Versão 0.6
 
 void mod_main(void);
-char menu_main(void);
+int menu_main(void);
 
 int main(void) {
     setlocale(LC_ALL|~LC_NUMERIC, "");
@@ -25,7 +25,7 @@ int main(void) {
     return 0;
 }
 
-char menu_main(void) {
+int menu_main(void) {
     terminal_clear();
 
     printf("\t\t=====================================\n");
@@ -50,37 +50,38 @@ char menu_main(void) {
     printf("\t\t|           0 - Finalizar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op = read_op();
+    printf("\nDigite a opcao desejada: ");
+    int op = read_numeric_op(); 
 
     return op;
 }
 
 void mod_main(void) {
-    char op = menu_main();
+    int op = menu_main();
 
-    while (op != '0') {
+    while (op != 0) {
         switch (op) {
-            case '1':
+            case 1:
                 mod_customer();
 
                 break;
 
-            case '2':
+            case 2:
                 mod_product();
 
                 break;
 
-            case '3':
+            case 3:
                 mod_request();
 
                 break;
 
-            case '4':
+            case 4:
                 mod_report();
 
                 break;
 
-            case '5':
+            case 5:
                 about();
 
                 break;

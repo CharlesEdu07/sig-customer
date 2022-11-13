@@ -9,7 +9,7 @@
 #include "inputs.h"
 #include "util.h"
 
-char menu_report(void) {
+int menu_report(void) {
     terminal_clear();
 
     printf("\t\t=====================================\n");
@@ -28,7 +28,8 @@ char menu_report(void) {
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op = read_op();
+    printf("\nDigite a opcao desejada: ");
+    int op = read_numeric_op();
 
     return op;
 }
@@ -207,21 +208,21 @@ void list_request(void) {
 }
 
 void mod_report(void) {
-    char op = menu_report();
+    int op = menu_report();
 
-    while (op != '0') {
+    while (op != 0) {
         switch (op) {
-            case '1':
+            case 1:
                 list_customer();
 
                 break;
 
-            case '2':
+            case 2:
                 list_product();
 
                 break;
 
-            case '3':
+            case 3:
                 list_request();
 
                 break;

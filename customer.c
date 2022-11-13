@@ -8,7 +8,7 @@
 #include "inputs.h"
 #include "util.h"
 
-char menu_customer(void) {
+int menu_customer(void) {
     terminal_clear();
 
     printf("\t\t=====================================\n");
@@ -30,7 +30,8 @@ char menu_customer(void) {
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op = read_op();
+    printf("\nDigite a opcao desejada: ");
+    int op = read_numeric_op();
 
     return op;
 }
@@ -142,6 +143,26 @@ Customer* create_customer_screen(void) {
     return customer;
 }
 
+void show_customer(Customer* customer) {
+    printf("\t\t========================================\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||            SIG-Customer            ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t========================================\n");
+    printf("\n");
+    printf("\t\t========================================\n");
+    printf("\t\t||        Visualizando Cliente        ||\n");
+    printf("\t\t========================================\n");
+
+    printf("\nNome: %s\n", customer->name);
+    printf("CPF: %s\n", customer->cpf);
+    printf("Celular: %s\n", customer->phone);
+    printf("Email: %s\n", customer->email);
+    printf("Endereco: %s\n", customer->address);
+}
+
 void find_customer(void) {
     terminal_clear();
 
@@ -153,23 +174,7 @@ void find_customer(void) {
 
         terminal_clear();
 
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||        Visualizando Cliente        ||\n");
-        printf("\t\t========================================\n");
-
-        printf("\nNome do cliente: %s\n", customer->name);
-        printf("CPF do cliente: %s\n", customer->cpf);
-        printf("Celular do cliente: %s\n", customer->phone);
-        printf("Email do cliente: %s\n", customer->email);
-        printf("Endereco do cliente: %s\n", customer->address);
+        show_customer(customer);
 
         free(customer);
     }
@@ -282,10 +287,10 @@ char* update_customer_screen(void) {
 }
 
 Customer* update_customer_data(Customer* customer) {
-    char op;
+    int op;
 
     do {
-        op = '0';
+        op = 0;
 
         terminal_clear();
 
@@ -308,11 +313,12 @@ Customer* update_customer_data(Customer* customer) {
         printf("\t\t|     0 - Encerrar Atualizacoes     |\n");
         printf("\t\t-------------------------------------\n");
 
-        op = read_op();
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
 
-        if (op != '0') {
+        if (op != 0) {
             switch (op) {
-                case '1':
+                case 1:
                     printf("\nDigite o novo nome do cliente: ");
                     read_name(customer->name);
 
@@ -323,7 +329,7 @@ Customer* update_customer_data(Customer* customer) {
 
                     break;
 
-                case '2':
+                case 2:
                     printf("\nDigite o novo telefone ou celular do cliente: ");
                     read_phone(customer->phone);
 
@@ -334,7 +340,7 @@ Customer* update_customer_data(Customer* customer) {
 
                     break;
 
-                case '3':
+                case 3:
                     printf("\nDigite o novo email do cliente: ");
                     read_email(customer->email);
 
@@ -345,7 +351,7 @@ Customer* update_customer_data(Customer* customer) {
 
                     break;
 
-                case '4':
+                case 4:
                     printf("\nDigite o novo domicilio do cliente: ");
                     read_string(customer->address);
 
@@ -362,17 +368,93 @@ Customer* update_customer_data(Customer* customer) {
                     break;
             }
         }
-    } while (op != '0');
+    } while (op != 0);
 
     terminal_clear();
 
     return customer;
 }
 
-void delete_customer_screen(void) {
+void delete_customer_file(Customer* customer) {
+    FILE* file = fopen("customer.dat", "r+b");
+
+    Customer* aux_customer = (Customer*) malloc(sizeof(Customer));
+
+    int found = 0;
+    long int minus_one = -1;
+
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
+
+        exit(1);
+    }
+
+    if (confirm_customer_delete(customer)) {
+        printf("Hally");
+    }
+
+    while (!feof(file) && !found) {
+        fread(aux_customer, sizeof(Customer), 1, file);
+        
+        if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {
+            found = 1;
+
+            fseek(file, (minus_one) * sizeof(Customer), SEEK_CUR);
+
+            customer->deleted = 1;
+
+            fwrite(customer, sizeof(Customer), 1, file);
+        }
+    }
+
+    fclose(file);
+    
+    free(aux_customer);
+}
+
+int confirm_customer_delete(Customer* customer) {
+    char op;
+
+    terminal_clear();
+    
+    show_customer(customer);
+
+    printf("\nTem certeza que deseja excluir este cliente? (s/n): ");
+    op = read_alpha_op();
+
+    if (op == 's') {
+        return 1;
+    }
+
+    else {
+        return 0;
+    }
+}
+
+void delete_customer(void) {
+    Customer* customer;
+
+    char* cpf = delete_customer_screen();
+
+    if (search_customer(cpf) != NULL) {
+        customer = search_customer(cpf);
+
+        delete_customer_file(customer);
+
+        free(customer);
+    }
+
+    else {
+        printf("\nCliente nao encontrado ou inexistente.\n");
+    }
+
+    free(cpf);
+}
+
+char* delete_customer_screen(void) {
     terminal_clear();
 
-    char cpf[20];
+    char* cpf = malloc(sizeof(char) * 20);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -390,29 +472,31 @@ void delete_customer_screen(void) {
     read_cpf(cpf);
 
     printf("\nCliente do CPF %sdeletado com sucesso!\n", cpf);
+
+    return cpf;
 }
 
 void mod_customer(void) {
-    char op = menu_customer();
+    int op = menu_customer();
     
-    while (op != '0') {
+    while (op != 0) {
         switch (op) {
-            case '1':
+            case 1:
                 create_customer();
                 
                 break;
 
-            case '2':
+            case 2:
                 find_customer();
                 
                 break;
                 
-            case '3':
+            case 3:
                 update_customer();
                 
                 break;
                 
-            case '4':
+            case 4:
                 delete_customer_screen();
                 
                 break;

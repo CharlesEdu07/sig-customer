@@ -11,7 +11,7 @@
 #include "inputs.h"
 #include "util.h"
 
-char menu_request(void) {
+int menu_request(void) {
     terminal_clear();
 
     printf("\t\t=====================================\n");
@@ -33,7 +33,8 @@ char menu_request(void) {
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
 
-    char op = read_op();
+    printf("\nDigite a opcao desejada: ");
+    int op = read_numeric_op();
 
     return op;
 }
@@ -267,26 +268,26 @@ void delete_request_screen(void) {
 }
 
 void mod_request(void) {
-    char op = menu_request();
+    int op = menu_request();
     
-    while (op != '0') {
+    while (op != 0) {
         switch (op) {
-            case '1':
+            case 1:
                 create_request();
                 
                 break;
 
-            case '2':
+            case 2:
                 find_request();
                 
                 break;
                 
-            case '3':
+            case 3:
                 update_request_screen();
                 
                 break;
                 
-            case '4':
+            case 4:
                 delete_request_screen();
                 
                 break;

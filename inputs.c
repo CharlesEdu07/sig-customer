@@ -7,12 +7,26 @@
 
 #include "inputs.h"
 
-char read_op(void) {
+int read_numeric_op(void) {
     char op;
 
-    printf("\nDigite a opcao desejada: ");
     scanf("%c", &op);
     getchar();
+
+    fseek(stdin, 0, SEEK_END);
+
+    int converted_op = op - '0';
+
+    return converted_op;
+}
+
+char read_alpha_op(void) {
+    char op;
+
+    scanf("%c", &op);
+    getchar();
+
+    fseek(stdin, 0, SEEK_END);
 
     return op;
 }

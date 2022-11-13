@@ -8,7 +8,7 @@
 #include "inputs.h"
 #include "util.h"
 
-char menu_product(void) {
+int menu_product(void) {
     terminal_clear();
 
     printf("\t\t=====================================\n");
@@ -29,8 +29,9 @@ char menu_product(void) {
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Regressar           |\n");
     printf("\t\t-------------------------------------\n");
-
-    char op = read_op();
+    
+    printf("\nDigite a opcao desejada: ");
+    int op = read_numeric_op();
 
     return op;
 }
@@ -102,7 +103,7 @@ void save_product(Product *product) {
 char* show_product_types(void) {
     char* type = (char*) malloc(255 * sizeof(char));
 
-    char op = '0';
+    int op = 0;
 
     do {
         printf("\n");
@@ -126,30 +127,31 @@ char* show_product_types(void) {
         printf("\t\t|            5 - Shampoo            |\n");
         printf("\t\t-------------------------------------\n");
 
-        op = read_op();
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
 
         switch(op) {
-            case '1':
+            case 1:
                 strcpy(type, "Perfume");
 
                 break;
 
-            case '2':
+            case 2:
                 strcpy(type, "Hidratante");
 
                 break;
 
-            case '3':
+            case 3:
                 strcpy(type, "Barbear");
 
                 break;
 
-            case '4':
+            case 4:
                 strcpy(type, "Sabonete");
 
                 break;
 
-            case '5':
+            case 5:
                 strcpy(type, "Shampoo");
 
                 break;
@@ -159,7 +161,7 @@ char* show_product_types(void) {
 
                 break;
         }   
-    } while (op != '1' && op != '2' && op != '3' && op != '4' && op != '5');
+    } while (op != 1 && op != 2 && op != 3 && op != 4 && op != 5);
 
     return type;
 }
@@ -357,10 +359,10 @@ Product* update_product_data(Product* product) {
 
     char product_price[20];
 
-    char op;
+    int op;
 
     do {
-        op = '0';
+        op = 0;
 
         printf("\t\t=====================================\n");
         printf("\t\t||  Qual(is) dado(s) quer editar?  ||\n");
@@ -381,11 +383,12 @@ Product* update_product_data(Product* product) {
         printf("\t\t|     0 - Encerrar Atualizacoes     |\n");
         printf("\t\t-------------------------------------\n");
 
-        op = read_op();
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
 
-        if (op != '0') {
+        if (op != 0) {
             switch (op) {
-                case '1':
+                case 1:
                     printf("\nDigite o novo nome do produto: ");
                     read_name(product->product_name);
                     
@@ -396,7 +399,7 @@ Product* update_product_data(Product* product) {
 
                     break;
 
-                case '2':
+                case 2:
                     printf("\nDigite o novo tipo do produto: \n");
 
                     strcpy(product->product_type, show_product_types());
@@ -408,7 +411,7 @@ Product* update_product_data(Product* product) {
 
                     break;
 
-                case '3':
+                case 3:
                     printf("\nDigite a nova descricao do produto: ");
                     read_string(product->product_description);
 
@@ -419,7 +422,7 @@ Product* update_product_data(Product* product) {
 
                     break;
 
-                case '4':
+                case 4:
                     printf("\nDigite o novo preco do produto: ");
                     read_float(product_price);
 
@@ -440,7 +443,7 @@ Product* update_product_data(Product* product) {
                     break;
             }
         }
-    } while (op != '0');
+    } while (op != 0);
 
     terminal_clear();
 
@@ -471,26 +474,26 @@ void delete_product_screen(void) {
 }
 
 void mod_product(void) {
-    char op = menu_product();
+    int op = menu_product();
     
-    while (op != '0') {
+    while (op != 0) {
         switch (op) {
-            case '1':
+            case 1:
                 create_product();
                 
                 break;
 
-            case '2':
+            case 2:
                 find_product();
                 
                 break;
                 
-            case '3':
+            case 3:
                 update_product();
                 
                 break;
                 
-            case '4':
+            case 4:
                 delete_product_screen();
                 
                 break;
