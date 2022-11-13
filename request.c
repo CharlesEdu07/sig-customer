@@ -41,17 +41,24 @@ char menu_request(void) {
 void create_request(void) {
     Request* request = create_request_screen();
 
-    if (search_request(request->id) == NULL) {
-        save_request(request);
+    if (request != NULL) {
+        if (search_request(request->id) == NULL) {
+            save_request(request);
 
-        printf("\nPedido cadastrado com sucesso.\n");
+            printf("\nPedido cadastrado com sucesso.\n");
+        }
+
+        else {
+            printf("\nPedido ja cadastrado.\n");
+        }
+
+        free(request);
     }
 
     else {
-        printf("\nPedido ja cadastrado.\n");
+        printf("\nNao foi possivel cadastrar o pedido.\n");
+        printf("Verifique se o cliente e produto digitados estao cadastrados.\n");
     }
-
-    free(request);
 }
 
 Request* search_request(char* id) {
@@ -120,19 +127,31 @@ Request* create_request_screen(void) {
     printf("\nQual o cliente fez o pedido? Digite o CPF: ");
     read_cpf(customer_cpf);
 
+    if (search_customer(customer_cpf) == NULL) {
+        printf("\nCliente nao cadastrado.\n");
+
+        return NULL;
+    }
+
     printf("Qual o produto? Digite o codigo: ");
     read_product_code(product_code);
+
+    if (search_product(product_code) == NULL) {
+        printf("\nProduto nao cadastrado.\n");
+
+        return NULL;
+    }
 
     printf("Qual a quantidade? Digite: ");
     read_int(quantity);
 
     int integer_quantity = atoi(quantity);
-
+    
     strcpy(request->id, generate_request_id());
     strcpy(request->date, get_current_date());
     strcpy(request->customer_cpf, customer_cpf);
     strcpy(request->product_code, product_code);
-    
+
     request->quantity = integer_quantity;
     request->amount_to_pay = get_product_price(product_code) * integer_quantity;
     request->deleted = 0;

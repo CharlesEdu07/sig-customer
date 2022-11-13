@@ -222,6 +222,8 @@ void find_product(void) {
     if (search_product(product_code) != NULL) {
         product = search_product(product_code);
 
+        terminal_clear();
+
         printf("\t\t========================================\n");
         printf("\t\t||                                    ||\n");
         printf("\t\t||            ------------            ||\n");
@@ -238,7 +240,7 @@ void find_product(void) {
         printf("Nome: %s\n", product->product_name);
         printf("Tipo: %s\n", product->product_type);
         printf("Descricao: %s\n", product->product_description);
-        printf("Preco: %f\n", product->product_price);
+        printf("Preco: %.2f\n", product->product_price);
 
         free(product);
     }
