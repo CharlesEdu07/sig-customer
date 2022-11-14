@@ -159,6 +159,8 @@ Request* create_request_screen(void) {
 }
 
 void show_request(Request* request) {
+    terminal_clear();
+
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
     printf("\t\t||            ------------            ||\n");
