@@ -77,7 +77,9 @@ Request* search_request(char* id) {
             exit(1);
         }
 
-        while (fread(request, sizeof(Request), 1, file)) {
+        while (!feof(file)) {
+            fread(request, sizeof(Request), 1, file);
+
             if (strcmp(request->id, id) == 0) {
                 fclose(file);
 
@@ -129,8 +131,6 @@ Request* create_request_screen(void) {
     read_cpf(customer_cpf);
 
     if (search_customer(customer_cpf) == NULL) {
-        printf("\nCliente nao cadastrado.\n");
-
         return NULL;
     }
 
@@ -138,8 +138,6 @@ Request* create_request_screen(void) {
     read_product_code(product_code);
 
     if (search_product(product_code) == NULL) {
-        printf("\nProduto nao cadastrado.\n");
-
         return NULL;
     }
 
@@ -160,6 +158,27 @@ Request* create_request_screen(void) {
     return request;
 }
 
+void show_request(Request* request) {
+    printf("\t\t========================================\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||            SIG-Customer            ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t========================================\n");
+    printf("\n");
+    printf("\t\t========================================\n");
+    printf("\t\t||            Vendo Pedido            ||\n");
+    printf("\t\t========================================\n");
+
+    printf("\nID do pedido: %s\n", request->id);
+    printf("CPF do cliente: %s\n", request->customer_cpf);
+    printf("Codigo do produto: %s\n", request->product_code);
+    printf("Data do pedido: %s\n", request->date);
+    printf("Quantidade: %d\n", request->quantity);
+    printf("Total a pagar: %.2f\n", request->amount_to_pay);
+}
+
 void find_request(void) {
     terminal_clear();
 
@@ -169,22 +188,7 @@ void find_request(void) {
     if (search_request(id) != NULL) {
         request = search_request(id);
 
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||          Pesquisar Pedidos         ||\n");
-        printf("\t\t========================================\n");
-
-        printf("\nID: %s", request->id);
-        printf("\nCPF: %s", request->customer_cpf);
-        printf("\nCodigo do produto: %s", request->product_code);
-        printf("\nQuantidade: %d", request->quantity);
+        show_request(request);
 
         printf("\n");
 
@@ -221,10 +225,63 @@ char* search_request_screen(void) {
     return id;
 }
 
-void update_request_screen(void) {
+void update_request_file(Request* request) {
+    FILE* file = fopen("request.dat", "r+b");
+
+    Request* request_aux = (Request*) malloc(sizeof(Request));
+
+    int found = 0;
+    long int minus_one = -1;
+
+    if (file == NULL) {
+        printf("\nErro ao abrir o arquivo.\n");
+        exit(1);
+    }
+
+    while (!feof(file) && !found) {
+        fread(request_aux, sizeof(Request), 1, file);
+
+        if (strcmp(request_aux->id, request->id) == 0 && request_aux->deleted == 0) {
+            found = 1;
+
+            fseek(file, (minus_one) * sizeof(Request), SEEK_CUR);
+
+            fwrite(request, sizeof(Request), 1, file);
+        }
+    }
+
+    fclose(file);
+
+    free(request_aux);
+}
+
+void update_request(void) {
+    Request* request;
+
+    char* id = update_request_screen();
+
+    if (search_request(id) != NULL) {
+        request = search_request(id);
+        request = update_request_data(request);
+
+        strcpy(request->id, id);
+
+        update_request_file(request);
+
+        free(request);
+    }
+
+    else {
+        printf("\nPedido nao encontrado ou inexistente.\n");
+    }
+
+    free(id);
+}
+
+char* update_request_screen(void) {
     terminal_clear();
 
-    char id[50];
+    char* id = (char*) malloc(sizeof(char) * 50);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -241,13 +298,182 @@ void update_request_screen(void) {
     printf("\nDigite o identificador do pedido: ");
     read_string(id);
 
-    printf("\nPedido com o identificador %satualizado com sucesso!\n", id);
+    return id;
 }
 
-void delete_request_screen(void) {
+Request* update_request_data(Request* request) {
+    int op;
+    char quantity[10];
+
+    do {
+        op = 0;
+
+        terminal_clear();
+
+        printf("\t\t=====================================\n");
+        printf("\t\t||  Qual(is) dado(s) quer editar?  ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|       1 - Cliente do Pedido       |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|       2 - Produto do Pedido       |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|       3 - Quantia do Pedido       |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|     0 - Encerrar Atualizacoes     |\n");
+        printf("\t\t-------------------------------------\n");
+
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
+
+        if (op != 0) {
+            switch (op) {
+                case 1:
+                    printf("\nDigite o novo cliente do pedido: ");
+                    read_cpf(request->customer_cpf);
+
+                    if (search_customer(request->customer_cpf) != NULL) {
+                        printf("\nCliente do pedido atualizado com sucesso.\n");
+                    }
+
+                    else {
+                        printf("\nCliente nao cadastrado.\n");
+                    }
+
+                    press_enter_to_continue();
+                    terminal_clear();
+
+                    break;
+
+                case 2:
+                    printf("\nDigite o novo produto do pedido: ");
+                    
+                    read_product_code(request->product_code);
+
+                    if (search_product(request->product_code) != NULL) {
+                        printf("\nProduto do pedido atualizado com sucesso.\n");
+                    }
+
+                    else {
+                        printf("\nProduto nao cadastrado.\n");
+                    }
+
+                    press_enter_to_continue();
+                    terminal_clear();
+
+                    break;
+
+                case 3:
+                    printf("\nDigite a nova quantidade do pedido: ");
+                    read_int(quantity);
+
+                    int integer_quantity = atoi(quantity);
+
+                    request->quantity = integer_quantity;
+                    request->amount_to_pay = get_product_price(request->product_code) * integer_quantity;
+
+                    printf("\nQuantidade do pedido atualizada com sucesso.\n");
+
+                    press_enter_to_continue();
+                    terminal_clear();
+
+                    break;
+
+                default:
+                    printf("\nOpcao invalida.\n");
+
+                    break;
+            }
+        }
+    } while (op != 0);
+
+    return request;
+}
+
+void delete_request_file(Request* request) {
+    FILE* file;
+    Request* aux_request;
+
+    int found = 0;
+    long int minus_one = -1;
+
+    if (confirm_request_delete(request)) {
+        file = fopen("request.dat", "r+b");
+
+        aux_request = (Request*) malloc(sizeof(Request));
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        while (!feof(file) && !found) {
+            fread(aux_request, sizeof(Request), 1, file);
+
+            if (strcmp(aux_request->id, request->id) == 0 && aux_request->deleted == 0) {
+                found = 1;
+
+                fseek(file, (minus_one) * sizeof(Request), SEEK_CUR);
+
+                aux_request->deleted = 1;
+
+                fwrite(aux_request, sizeof(Request), 1, file);
+
+                printf("\nPedido deletado com sucesso.\n");
+            }
+        }
+
+        fclose(file);
+
+        free(aux_request);
+    }
+}
+
+int confirm_request_delete(Request* request) {
+    char op;
+
     terminal_clear();
 
-    char id[50];
+    show_request(request);
+
+    printf("\nDeseja realmente excluir este pedido? (s/n): ");
+    op = read_alpha_op();
+
+    if (tolower(op) == 's') {
+        return 1;
+    }
+
+    return 0;
+}
+
+void delete_request(void) {
+    Request* request;
+
+    char* id = delete_request_screen();
+
+    if (search_request(id) != NULL) {
+        request = search_request(id);
+
+        delete_request_file(request);
+
+        free(request);
+    }
+
+    else {
+        printf("\nPedido nao encontrado ou inexistente.\n");
+    }
+
+    free(id);
+}
+
+char* delete_request_screen(void) {
+    terminal_clear();
+
+    char* id = (char*) malloc(sizeof(char) * 50);
 
     printf("\t\t========================================\n");
     printf("\t\t||                                    ||\n");
@@ -264,7 +490,7 @@ void delete_request_screen(void) {
     printf("\nDigite o identificador do pedido: ");
     read_string(id);
 
-    printf("\nPedido com identificador %sdeletado com sucesso!\n", id);
+    return id;
 }
 
 void mod_request(void) {
@@ -283,12 +509,12 @@ void mod_request(void) {
                 break;
                 
             case 3:
-                update_request_screen();
+                update_request();
                 
                 break;
                 
             case 4:
-                delete_request_screen();
+                delete_request();
                 
                 break;
                 

@@ -18,6 +18,7 @@ void find_customer(void);
 void update_customer(void);
 void delete_customer(void);
 void save_customer(Customer* customer);
+void show_customer(Customer* customer);
 void update_customer_file(Customer* customer);
 void delete_customer_file(Customer* customer);
 

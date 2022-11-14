@@ -451,8 +451,6 @@ Product* update_product_data(Product* product) {
         }
     } while (op != 0);
 
-    terminal_clear();
-
     return product;
 }
 

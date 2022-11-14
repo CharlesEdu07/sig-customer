@@ -372,8 +372,6 @@ Customer* update_customer_data(Customer* customer) {
         }
     } while (op != 0);
 
-    terminal_clear();
-
     return customer;
 }
 
@@ -395,7 +393,7 @@ void delete_customer_file(Customer* customer) {
             exit(1);
         }
 
-        while(!feof(file) && !found) {
+        while (!feof(file) && !found) {
             fread(aux_customer, sizeof(Customer), 1, file);
 
             if (strcmp(aux_customer->cpf, customer->cpf) == 0 && aux_customer->deleted == 0) {

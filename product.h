@@ -16,7 +16,9 @@ void mod_product(void);
 void create_product(void);
 void find_product(void);
 void update_product(void);
+void delete_product(void);
 void save_product(Product* product);
+void show_product(Product* product);
 void update_product_file(Product* product);
 void delete_product_file(Product* product);
 

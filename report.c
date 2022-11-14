@@ -86,6 +86,10 @@ void list_customer(void) {
             }
         }
 
+        if (count == 1) {
+            printf("\nNao ha clientes cadastrados.\n");
+        }
+
         fclose(fp);
     
         free(customer);
@@ -144,6 +148,10 @@ void list_product(void) {
             }
         }
 
+        if (count == 1) {
+            printf("\nNao existem produtos registados.\n");
+        }
+
         fclose(fp);
     
         free(product);
@@ -195,10 +203,16 @@ void list_request(void) {
                 printf("\nID do pedido: %s\n", request->id);
                 printf("CPF do cliente: %s\n", request->customer_cpf);
                 printf("Codigo do produto: %s\n", request->product_code);
+                printf("Data do pedido: %s\n", request->date);
                 printf("Quantidade do produto: %d\n", request->quantity);
+                printf("Total a pagar: %.2f\n", request->amount_to_pay);
 
                 count++;
             }
+        }
+
+        if (count == 1) {
+            printf("\nNao existem pedidos registados.\n");
         }
 
         fclose(fp);
