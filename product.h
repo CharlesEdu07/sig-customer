@@ -26,6 +26,7 @@ char* show_product_types(void);
 char* search_product_screen(void);
 char* update_product_screen(void);
 char* delete_product_screen(void);
+char* get_product_name(char* product_code);
 
 float get_product_price(char* product_code);
 

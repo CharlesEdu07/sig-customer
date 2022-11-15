@@ -174,7 +174,9 @@ void show_request(Request* request) {
     printf("\t\t========================================\n");
 
     printf("\nID do pedido: %s\n", request->id);
+    printf("Nome do cliente: %s\n", get_customer_name(request->customer_cpf));
     printf("CPF do cliente: %s\n", request->customer_cpf);
+    printf("Nome do produto: %s\n", get_product_name(request->product_code));
     printf("Codigo do produto: %s\n", request->product_code);
     printf("Data do pedido: %s\n", request->date);
     printf("Quantidade: %d\n", request->quantity);

@@ -83,6 +83,12 @@ Product* search_product(char* product_code) {
     return NULL;
 }
 
+char* get_product_name(char* product_code) {
+    Product* product = search_product(product_code);
+
+    return product->product_name;
+}
+
 float get_product_price(char* product_code) {
     Product* product = search_product(product_code);
 

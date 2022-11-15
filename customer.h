@@ -25,6 +25,7 @@ void delete_customer_file(Customer* customer);
 char* search_customer_screen(void);
 char* update_customer_screen(void);
 char* delete_customer_screen(void);
+char* get_customer_name(char* cpf);
 
 Customer* create_customer_screen(void);
 Customer* search_customer(char *cpf);

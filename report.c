@@ -201,8 +201,10 @@ void list_request(void) {
             if (request->deleted == 0) {
                 printf("\nPedido %d:\n", count);
                 printf("\nID do pedido: %s\n", request->id);
+                printf("Nome do cliente: %s\n", get_customer_name(request->customer_cpf));
                 printf("CPF do cliente: %s\n", request->customer_cpf);
                 printf("Codigo do produto: %s\n", request->product_code);
+                printf("Nome do produto: %s\n", get_product_name(request->product_code));
                 printf("Data do pedido: %s\n", request->date);
                 printf("Quantidade do produto: %d\n", request->quantity);
                 printf("Total a pagar: %.2f\n", request->amount_to_pay);

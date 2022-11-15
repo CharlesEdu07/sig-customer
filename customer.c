@@ -83,6 +83,12 @@ Customer* search_customer(char* cpf) {
     return NULL;
 }
 
+char* get_customer_name(char* cpf) {
+    Customer* customer = search_customer(cpf);
+
+    return customer->name;
+}
+
 void save_customer(Customer* customer) {
     FILE* file = fopen("customer.dat", "ab");
 
