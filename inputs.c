@@ -289,8 +289,6 @@ int product_code_validation(char* code) {
         check_digit = accumulator + '0';
     }
 
-    //printf("%c", check_digit);
-
     if (check_digit != code[12]) {
         return 0;
     }

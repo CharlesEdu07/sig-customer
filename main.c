@@ -12,7 +12,7 @@
 #include "inputs.h"
 #include "util.h"
 
-// Versão 0.6
+// Versão 0.12
 
 void mod_main(void);
 int menu_main(void);
