@@ -104,10 +104,7 @@ int menu_request_report(void) {
     printf("\t\t|    2 - Listar Pedidos Por Data    |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|        3 - Maior Quantidade       |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|        4 - Menor Quantidade       |\n");
+    printf("\t\t| 3 - Listar Pedidos Por Quantidade |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|    5 - Listar Pedidos Deletados   |\n");
@@ -355,7 +352,7 @@ void list_deleted_customer(void) {
         }
 
         if (count == 1) {
-            printf("\nNao ha clientes cadastrados.\n");
+            printf("\nNao ha clientes deletados.\n");
         }
 
         fclose(fp);
@@ -831,6 +828,48 @@ void list_product_by_price(void) {
     }
 }
 
+void list_deleted_product(void) {
+    terminal_clear();
+
+    FILE* fp;
+
+    if (access("product.dat", F_OK) == -1) {
+        list_product_banner();
+
+        printf("\nNao existem produtos registados.\n");
+    }
+
+    else {
+        fp = fopen("product.dat", "rb");
+        Product* product = (Product*) malloc(sizeof(Product));
+
+        list_product_banner();
+
+        int count = 1;
+
+        while (fread(product, sizeof(Product), 1, fp)) {
+            if (product->deleted == 1) {
+                printf("\nProduto %d:\n", count);
+                printf("\nNome do produto: %s\n", product->product_name);
+                printf("Codigo do produto: %s\n", product->product_code);
+                printf("Descricao do produto: %s\n", product->product_description);
+                printf("Tipo do produto: %s\n", product->product_type);
+                printf("Preco do produto: %.2f\n", product->product_price);
+
+                count++;
+            }
+        }
+
+        if (count == 1) {
+            printf("\nNao existem produtos deletados\n");
+        }
+
+        fclose(fp);
+    
+        free(product);
+    }
+}
+
 void list_request(void) {
     terminal_clear();
 
@@ -875,6 +914,10 @@ void list_request(void) {
     
         free(request);
     }
+}
+
+void list_request_by_date(void) {
+    ;
 }
 
 void mod_report(void) {
@@ -963,6 +1006,11 @@ void mod_product_report(void) {
 
             case 4:
                 list_product_by_price();
+
+                break;
+
+            case 5:
+                list_deleted_product();
 
                 break;
 

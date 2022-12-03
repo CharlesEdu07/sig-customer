@@ -43,13 +43,14 @@ void list_deleted_customer(void);
 void list_product(void);
 void list_product_by_name(void);
 void list_product_by_type(void);
+void list_deleted_product(void);
 void list_request(void);
+void list_request_by_date(void);
 void mod_report(void);
+void mod_customer_report(void);
+void mod_product_report(void);
+void mod_request_report(void);
 
 void show_found_customer(Customer_List* customer);
 
 char* list_product_by_type_screen(void);
-
-void mod_customer_report(void);
-void mod_product_report(void);
-void mod_request_report(void);
