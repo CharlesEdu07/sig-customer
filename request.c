@@ -180,7 +180,7 @@ void show_request(Request* request) {
     printf("Codigo do produto: %s\n", request->product_code);
     printf("Data do pedido: %s\n", request->date);
     printf("Quantidade: %d\n", request->quantity);
-    printf("Total a pagar: %.2f", request->amount_to_pay);
+    printf("Total a pagar: %.2f\n", request->amount_to_pay);
 }
 
 void find_request(void) {

@@ -368,7 +368,7 @@ void list_product(void) {
     if (access("product.dat", F_OK) == -1) {
         list_product_banner();
 
-        printf("\nNao existem produtos registados.\n");
+        printf("\nNao existem produtos registrados.\n");
     }
 
     else {
@@ -393,7 +393,7 @@ void list_product(void) {
         }
 
         if (count == 1) {
-            printf("\nNao existem produtos registados.\n");
+            printf("\nNao existem produtos registrados.\n");
         }
 
         fclose(fp);
@@ -835,7 +835,7 @@ void list_deleted_product(void) {
     if (access("product.dat", F_OK) == -1) {
         list_product_banner();
 
-        printf("\nNao existem produtos registados.\n");
+        printf("\nNao existem produtos registrados.\n");
     }
 
     else {
@@ -860,7 +860,7 @@ void list_deleted_product(void) {
         }
 
         if (count == 1) {
-            printf("\nNao existem produtos deletados\n");
+            printf("\nNao existem produtos deletados.\n");
         }
 
         fclose(fp);
@@ -877,7 +877,7 @@ void list_request(void) {
     if (access("request.dat", F_OK) == -1) {
         list_request_banner();
 
-        printf("\nNao existem pedidos registados.\n");
+        printf("\nNao existem pedidos registrados.\n");
     }    
 
     else {
@@ -906,7 +906,7 @@ void list_request(void) {
         }
 
         if (count == 1) {
-            printf("\nNao existem pedidos registados.\n");
+            printf("\nNao existem pedidos registrados.\n");
         }
 
         fclose(fp);
@@ -1191,7 +1191,49 @@ void list_request_by_amount_to_pay(void) {
 }
 
 void list_deleted_request(void) {
-    ;
+    terminal_clear();
+
+    FILE* fp;
+
+    if (access("request.dat", F_OK) == -1) {
+        list_request_banner();
+
+        printf("\nNao existem pedidos deletados.\n");
+    }    
+
+    else {
+        fp = fopen("request.dat", "rb");
+
+        Request* request = (Request*) malloc(sizeof(Request));
+
+        list_request_banner();
+
+        int count = 1;
+
+        while (fread(request, sizeof(Request), 1, fp)) {
+            if (request->deleted == 1) {
+                printf("\nPedido %d:\n", count);
+                printf("\nID do pedido: %s\n", request->id);
+                printf("Nome do cliente: %s\n", get_customer_name(request->customer_cpf));
+                printf("CPF do cliente: %s\n", request->customer_cpf);
+                printf("Codigo do produto: %s\n", request->product_code);
+                printf("Nome do produto: %s\n", get_product_name(request->product_code));
+                printf("Data do pedido: %s\n", request->date);
+                printf("Quantidade do produto: %d\n", request->quantity);
+                printf("Total a pagar: %.2f\n", request->amount_to_pay);
+
+                count++;
+            }
+        }
+
+        if (count == 1) {
+            printf("\nNao existem pedidos deletados.\n");
+        }
+
+        fclose(fp);
+    
+        free(request);
+    }
 }
 
 void mod_report(void) {
