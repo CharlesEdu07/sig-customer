@@ -1082,7 +1082,112 @@ int list_request_by_quantity_screen(void) {
 }
 
 void list_request_by_amount_to_pay(void) {
-    ;
+    int chosen = list_product_by_price_screen();
+
+    FILE* file;
+
+    int length = 0;
+
+    Request* request;
+
+    Request_List* new_request;
+    Request_List* list = NULL;
+
+    if (access("request.dat", F_OK) != -1) {
+        file = fopen("request.dat", "rb");
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        else {
+            list = NULL;
+
+            request = (Request*) malloc(sizeof(Request));
+
+            while (fread(request, sizeof(Request), 1, file)) {
+                if (request->deleted == 0) {
+                    new_request = (Request_List*) malloc(sizeof(Request_List));
+
+                    length = strlen(request->id) + 1;
+                    new_request->id = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->id, request->id);
+
+                    length = strlen(request->customer_cpf) + 1;
+                    new_request->customer_cpf = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->customer_cpf, request->customer_cpf);
+
+                    length = strlen(request->product_code) + 1;
+                    new_request->product_code = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->product_code, request->product_code);
+
+                    length = strlen(request->date) + 1;
+                    new_request->date = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->date, request->date);
+
+                    new_request->quantity = request->quantity;
+                    new_request->amount_to_pay = request->amount_to_pay;
+
+                    if (list == NULL) {
+                        list = new_request;
+                        new_request->next = NULL;
+                    }
+
+                    else if (chosen == 1 && new_request->amount_to_pay < list->amount_to_pay) {
+                        new_request->next = list;
+                        list = new_request;
+                    }
+
+                    else if (chosen == 2 && new_request->amount_to_pay > list->amount_to_pay) {
+                        new_request->next = list;
+                        list = new_request;
+                    }
+
+                    else {
+                        Request_List* before = list;
+                        Request_List* current = list->next;
+
+                        while ((current != NULL) && ((chosen == 1 && new_request->amount_to_pay > current->amount_to_pay) || (chosen == 2 && new_request->amount_to_pay < current->amount_to_pay))) {
+                            before = current;
+                            current = current->next;
+                        }
+
+                        before->next = new_request;
+                        new_request->next = current;
+                    }
+                }
+            }
+
+            free(request);
+
+            new_request = list;
+
+            while (new_request != NULL) {
+                show_found_request(new_request);
+
+                new_request = new_request->next;
+            }
+
+            new_request = list;
+
+            while (new_request != NULL) {
+                list = new_request->next;
+
+                free(new_request->id);
+                free(new_request->customer_cpf);
+                free(new_request->product_code);
+                free(new_request->date);
+
+                free(new_request);
+
+                new_request = list;
+            }
+        }
+
+        fclose(file);
+    }
 }
 
 void list_deleted_request(void) {
