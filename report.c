@@ -48,10 +48,7 @@ int menu_customer_report(void) {
     printf("\t\t|   2 - Listar em Ordem Alfabetica  |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
-    printf("\t\t|      3 - Pedidos Por Cliente      |\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t-------------------------------------\n");
-    printf("\t\t|   4 - Listar Clientes Deletados   |\n");
+    printf("\t\t|   3 - Listar Clientes Deletados   |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t|           0 - Regressar           |\n");
@@ -125,42 +122,65 @@ int menu_request_report(void) {
     return op;
 }
 
+void list_customer_banner(void) {
+    printf("\t\t========================================\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||            SIG-Customer            ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t========================================\n");
+    printf("\n");
+    printf("\t\t========================================\n");
+    printf("\t\t||           Listar Clientes          ||\n");
+    printf("\t\t========================================\n");
+}
+
+void list_product_banner(void) {
+    printf("\t\t========================================\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||            SIG-Customer            ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t========================================\n");
+    printf("\n");
+    printf("\t\t========================================\n");
+    printf("\t\t||           Listar Produtos          ||\n");
+    printf("\t\t========================================\n");
+}
+
+void list_request_banner(void) {
+    printf("\t\t========================================\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||            SIG-Customer            ||\n");
+    printf("\t\t||            ------------            ||\n");
+    printf("\t\t||                                    ||\n");
+    printf("\t\t========================================\n");
+    printf("\n");
+    printf("\t\t========================================\n");
+    printf("\t\t||           Listar Pedidos           ||\n");
+    printf("\t\t========================================\n");
+}
+
 void list_customer(void) {
     terminal_clear();
 
     FILE* fp;
 
     if (access("customer.dat", F_OK) == -1) {
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||           Listar Clientes          ||\n");
-        printf("\t\t========================================\n");
+        list_customer_banner();
 
         printf("\nNao ha clientes cadastrados.\n");
     }
 
     else {
         fp = fopen("customer.dat", "rb");
+
         Customer* customer = (Customer*) malloc(sizeof(Customer));
 
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||           Listar Clientes          ||\n");
-        printf("\t\t========================================\n");
+        list_customer_banner();
 
         int count = 1;
 
@@ -188,6 +208,10 @@ void list_customer(void) {
 }
 
 void show_found_customer(Customer_List* customer_list) {
+    terminal_clear();
+
+    list_customer_banner();
+
     printf("\nNome do cliente: %s\n", customer_list->name);
     printf("CPF do cliente: %s\n", customer_list->cpf);
     printf("Celular do cliente: %s\n", customer_list->phone);
@@ -195,10 +219,10 @@ void show_found_customer(Customer_List* customer_list) {
     printf("Endereco do cliente: %s\n", customer_list->address);
 }
 
-void list_customer_alpha_order(void) {
+void list_customer_by_name(void) {
     FILE* file;
 
-    int lenght;
+    int length;
 
     Customer* customer;
 
@@ -222,24 +246,24 @@ void list_customer_alpha_order(void) {
                 if (customer->deleted == 0) {
                     new_customer = (Customer_List*) malloc(sizeof(Customer_List));
 
-                    lenght = strlen(customer->name) + 1;
-                    new_customer->name = (char*) malloc(lenght * sizeof(char));
+                    length = strlen(customer->name) + 1;
+                    new_customer->name = (char*) malloc(length * sizeof(char));
                     strcpy(new_customer->name, customer->name);
 
-                    lenght = strlen(customer->cpf) + 1;
-                    new_customer->cpf = (char*) malloc(lenght * sizeof(char));
+                    length = strlen(customer->cpf) + 1;
+                    new_customer->cpf = (char*) malloc(length * sizeof(char));
                     strcpy(new_customer->cpf, customer->cpf);
 
-                    lenght = strlen(customer->phone) + 1;
-                    new_customer->phone = (char*) malloc(lenght * sizeof(char));
+                    length = strlen(customer->phone) + 1;
+                    new_customer->phone = (char*) malloc(length * sizeof(char));
                     strcpy(new_customer->phone, customer->phone);
 
-                    lenght = strlen(customer->email) + 1;
-                    new_customer->email = (char*) malloc(lenght * sizeof(char));
+                    length = strlen(customer->email) + 1;
+                    new_customer->email = (char*) malloc(length * sizeof(char));
                     strcpy(new_customer->email, customer->email);
 
-                    lenght = strlen(customer->address) + 1;
-                    new_customer->address = (char*) malloc(lenght * sizeof(char));
+                    length = strlen(customer->address) + 1;
+                    new_customer->address = (char*) malloc(length * sizeof(char));
                     strcpy(new_customer->address, customer->address);
 
                     if (list == NULL) {
@@ -297,8 +321,47 @@ void list_customer_alpha_order(void) {
     }
 }
 
-void list_request_by_customer(void) {
-    ;
+void list_deleted_customer(void) {
+    terminal_clear();
+
+    FILE* fp;
+
+    if (access("customer.dat", F_OK) == -1) {
+        list_customer_banner();
+
+        printf("\nNao ha clientes cadastrados.\n");
+    }
+
+    else {
+        fp = fopen("customer.dat", "rb");
+
+        Customer* customer = (Customer*) malloc(sizeof(Customer));
+
+        list_customer_banner();
+
+        int count = 1;
+
+        while (fread(customer, sizeof(Customer), 1, fp)) {
+            if (customer->deleted == 1) {
+                printf("\nCliente %d:\n", count);
+                printf("\nNome do cliente: %s\n", customer->name);
+                printf("CPF do cliente: %s\n", customer->cpf);
+                printf("Celular do cliente: %s\n", customer->phone);
+                printf("Email do cliente: %s\n", customer->email);
+                printf("Endereco do cliente: %s\n", customer->address);
+
+                count++;
+            }
+        }
+
+        if (count == 1) {
+            printf("\nNao ha clientes cadastrados.\n");
+        }
+
+        fclose(fp);
+    
+        free(customer);
+    }
 }
 
 void list_product(void) {
@@ -307,17 +370,7 @@ void list_product(void) {
     FILE* fp;
 
     if (access("product.dat", F_OK) == -1) {
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||           Listar Produtos          ||\n");
-        printf("\t\t========================================\n");
+        list_product_banner();
 
         printf("\nNao existem produtos registados.\n");
     }
@@ -326,17 +379,7 @@ void list_product(void) {
         fp = fopen("product.dat", "rb");
         Product* product = (Product*) malloc(sizeof(Product));
 
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||           Listar Produtos          ||\n");
-        printf("\t\t========================================\n");
+        list_product_banner();
 
         int count = 1;
 
@@ -363,42 +406,299 @@ void list_product(void) {
     }
 }
 
+void show_found_product(Product_List* product_list) {
+    printf("\nNome do produto: %s\n", product_list->product_name);
+    printf("Codigo do produto: %s\n", product_list->product_code);
+    printf("Descricao do produto: %s\n", product_list->product_description);
+    printf("Tipo do produto: %s\n", product_list->product_type);
+    printf("Preco do produto: %.2f\n", product_list->product_price);
+}
+
+void list_product_by_name(void) {
+    FILE* file;
+
+    int length;
+
+    Product* product;
+
+    Product_List* new_product;
+    Product_List* list = NULL;
+
+    if (access("product.dat", F_OK) != -1) {
+        file = fopen("product.dat", "rb");
+
+        if (file == NULL) {
+            printf("Erro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        else {
+            list = NULL;
+
+            product = (Product*) malloc(sizeof(Product));
+
+            while (fread(product, sizeof(Product), 1, file)) {
+                if (product->deleted == 0) {
+                    new_product = (Product_List*) malloc(sizeof(Product_List));
+
+                    length = strlen(product->product_name) + 1;
+                    new_product->product_name = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_name, product->product_name);
+
+                    length = strlen(product->product_code) + 1;
+                    new_product->product_code = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_code, product->product_code);
+
+                    length = strlen(product->product_description) + 1;
+                    new_product->product_description = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_description, product->product_description);
+
+                    length = strlen(product->product_type) + 1;
+                    new_product->product_type = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_type, product->product_type);
+
+                    new_product->product_price = product->product_price;
+
+                    if (list == NULL) {
+                        list = new_product;
+                        list->next = NULL;
+                    }
+
+                    else if (strcmp(list->product_name, new_product->product_name) > 0) {
+                        new_product->next = list;
+                        list = new_product;
+                    }
+
+                    else {
+                        Product_List* before = list;
+                        Product_List* current = list->next;
+
+                        while (current != NULL && strcmp(current->product_name, new_product->product_name) < 0) {
+                            before = current;
+                            current = current->next;
+                        }
+
+                        before->next = new_product;
+                        new_product->next = current;
+                    }
+                }
+            }
+
+            free(product);
+
+            new_product = list;
+
+            while (new_product != NULL) {
+                show_found_product(new_product);
+
+                new_product = new_product->next;
+            }
+
+            new_product = list;
+
+            while (new_product != NULL) {
+                list = list->next;
+
+                free(new_product->product_name);
+                free(new_product->product_code);
+                free(new_product->product_description);
+                free(new_product->product_type);
+                free(new_product);
+
+                new_product = list;
+            }
+        }
+
+        fclose(file);
+    }
+}
+
+char* list_product_by_type_screen(void) {
+    char* type = (char*) malloc(255 * sizeof(char));
+
+    int op = 0;
+
+    do {
+        printf("\n");
+
+        printf("\t\t=====================================\n");
+        printf("\t\t||    Informe o tipo do produto    ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|            1 - Perfume            |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|          2 - Hidratantes          |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|            3 - Barbear            |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|           4 - Sabonetes           |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|            5 - Shampoo            |\n");
+        printf("\t\t-------------------------------------\n");
+
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
+
+        switch(op) {
+            case 1:
+                strcpy(type, "Perfume");
+
+                break;
+
+            case 2:
+                strcpy(type, "Hidratante");
+
+                break;
+
+            case 3:
+                strcpy(type, "Barbear");
+
+                break;
+
+            case 4:
+                strcpy(type, "Sabonete");
+
+                break;
+
+            case 5:
+                strcpy(type, "Shampoo");
+
+                break;
+
+            default:
+                printf("\nOpcao invalida.\n");
+
+                break;
+        }   
+    } while (op != 1 && op != 2 && op != 3 && op != 4 && op != 5);
+
+    return type;
+}
+
+void list_product_by_type(void) {
+    char* type = list_product_by_type_screen();
+
+    FILE* file;
+
+    int length;
+
+    Product* product;
+
+    Product_List* new_product;
+    Product_List* list = NULL;
+
+    if (access("product.dat", F_OK) != -1) {
+        file = fopen("product.dat", "rb");
+
+        if (file == NULL) {
+            printf("Erro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        else {
+            list = NULL;
+
+            product = (Product*) malloc(sizeof(Product));
+
+            while (fread(product, sizeof(Product), 1, file)) {
+                if (product->deleted == 0 && strcmp(product->product_type, type) == 0) {
+                    new_product = (Product_List*) malloc(sizeof(Product_List));
+
+                    length = strlen(product->product_name) + 1;
+                    new_product->product_name = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_name, product->product_name);
+
+                    length = strlen(product->product_code) + 1;
+                    new_product->product_code = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_code, product->product_code);
+
+                    length = strlen(product->product_description) + 1;
+                    new_product->product_description = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_description, product->product_description);
+
+                    length = strlen(product->product_type) + 1;
+                    new_product->product_type = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_type, product->product_type);
+
+                    new_product->product_price = product->product_price;
+
+                    if (list == NULL) {
+                        list = new_product;
+                        list->next = NULL;
+                    }
+
+                    else if (strcmp(list->product_name, new_product->product_name) > 0) {
+                        new_product->next = list;
+                        list = new_product;
+                    }
+
+                    else {
+                        Product_List* before = list;
+                        Product_List* current = list->next;
+
+                        while (current != NULL && strcmp(current->product_name, new_product->product_name) < 0) {
+                            before = current;
+                            current = current->next;
+                        }
+
+                        before->next = new_product;
+                        new_product->next = current;
+                    }
+                }
+            }
+
+            free(product);
+
+            new_product = list;
+
+            while (new_product != NULL) {
+                show_found_product(new_product);
+
+                new_product = new_product->next;
+            }
+
+            new_product = list;
+
+            while (new_product != NULL) {
+                list = list->next;
+
+                free(new_product->product_name);
+                free(new_product->product_code);
+                free(new_product->product_description);
+                free(new_product->product_type);
+                free(new_product);
+
+                new_product = list;
+            }
+        }
+
+        fclose(file);
+    }
+}
+
 void list_request(void) {
     terminal_clear();
 
     FILE* fp;
 
     if (access("request.dat", F_OK) == -1) {
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||            Listar Pedido           ||\n");
-        printf("\t\t========================================\n");
+        list_request_banner();
 
         printf("\nNao existem pedidos registados.\n");
     }
 
     else {
         fp = fopen("request.dat", "rb");
+
         Request* request = (Request*) malloc(sizeof(Request));
 
-        printf("\t\t========================================\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||            SIG-Customer            ||\n");
-        printf("\t\t||            ------------            ||\n");
-        printf("\t\t||                                    ||\n");
-        printf("\t\t========================================\n");
-        printf("\n");
-        printf("\t\t========================================\n");
-        printf("\t\t||            Listar Pedido           ||\n");
-        printf("\t\t========================================\n");
+        list_request_banner();
 
         int count = 1;
 
@@ -471,7 +771,12 @@ void mod_customer_report(void) {
                 break;
 
             case 2:
-                list_customer_alpha_order();
+                list_customer_by_name();
+
+                break;
+
+            case 3:
+                list_deleted_customer();
 
                 break;
 
@@ -494,6 +799,16 @@ void mod_product_report(void) {
         switch (op) {
             case 1:
                 list_product();
+
+                break;
+
+            case 2:
+                list_product_by_name();
+
+                break;
+
+            case 3:
+                list_product_by_type();
 
                 break;
 
