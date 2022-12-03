@@ -86,7 +86,11 @@ Product* search_product(char* product_code) {
 char* get_product_name(char* product_code) {
     Product* product = search_product(product_code);
 
-    return product->product_name;
+    if (product != NULL) {
+        return product->product_name;
+    }
+
+    return "Produto deletado";
 }
 
 float get_product_price(char* product_code) {

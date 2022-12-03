@@ -86,7 +86,11 @@ Customer* search_customer(char* cpf) {
 char* get_customer_name(char* cpf) {
     Customer* customer = search_customer(cpf);
 
-    return customer->name;
+    if (customer != NULL) {
+        return customer->name;
+    }
+
+    return "Cliente deletado";
 }
 
 void save_customer(Customer* customer) {
