@@ -107,6 +107,9 @@ int menu_request_report(void) {
     printf("\t\t| 3 - Listar Pedidos Por Quantidade |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
+    printf("\t\t|  4 - Listar Pedidos Por Montante  |\n");
+    printf("\t\t-------------------------------------\n");
+    printf("\t\t-------------------------------------\n");
     printf("\t\t|    5 - Listar Pedidos Deletados   |\n");
     printf("\t\t-------------------------------------\n");
     printf("\t\t-------------------------------------\n");
@@ -205,10 +208,6 @@ void list_customer(void) {
 }
 
 void show_found_customer(Customer_List* customer_list) {
-    terminal_clear();
-
-    list_customer_banner();
-
     printf("\nNome do cliente: %s\n", customer_list->name);
     printf("CPF do cliente: %s\n", customer_list->cpf);
     printf("Celular do cliente: %s\n", customer_list->phone);
@@ -679,48 +678,6 @@ void list_product_by_type(void) {
     }
 }
 
-int list_product_by_price_screen(void) {
-    int op = 0;
-
-    int chosen = 0;
-
-    do {
-        printf("\n");
-
-        printf("\t\t=====================================\n");
-        printf("\t\t||    Informe o tipo do produto    ||\n");
-        printf("\t\t=====================================\n");
-        printf("\t\t-------------------------------------\n");
-        printf("\t\t|  1 - Do mais barato ao nais caro  |\n");
-        printf("\t\t-------------------------------------\n");
-        printf("\t\t-------------------------------------\n");
-        printf("\t\t|  2 - Do mais caro ao mais barato  |\n");
-        printf("\t\t-------------------------------------\n");
-
-        printf("\nDigite a opcao desejada: ");
-        op = read_numeric_op();
-
-        switch(op) {
-            case 1:
-                chosen = 1;
-
-                break;
-
-            case 2:
-                chosen = 2;
-
-                break;
-
-            default:
-                printf("\nOpcao invalida.\n");
-
-                break;
-        }   
-    } while (op != 1 && op != 2 && op != 3 && op != 4 && op != 5);
-
-    return chosen;
-}
-
 void list_product_by_price(void) {
     int chosen = list_product_by_price_screen();
 
@@ -828,6 +785,48 @@ void list_product_by_price(void) {
     }
 }
 
+int list_product_by_price_screen(void) {
+    int op = 0;
+
+    int chosen = 0;
+
+    do {
+        printf("\n");
+
+        printf("\t\t=====================================\n");
+        printf("\t\t||          Ver Relatorio          ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|  1 - Do mais barato ao mais caro  |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|  2 - Do mais caro ao mais barato  |\n");
+        printf("\t\t-------------------------------------\n");
+
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
+
+        switch(op) {
+            case 1:
+                chosen = 1;
+
+                break;
+
+            case 2:
+                chosen = 2;
+
+                break;
+
+            default:
+                printf("\nOpcao invalida.\n");
+
+                break;
+        }   
+    } while (op != 1 && op != 2);
+
+    return chosen;
+}
+
 void list_deleted_product(void) {
     terminal_clear();
 
@@ -879,7 +878,7 @@ void list_request(void) {
         list_request_banner();
 
         printf("\nNao existem pedidos registados.\n");
-    }
+    }    
 
     else {
         fp = fopen("request.dat", "rb");
@@ -916,7 +915,177 @@ void list_request(void) {
     }
 }
 
+void show_found_request(Request_List* request_list) {
+    printf("\nID do pedido: %s\n", request_list->id);
+    printf("Nome do cliente: %s\n", get_customer_name(request_list->customer_cpf));
+    printf("CPF do cliente: %s\n", request_list->customer_cpf);
+    printf("Codigo do produto: %s\n", request_list->product_code);
+    printf("Nome do produto: %s\n", get_product_name(request_list->product_code));
+    printf("Data do pedido: %s\n", request_list->date);
+    printf("Quantidade do produto: %d\n", request_list->quantity);
+    printf("Total a pagar: %.2f\n", request_list->amount_to_pay);
+}
+
 void list_request_by_date(void) {
+    ;
+}
+
+void list_request_by_quantity(void) {
+    int chosen = list_request_by_quantity_screen();
+
+    FILE* file;
+
+    int length = 0;
+
+    Request* request;
+
+    Request_List* new_request;
+    Request_List* list = NULL;
+
+    if (access("request.dat", F_OK) != -1) {
+        file = fopen("request.dat", "rb");
+
+        if (file == NULL) {
+            printf("\nErro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        else {
+            list = NULL;
+
+            request = (Request*) malloc(sizeof(Request));
+
+            while (fread(request, sizeof(Request), 1, file)) {
+                if (request->deleted == 0) {
+                    new_request = (Request_List*) malloc(sizeof(Request_List));
+
+                    length = strlen(request->id) + 1;
+                    new_request->id = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->id, request->id);
+
+                    length = strlen(request->customer_cpf) + 1;
+                    new_request->customer_cpf = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->customer_cpf, request->customer_cpf);
+
+                    length = strlen(request->product_code) + 1;
+                    new_request->product_code = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->product_code, request->product_code);
+
+                    length = strlen(request->date) + 1;
+                    new_request->date = (char*) malloc(length * sizeof(char));
+                    strcpy(new_request->date, request->date);
+
+                    new_request->quantity = request->quantity;
+                    new_request->amount_to_pay = request->amount_to_pay;
+
+                    if (list == NULL) {
+                        list = new_request;
+                        new_request->next = NULL;
+                    }
+
+                    else if (chosen == 1 && new_request->quantity < list->quantity) {
+                        new_request->next = list;
+                        list = new_request;
+                    }
+
+                    else if (chosen == 2 && new_request->quantity > list->quantity) {
+                        new_request->next = list;
+                        list = new_request;
+                    }
+
+                    else {
+                        Request_List* before = list;
+                        Request_List* current = list->next;
+
+                        while ((current != NULL) && ((chosen == 1 && new_request->quantity > current->quantity) || (chosen == 2 && new_request->quantity < current->quantity))) {
+                            before = current;
+                            current = current->next;
+                        }
+
+                        before->next = new_request;
+                        new_request->next = current;
+                    }
+                }
+            }
+
+            free(request);
+
+            new_request = list;
+
+            while (new_request != NULL) {
+                show_found_request(new_request);
+
+                new_request = new_request->next;
+            }
+
+            new_request = list;
+
+            while (new_request != NULL) {
+                list = new_request->next;
+
+                free(new_request->id);
+                free(new_request->customer_cpf);
+                free(new_request->product_code);
+                free(new_request->date);
+
+                free(new_request);
+
+                new_request = list;
+            }
+        }
+
+        fclose(file);
+    }
+}
+
+int list_request_by_quantity_screen(void) {
+    int op = 0;
+
+    int chosen = 0;
+
+    do {
+        printf("\n");
+
+        printf("\t\t=====================================\n");
+        printf("\t\t||          Ver Relatorio          ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t| 2 - Da menor quantia para a maior |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t| 1 - Da maior quantia para a menor |\n");
+        printf("\t\t-------------------------------------\n");
+
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
+
+        switch(op) {
+            case 1:
+                chosen = 1;
+
+                break;
+
+            case 2:
+                chosen = 2;
+
+                break;
+
+            default:
+                printf("\nOpcao invalida.\n");
+
+                break;
+        }   
+    } while (op != 1 && op != 2);
+
+    return chosen;
+}
+
+void list_request_by_amount_to_pay(void) {
+    ;
+}
+
+void list_deleted_request(void) {
     ;
 }
 
@@ -1033,6 +1202,26 @@ void mod_request_report(void) {
         switch (op) {
             case 1:
                 list_request();
+
+                break;
+
+            case 2:
+                list_request_by_date();
+
+                break;
+
+            case 3:
+                list_request_by_quantity();
+
+                break;
+
+            case 4:
+                list_request_by_amount_to_pay();
+
+                break;
+
+            case 5:
+                list_deleted_request();
 
                 break;
 

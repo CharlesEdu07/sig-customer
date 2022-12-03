@@ -27,7 +27,6 @@ struct request_list {
     char* product_code;
     int quantity;
     float amount_to_pay;
-    int deleted;
     Request_List* next;
 };
 
@@ -35,6 +34,8 @@ int menu_report(void);
 int menu_customer_report(void);
 int menu_product_report(void);
 int menu_request_report(void);
+int list_product_by_price_screen(void);
+int list_request_by_quantity_screen(void);
 
 void list_customer_banner(void);
 void list_customer(void);
@@ -46,11 +47,14 @@ void list_product_by_type(void);
 void list_deleted_product(void);
 void list_request(void);
 void list_request_by_date(void);
+void list_request_by_quantity(void);
 void mod_report(void);
 void mod_customer_report(void);
 void mod_product_report(void);
 void mod_request_report(void);
 
 void show_found_customer(Customer_List* customer);
+void show_found_product(Product_List* product);
+void show_found_request(Request_List* request);
 
 char* list_product_by_type_screen(void);
