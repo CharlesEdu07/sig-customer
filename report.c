@@ -682,6 +682,155 @@ void list_product_by_type(void) {
     }
 }
 
+int list_product_by_price_screen(void) {
+    int op = 0;
+
+    int chosen = 0;
+
+    do {
+        printf("\n");
+
+        printf("\t\t=====================================\n");
+        printf("\t\t||    Informe o tipo do produto    ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|  1 - Do mais barato ao nais caro  |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|  2 - Do mais caro ao mais barato  |\n");
+        printf("\t\t-------------------------------------\n");
+
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
+
+        switch(op) {
+            case 1:
+                chosen = 1;
+
+                break;
+
+            case 2:
+                chosen = 2;
+
+                break;
+
+            default:
+                printf("\nOpcao invalida.\n");
+
+                break;
+        }   
+    } while (op != 1 && op != 2 && op != 3 && op != 4 && op != 5);
+
+    return chosen;
+}
+
+void list_product_by_price(void) {
+    int chosen = list_product_by_price_screen();
+
+    FILE* file;
+
+    int length;
+
+    Product* product;
+
+    Product_List* new_product;
+    Product_List* list = NULL;
+
+    if (access("product.dat", F_OK) != -1) {
+        file = fopen("product.dat", "rb");
+
+        if (file == NULL) {
+            printf("Erro ao abrir o arquivo.\n");
+
+            exit(1);
+        }
+
+        else {
+            list = NULL;
+
+            product = (Product*) malloc(sizeof(Product));
+
+            while (fread(product, sizeof(Product), 1, file)) {
+                if (product->deleted == 0) {
+                    new_product = (Product_List*) malloc(sizeof(Product_List));
+
+                    length = strlen(product->product_name) + 1;
+                    new_product->product_name = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_name, product->product_name);
+
+                    length = strlen(product->product_code) + 1;
+                    new_product->product_code = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_code, product->product_code);
+
+                    length = strlen(product->product_description) + 1;
+                    new_product->product_description = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_description, product->product_description);
+
+                    length = strlen(product->product_type) + 1;
+                    new_product->product_type = (char*) malloc(length * sizeof(char));
+                    strcpy(new_product->product_type, product->product_type);
+
+                    new_product->product_price = product->product_price;
+
+                    if (list == NULL) {
+                        list = new_product;
+                        list->next = NULL;
+                    }
+
+                    else if (chosen == 1 && new_product->product_price < list->product_price) {
+                        new_product->next = list;
+                        list = new_product;
+                    }
+
+                    else if (chosen == 2 && new_product->product_price > list->product_price) {
+                        new_product->next = list;
+                        list = new_product;
+                    }
+
+                    else {
+                        Product_List* before = list;
+                        Product_List* current = list->next;
+
+                        while ((current != NULL) && ((chosen == 1 && new_product->product_price > current->product_price) || (chosen == 2 && new_product->product_price < current->product_price))) {
+                            before = current;
+                            current = current->next;
+                        }
+
+                        before->next = new_product;
+                        new_product->next = current;
+                    }
+                }
+            }
+
+            free(product);
+
+            new_product = list;
+
+            while (new_product != NULL) {
+                show_found_product(new_product);
+
+                new_product = new_product->next;
+            }
+
+            new_product = list;
+
+            while (new_product != NULL) {
+                list = list->next;
+
+                free(new_product->product_name);
+                free(new_product->product_code);
+                free(new_product->product_description);
+                free(new_product->product_type);
+                free(new_product);
+
+                new_product = list;
+            }
+        }
+
+        fclose(file);
+    }
+}
+
 void list_request(void) {
     terminal_clear();
 
@@ -809,6 +958,11 @@ void mod_product_report(void) {
 
             case 3:
                 list_product_by_type();
+
+                break;
+
+            case 4:
+                list_product_by_price();
 
                 break;
 
