@@ -36,6 +36,7 @@ int menu_product_report(void);
 int menu_request_report(void);
 int list_product_by_price_screen(void);
 int list_request_by_quantity_screen(void);
+int list_request_by_data_screen(void);
 
 void list_customer_banner(void);
 void list_customer(void);

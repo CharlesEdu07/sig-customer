@@ -216,6 +216,8 @@ void show_found_customer(Customer_List* customer_list) {
 }
 
 void list_customer_by_name(void) {
+    terminal_clear();
+
     FILE* file;
 
     int length;
@@ -290,6 +292,8 @@ void list_customer_by_name(void) {
             free(customer);
 
             new_customer = list;
+
+            list_customer_banner();
 
             while (new_customer != NULL) {
                 show_found_customer(new_customer);
@@ -411,6 +415,8 @@ void show_found_product(Product_List* product_list) {
 }
 
 void list_product_by_name(void) {
+    terminal_clear();
+
     FILE* file;
 
     int length;
@@ -484,6 +490,8 @@ void list_product_by_name(void) {
             free(product);
 
             new_product = list;
+
+            list_product_banner();
 
             while (new_product != NULL) {
                 show_found_product(new_product);
@@ -577,6 +585,8 @@ char* list_product_by_type_screen(void) {
 }
 
 void list_product_by_type(void) {
+    terminal_clear();
+
     char* type = list_product_by_type_screen();
 
     FILE* file;
@@ -679,6 +689,8 @@ void list_product_by_type(void) {
 }
 
 void list_product_by_price(void) {
+    terminal_clear();
+
     int chosen = list_product_by_price_screen();
 
     FILE* file;
@@ -786,6 +798,8 @@ void list_product_by_price(void) {
 }
 
 int list_product_by_price_screen(void) {
+    terminal_clear();
+
     int op = 0;
 
     int chosen = 0;
@@ -930,7 +944,59 @@ void list_request_by_date(void) {
     ;
 }
 
+int list_request_by_date_screen(void) {
+    int op = 0;
+
+    int chosen = 0;
+
+    do {
+        printf("\n");
+
+        printf("\t\t=====================================\n");
+        printf("\t\t||          Ver Relatorio          ||\n");
+        printf("\t\t=====================================\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|     1 - Pedidos no Ultimo Ano     |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|     2 - Pedidos no Ultimo Mes     |\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t-------------------------------------\n");
+        printf("\t\t|     3 - Pedidos Ultima Semana     |\n");
+        printf("\t\t-------------------------------------\n");
+
+        printf("\nDigite a opcao desejada: ");
+        op = read_numeric_op();
+
+        switch(op) {
+            case 1:
+                chosen = 1;
+
+                break;
+
+            case 2:
+                chosen = 2;
+
+                break;
+
+            case 3:
+                chosen = 3;
+
+                break;
+
+            default:
+                printf("\nOpcao invalida.\n");
+
+                break;
+        }   
+    } while (op != 1 && op != 2 && op != 3);
+
+    return chosen;
+}
+
 void list_request_by_quantity(void) {
+    terminal_clear();
+
     int chosen = list_request_by_quantity_screen();
 
     FILE* file;
@@ -1082,6 +1148,8 @@ int list_request_by_quantity_screen(void) {
 }
 
 void list_request_by_amount_to_pay(void) {
+    terminal_clear();
+
     int chosen = list_product_by_price_screen();
 
     FILE* file;
@@ -1353,7 +1421,9 @@ void mod_request_report(void) {
                 break;
 
             case 2:
-                list_request_by_date();
+                //list_request_by_date();
+
+                printf("\nFuncao nao implementada.\n");
 
                 break;
 
