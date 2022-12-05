@@ -1117,10 +1117,10 @@ int list_request_by_quantity_screen(void) {
         printf("\t\t||          Ver Relatorio          ||\n");
         printf("\t\t=====================================\n");
         printf("\t\t-------------------------------------\n");
-        printf("\t\t| 2 - Da menor quantia para a maior |\n");
+        printf("\t\t| 1 - Da menor quantia para a maior |\n");
         printf("\t\t-------------------------------------\n");
         printf("\t\t-------------------------------------\n");
-        printf("\t\t| 1 - Da maior quantia para a menor |\n");
+        printf("\t\t| 2 - Da maior quantia para a menor |\n");
         printf("\t\t-------------------------------------\n");
 
         printf("\nDigite a opcao desejada: ");
