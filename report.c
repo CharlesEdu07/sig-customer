@@ -941,7 +941,105 @@ void show_found_request(Request_List* request_list) {
 }
 
 void list_request_by_date(void) {
-    ;
+    terminal_clear();
+
+    FILE* fp;
+
+    if (access("request.dat", F_OK) == -1) {
+        printf("\nNao existem pedidos registrados.\n");
+    }
+
+    else {
+        fp = fopen("request.dat", "rb");
+
+        Request* request = (Request*) malloc(sizeof(Request));
+
+        int op = list_request_by_date_screen();
+
+        int count = 1;
+
+        switch(op) {
+            case 1:
+                while (fread(request, sizeof(Request), 1, fp)) {
+                    if (request->deleted == 0) {
+                        if (is_this_year(request->date)) {
+                            printf("\nPedido %d:\n", count);
+                            printf("\nID do pedido: %s\n", request->id);
+                            printf("Nome do cliente: %s\n", get_customer_name(request->customer_cpf));
+                            printf("CPF do cliente: %s\n", request->customer_cpf);
+                            printf("Codigo do produto: %s\n", request->product_code);
+                            printf("Nome do produto: %s\n", get_product_name(request->product_code));
+                            printf("Data do pedido: %s\n", request->date);
+                            printf("Quantidade do produto: %d\n", request->quantity);
+                            printf("Total a pagar: %.2f\n", request->amount_to_pay);
+
+                            count++;
+                        }
+                    }
+                }
+
+                if (count == 1) {
+                    printf("\nNao existem pedidos registrados no ultimo ano.\n");
+                }
+
+                break;
+
+            case 2:
+                while (fread(request, sizeof(Request), 1, fp)) {
+                    if (request->deleted == 0) {
+                        if (is_this_month(request->date)) {
+                            printf("\nPedido %d:\n", count);
+                            printf("\nID do pedido: %s\n", request->id);
+                            printf("Nome do cliente: %s\n", get_customer_name(request->customer_cpf));
+                            printf("CPF do cliente: %s\n", request->customer_cpf);
+                            printf("Codigo do produto: %s\n", request->product_code);
+                            printf("Nome do produto: %s\n", get_product_name(request->product_code));
+                            printf("Data do pedido: %s\n", request->date);
+                            printf("Quantidade do produto: %d\n", request->quantity);
+                            printf("Total a pagar: %.2f\n", request->amount_to_pay);
+
+                            count++;
+                        }
+                    }
+                }
+
+                if (count == 1) {
+                    printf("\nNao existem pedidos registrados no ultimo mes.\n");
+                }
+
+                break;
+
+            case 3:
+                while (fread(request, sizeof(Request), 1, fp)) {
+                    if (request->deleted == 0) {
+                        if (is_this_week(request->date)) {
+                            printf("\nPedido %d:\n", count);
+                            printf("\nID do pedido: %s\n", request->id);
+                            printf("Nome do cliente: %s\n", get_customer_name(request->customer_cpf));
+                            printf("CPF do cliente: %s\n", request->customer_cpf);
+                            printf("Codigo do produto: %s\n", request->product_code);
+                            printf("Nome do produto: %s\n", get_product_name(request->product_code));
+                            printf("Data do pedido: %s\n", request->date);
+                            printf("Quantidade do produto: %d\n", request->quantity);
+                            printf("Total a pagar: %.2f\n", request->amount_to_pay);
+
+                            count++;
+                        }
+                    }
+                }
+
+                if (count == 1) {
+                    printf("\nNao existem pedidos registrados na ultima semana.\n");
+                }
+
+                break;
+
+                default:
+                    printf("\nOpcao invalida.\n");
+
+                    break;
+        }
+    }
 }
 
 int list_request_by_date_screen(void) {
@@ -1421,9 +1519,7 @@ void mod_request_report(void) {
                 break;
 
             case 2:
-                //list_request_by_date();
-
-                printf("\nFuncao nao implementada.\n");
+                list_request_by_date();
 
                 break;
 

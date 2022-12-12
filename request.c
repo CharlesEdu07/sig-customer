@@ -93,6 +93,16 @@ Request* search_request(char* id) {
     return NULL;
 }
 
+char* get_request_date(char* id) {
+    Request* request = search_request(id);
+
+    if (request != NULL) {
+        return request->date;
+    }
+
+    return NULL;
+}
+
 void save_request(Request* request) {
     FILE* file = fopen("request.dat", "ab");
 
