@@ -200,7 +200,7 @@ Product* create_product_screen(void) {
     printf("\t\t||          Cadastrar Produto         ||\n");
     printf("\t\t========================================\n");
 
-    printf("\nDigite o codigo de barras do produto: ");
+    printf("\nDigite o codigo de barras do produto (Formato EAN13): ");
     read_product_code(product_code);
     
     printf("Digite o nome do produto: ");

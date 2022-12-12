@@ -144,7 +144,7 @@ Request* create_request_screen(void) {
         return NULL;
     }
 
-    printf("Qual o produto? Digite o codigo: ");
+    printf("Qual o produto? Digite o codigo (Formato EAN13): ");
     read_product_code(product_code);
 
     if (search_product(product_code) == NULL) {
