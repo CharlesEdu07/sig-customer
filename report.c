@@ -315,6 +315,8 @@ void list_customer_by_name(void) {
 
                 new_customer = list;
             }
+
+            free(list);
         }
 
         fclose(file);
@@ -512,6 +514,8 @@ void list_product_by_name(void) {
 
                 new_product = list;
             }
+
+            free(list);
         }
 
         fclose(file);
@@ -682,6 +686,8 @@ void list_product_by_type(void) {
 
                 new_product = list;
             }
+
+            free(list);
         }
 
         fclose(file);
@@ -791,6 +797,8 @@ void list_product_by_price(void) {
 
                 new_product = list;
             }
+
+            free(list);
         }
 
         fclose(file);
@@ -1197,6 +1205,8 @@ void list_request_by_quantity(void) {
 
                 new_request = list;
             }
+
+            free(list);
         }
 
         fclose(file);
@@ -1350,6 +1360,8 @@ void list_request_by_amount_to_pay(void) {
 
                 new_request = list;
             }
+
+            free(list);
         }
 
         fclose(file);
