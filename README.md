@@ -1,12 +1,4 @@
 # SIG-Customer
-Projeto desenvolvido na linguagem C na disciplina de Programação
-
-
-Aluno: Charles Eduardo Araújo de Faria
-
-Orientador: Flavius Gorgonio
-
-
 
 SIG-Custumer: Um sistema de controle de cliente
 
@@ -22,8 +14,6 @@ trole de clientes de uma empresa, facilitando a gestao.
 Como executar este projeto? Seguem os comandos:
 
 
-gcc -c -Wall *.c
-
-gcc -o teste *.o
-
-./teste
+- gcc -c -Wall *.c
+- gcc -o teste *.o
+- ./teste
