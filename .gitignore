@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*.dat
 
 # Object files
 *.o
@@ -54,5 +55,3 @@ dkms.conf
 
 # Visual Studio
 .vscode/*
-
-*.dat
